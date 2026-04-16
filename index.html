@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oqline - Ekosistem Digital Bisnis Indonesia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #dc2626;
+            --primary-dark: #b91c1c;
+            --primary-light: #ef4444;
+            --secondary: #f59e0b;
+            --dark: #0f172a;
+            --light: #fef2f2;
+            --gray: #64748b;
+            --success: #10b981;
+            --gradient-1: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            --gradient-2: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            --gradient-3: linear-gradient(135deg, #dc2626 0%, #f59e0b 100%);
+            --red-soft: #fef2f2;
+            --red-medium: #fee2e2;
+            --red-dark: #7f1d1d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(220,38,38,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--gradient-1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(220,38,38,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(220,38,38,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(245,158,11,0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #fef2f2 0%, #fff5f5 50%, #ffffff 100%);
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            top: -200px;
+            right: -200px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-50px, 50px) scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--dark) 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(220,38,38,0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid #fecaca;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .floating-cards {
+            position: relative;
+            height: 500px;
+        }
+
+        .float-card {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(220,38,38,0.1);
+            animation: float-card 6s infinite ease-in-out;
+            border: 1px solid rgba(220,38,38,0.1);
+        }
+
+        .float-card:nth-child(1) {
+            top: 0;
+            left: 0;
+            width: 280px;
+            animation-delay: 0s;
+        }
+
+        .float-card:nth-child(2) {
+            top: 100px;
+            right: 0;
+            width: 250px;
+            animation-delay: 1s;
+        }
+
+        .float-card:nth-child(3) {
+            bottom: 50px;
+            left: 50px;
+            width: 300px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .mini-preview {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .preview-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #fecaca;
+        }
+
+        .preview-row:last-child {
+            border-bottom: none;
+        }
+
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fca5a5 0%, #fecaca 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #fca5a5;
+            font-weight: 500;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #fecaca;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(220,38,38,0.12);
+            border-color: transparent;
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .product-icon.websitemu { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: white; }
+        .product-icon.undanganmu { background: linear-gradient(135deg, #be123c 0%, #e11d48 100%); color: white; }
+        .product-icon.biolinkmu { background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); color: white; }
+        .product-icon.designmu { background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); color: white; }
+        .product-icon.tokomu { background: linear-gradient(135deg, #dc2626 0%, #f59e0b 100%); color: white; }
+        .product-icon.notamu { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); color: white; }
+        .product-icon.coming { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); color: #991b1b; }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+
+        .product-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .product-features li i {
+            color: #dc2626;
+            font-size: 0.8rem;
+        }
+
+        .product-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 700;
+            transition: gap 0.3s;
+        }
+
+        .product-link:hover {
+            gap: 1rem;
+        }
+
+        .badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge.live {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge.soon {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge.hot {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+        }
+
+        /* Ecosystem Section */
+        .ecosystem {
+            background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);
+            padding: 6rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ecosystem::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(220,38,38,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .ecosystem-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .ecosystem-text h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .ecosystem-text p {
+            font-size: 1.25rem;
+            color: #fca5a5;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .ecosystem-visual {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .eco-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .eco-card:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-5px);
+            border-color: rgba(220,38,38,0.5);
+        }
+
+        .eco-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fca5a5;
+        }
+
+        .eco-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .eco-card p {
+            font-size: 0.9rem;
+            color: #fca5a5;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #ffffff 0%, #fef2f2 100%);
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #dc2626, #f59e0b);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 45%;
+            box-shadow: 0 10px 40px rgba(220,38,38,0.1);
+            position: relative;
+            border: 1px solid #fecaca;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #dc2626;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #dc2626;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .timeline-content .date {
+            color: #dc2626;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-white {
+            background: white;
+            color: #dc2626;
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fca5a5 0%, #fecaca 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-brand p {
+            color: #fca5a5;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #fca5a5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fca5a5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #dc2626;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ecosystem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline-content {
+                width: 90%;
+                margin: 0 auto !important;
+            }
+
+            .roadmap-timeline::before {
+                left: 20px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Oqline</div>
+            <ul class="nav-links">
+                <li><a href="#products">Produk</a></li>
+                <li><a href="#ecosystem">Ekosistem</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#harga">Harga</a></li>
+            </ul>
+            <a href="#products" class="nav-cta">Mulai Sekarang</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Semua Kebutuhan Bisnis Anda dalam Satu Ekosistem</h1>
+                <p>Mulai dari jualan, promosi, transaksi, sampai keuangan — semua ada, semua terhubung. Platform digital lengkap untuk UMKM Indonesia yang ingin berkembang.</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Jelajahi Produk
+                    </a>
+                    <a href="#ecosystem" class="btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        Lihat Demo
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-cards">
+                    <div class="float-card">
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+                            <div class="icon-box" style="background:linear-gradient(135deg, #dc2626, #ef4444);color:white;">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div>
+                                <h4 style="margin:0;font-size:1.1rem;">TokoMu</h4>
+                                <p style="margin:0;font-size:0.85rem;color:#64748b;">Toko Online Aktif</p>
+                            </div>
+                        </div>
+                        <div class="mini-preview">
+                            <div class="preview-row">
+                                <span style="font-size:1.5rem;">👕</span>
+                                <div style="flex:1;">
+                                    <div style="font-weight:600;">Kaos Premium</div>
+                                    <div style="font-size:0.8rem;color:#64748b;">Rp 125.000</div>
+                                </div>
+                                <span style="color:#dc2626;font-weight:700;">✓</span>
+                            </div>
+                            <div class="preview-row">
+                                <span style="font-size:1.5rem;">👜</span>
+                                <div style="flex:1;">
+                                    <div style="font-weight:600;">Tas Selempang</div>
+                                    <div style="font-size:0.8rem;color:#64748b;">Rp 145.000</div>
+                                </div>
+                                <span style="color:#dc2626;font-weight:700;">✓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="float-card">
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+                            <div class="icon-box" style="background:linear-gradient(135deg, #7f1d1d, #b91c1c);color:white;">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div>
+                                <h4 style="margin:0;font-size:1.1rem;">NotaMu</h4>
+                                <p style="margin:0;font-size:0.85rem;color:#64748b;">Invoice Generated</p>
+                            </div>
+                        </div>
+                        <div class="mini-preview" style="background:#450a0a;color:white;">
+                            <div style="font-size:0.7rem;opacity:0.7;margin-bottom:0.5rem;">INV-2024-0021</div>
+                            <div style="display:flex;justify-content:space-between;margin-bottom:0.25rem;font-size:0.85rem;">
+                                <span>Jasa Desain</span>
+                                <span>Rp 500K</span>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;margin-bottom:0.25rem;font-size:0.85rem;">
+                                <span>Revisi (3x)</span>
+                                <span>Rp 225K</span>
+                            </div>
+                            <div style="border-top:1px solid #7f1d1d;margin-top:0.5rem;padding-top:0.5rem;display:flex;justify-content:space-between;font-weight:700;">
+                                <span>TOTAL</span>
+                                <span style="color:#fca5a5;">Rp 875K</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="float-card">
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+                            <div class="icon-box" style="background:linear-gradient(135deg, #be123c, #e11d48);color:white;">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </div>
+                            <div>
+                                <h4 style="margin:0;font-size:1.1rem;">UndanganMu</h4>
+                                <p style="margin:0;font-size:0.85rem;color:#64748b;">Wedding Invitation</p>
+                            </div>
+                        </div>
+                        <div class="mini-preview" style="text-align:center;padding:1.5rem;">
+                            <div style="font-size:0.8rem;color:#991b1b;margin-bottom:0.5rem;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+                            <div style="font-size:1.2rem;font-weight:700;color:#450a0a;margin-bottom:0.25rem;">Ahmad & Siti</div>
+                            <div style="font-size:0.8rem;color:#64748b;">14 Juni 2025</div>
+                            <div style="margin-top:1rem;padding:0.5rem;background:linear-gradient(135deg,#dc2626,#ef4444);color:white;border-radius:8px;font-size:0.8rem;font-weight:600;">
+                                <i class="fab fa-whatsapp"></i> Kirim via WA
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>14+</h3>
+                <p>Produk Digital</p>
+            </div>
+            <div class="stat-item">
+                <h3>18K+</h3>
+                <p>Pengguna Aktif</p>
+            </div>
+            <div class="stat-item">
+                <h3>50K+</h3>
+                <p>Transaksi/Bulan</p>
+            </div>
+            <div class="stat-item">
+                <h3>99%</h3>
+                <p>Kepuasan Pelanggan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <h2>Produk Oqline</h2>
+            <p>Pilih solusi yang sesuai dengan kebutuhan bisnis Anda. Dari yang sudah live hingga yang akan segera hadir.</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- WebsiteMu -->
+            <div class="product-card">
+                <span class="badge live">LIVE</span>
+                <div class="product-icon websitemu">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>WebsiteMu</h3>
+                <p>Website instan profesional dalam 5 menit. Landing page, company profile, dan toko online siap pakai tanpa coding.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> 20+ Template Premium</li>
+                    <li><i class="fas fa-check"></i> Mobile Responsive</li>
+                    <li><i class="fas fa-check"></i> Domain Custom</li>
+                </ul>
+                <a href="https://websitemu-puce.vercel.app/" target="_blank" class="product-link">
+                    Kunjungi WebsiteMu <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- LinkMu / BioLinkMu -->
+            <div class="product-card">
+                <span class="badge hot">POPULER</span>
+                <div class="product-icon biolinkmu">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3>LinkMu</h3>
+                <p>Satu link untuk semua jualanmu. Bio link + mini store dengan katalog produk dan tombol WhatsApp.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Link-in-Bio Profesional</li>
+                    <li><i class="fas fa-check"></i> Katalog Mini Store</li>
+                    <li><i class="fas fa-check"></i> Analitik Klik</li>
+                </ul>
+                <a href="https://biolinkmu.vercel.app/" target="_blank" class="product-link">
+                    Kunjungi LinkMu <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- DesignMu -->
+            <div class="product-card">
+                <span class="badge live">LIVE</span>
+                <div class="product-icon designmu">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>DesignMu</h3>
+                <p>Template siap pakai untuk jualan & branding. 2,400+ template profesional dengan harga terjangkau.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Template IG & TikTok</li>
+                    <li><i class="fas fa-check"></i> Template Website</li>
+                    <li><i class="fas fa-check"></i> Edit Mudah</li>
+                </ul>
+                <a href="https://designmu.vercel.app/" target="_blank" class="product-link">
+                    Kunjungi DesignMu <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- UndanganMu -->
+            <div class="product-card">
+                <span class="badge hot">BEST SELLER</span>
+                <div class="product-icon undanganmu">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <h3>UndanganMu</h3>
+                <p>Undangan digital praktis & elegan. Lebih hemat, lebih modern, kirim via WhatsApp dalam sekali klik.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> 50+ Template Pernikahan</li>
+                    <li><i class="fas fa-check"></i> RSVP Online</li>
+                    <li><i class="fas fa-check"></i> Galeri Foto & Musik</li>
+                </ul>
+                <a href="https://undanganmu-nine.vercel.app/" target="_blank" class="product-link">
+                    Kunjungi UndanganMu <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- TokoMu -->
+            <div class="product-card">
+                <span class="badge live">LIVE</span>
+                <div class="product-icon tokomu">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3>TokoMu</h3>
+                <p>Toko online simpel tanpa ribet. Katalog produk, checkout sederhana, langsung terintegrasi WhatsApp.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Katalog Produk Unlimited</li>
+                    <li><i class="fas fa-check"></i> Checkout via WhatsApp</li>
+                    <li><i class="fas fa-check"></i> Manajemen Stok</li>
+                </ul>
+                <a href="https://tokomu-black.vercel.app/" target="_blank" class="product-link">
+                    Kunjungi TokoMu <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- NotaMu -->
+            <div class="product-card">
+                <span class="badge live">LIVE</span>
+                <div class="product-icon notamu">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <h3>NotaMu</h3>
+                <p>Invoice & nota digital dalam hitungan detik. Kirim via WhatsApp, lebih rapi, lebih profesional.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Invoice Profesional</li>
+                    <li><i class="fas fa-check"></i> Kirim via WhatsApp</li>
+                    <li><i class="fas fa-check"></i> Riwayat & Arsip</li>
+                </ul>
+                <a href="https://notamu.vercel.app/" target="_blank" class="product-link">
+                    Kunjungi NotaMu <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- DuitMu -->
+            <div class="product-card">
+                <span class="badge soon">SEGERA</span>
+                <div class="product-icon coming">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3>DuitMu</h3>
+                <p>Accounting & finance sederhana. Pembukuan, laporan keuangan, dan cashflow bisnis jadi rapi & jelas.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Pembukuan Otomatis</li>
+                    <li><i class="fas fa-check"></i> Laporan Keuangan</li>
+                    <li><i class="fas fa-check"></i> Cashflow Tracking</li>
+                </ul>
+                <span style="color:#991b1b;font-weight:600;"><i class="fas fa-clock"></i> Coming Soon</span>
+            </div>
+
+            <!-- SalesMu -->
+            <div class="product-card">
+                <span class="badge soon">SEGERA</span>
+                <div class="product-icon coming">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>SalesMu</h3>
+                <p>CRM & Sales System. Atur leads dan closing tanpa ribet. Pipeline penjualan & follow-up otomatis.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> CRM Sederhana</li>
+                    <li><i class="fas fa-check"></i> Pipeline Penjualan</li>
+                    <li><i class="fas fa-check"></i> Follow-up Otomatis</li>
+                </ul>
+                <span style="color:#991b1b;font-weight:600;"><i class="fas fa-clock"></i> Coming Soon</span>
+            </div>
+
+            <!-- PayMu -->
+            <div class="product-card">
+                <span class="badge soon">SEGERA</span>
+                <div class="product-icon coming">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3>PayMu</h3>
+                <p>Payment & checkout system. Terima pembayaran lebih mudah dengan link pembayaran & QRIS.</p>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Link Pembayaran</li>
+                    <li><i class="fas fa-check"></i> QRIS Integration</li>
+                    <li><i class="fas fa-check"></i> Multi Payment</li>
+                </ul>
+                <span style="color:#991b1b;font-weight:600;"><i class="fas fa-clock"></i> Coming Soon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ecosystem Section -->
+    <section class="ecosystem" id="ecosystem">
+        <div class="ecosystem-content">
+            <div class="ecosystem-grid">
+                <div class="ecosystem-text">
+                    <h2>Satu Ekosistem, Semua Terhubung</h2>
+                    <p>Oqline bukan sekadar tools terpisah. Semua produk kami terintegrasi untuk menciptakan pengalaman bisnis yang seamless. Dari pertama kali customer melihat produk Anda di LinkMu, checkout di TokoMu, menerima invoice dari NotaMu, hingga pembayaran via PayMu — semua tercatat rapi di DuitMu.</p>
+                    <a href="#products" class="btn-primary" style="background:white;color:#dc2626;">
+                        <i class="fas fa-rocket"></i>
+                        Mulai Bangun Bisnis
+                    </a>
+                </div>
+                <div class="ecosystem-visual">
+                    <div class="eco-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h4>PromoMu</h4>
+                        <p>Marketing & Campaign Tools</p>
+                    </div>
+                    <div class="eco-card">
+                        <i class="fas fa-box"></i>
+                        <h4>OrderMu</h4>
+                        <p>Order Management System</p>
+                    </div>
+                    <div class="eco-card">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h4>KirimMu</h4>
+                        <p>Shipping Integration</p>
+                    </div>
+                    <div class="eco-card">
+                        <i class="fas fa-robot"></i>
+                        <h4>ChatMu</h4>
+                        <p>WhatsApp Automation</p>
+                    </div>
+                    <div class="eco-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>EduMu</h4>
+                        <p>Edukasi & Insight Bisnis</p>
+                    </div>
+                    <div class="eco-card" style="background:linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">
+                        <i class="fas fa-infinity" style="color:white;"></i>
+                        <h4 style="color:white;">Dan Masih Banyak Lagi</h4>
+                        <p style="color:rgba(255,255,255,0.8);">Terus berkembang setiap bulan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="roadmap" id="roadmap">
+        <div class="section-header">
+            <h2>Roadmap 2024-2025</h2>
+            <p>Perjalanan kami membangun ekosistem bisnis digital terlengkap di Indonesia</p>
+        </div>
+
+        <div class="roadmap-timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date">Q1 2024</span>
+                    <h3>🚀 Phase 1: Foundation</h3>
+                    <p>Peluncuran 6 produk inti: WebsiteMu, LinkMu, DesignMu, UndanganMu, TokoMu, dan NotaMu. Membangun dasar ekosistem untuk UMKM Indonesia.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date">Q2 2024</span>
+                    <h3>💰 Phase 2: Finance</h3>
+                    <p>Peluncuran DuitMu untuk accounting dan PayMu untuk payment gateway. Integrasi keuangan mulai terbentuk.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date">Q3 2024</span>
+                    <h3>📈 Phase 3: Growth</h3>
+                    <p>SalesMu CRM dan OrderMu management system. Bantu bisnis scale dengan sistem yang lebih terstruktur.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date">Q4 2024</span>
+                    <h3>🚚 Phase 4: Operations</h3>
+                    <p>KirimMu untuk shipping integration dan ChatMu untuk automation. Operasional bisnis jadi semakin mulus.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date">2025</span>
+                    <h3>🎯 Phase 5: Mastery</h3>
+                    <p>PromoMu marketing tools dan EduMu learning platform. Oqline menjadi platform end-to-end lengkap untuk bisnis digital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Siap Membangun Bisnis Digital Anda?</h2>
+            <p>Jangan tunggu sampai ketinggalan. Ribuan bisnis sudah mulai digital dengan Oqline. Sekarang giliran Anda.</p>
+            <a href="#products" class="btn-white">
+                <i class="fas fa-rocket"></i> Mulai Sekarang Gratis
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Oqline</h3>
+                <p>Ekosistem digital bisnis Indonesia. Kami percaya setiap bisnis, sekecil apapun, berhak punya sistem yang profesional dan scalable.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Produk</h4>
+                <ul>
+                    <li><a href="#">WebsiteMu</a></li>
+                    <li><a href="#">LinkMu</a></li>
+                    <li><a href="#">DesignMu</a></li>
+                    <li><a href="#">UndanganMu</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Perusahaan</h4>
+                <ul>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Karir</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">API Docs</a></li>
+                    <li><a href="#">Status</a></li>
+                    <li><a href="#">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Oqline. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 4px 20px rgba(220,38,38,0.1)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
