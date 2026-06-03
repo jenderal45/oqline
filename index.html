@@ -26,7 +26,8 @@
         .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
         .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
         .logo span { color: var(--oracle-red); }
-        .logo {width: 180px; max-width: 100%; height: auto;}
+        .logo { max-width: 180px; height: auto; display: block; }
+        .logo img { width: 100%; height: auto; display: block; }
         .nav-links { display: flex; gap: 40px; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 15px; transition: color 0.3s; position: relative; }
         .nav-links a:hover { color: var(--oracle-red); }
@@ -150,7 +151,6 @@
         .cta-buttons { display: flex; gap: 20px; justify-content: center; }
         .footer { background: var(--oracle-dark); color: white; padding: 80px 40px 40px; }
         .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-        .footer-brand img { width: 180px; max-width: 100%; height: auto; margin-bottom: 20px; display: block; }
         .footer-brand h3 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
         .footer-brand h3 span { color: var(--oracle-red); }
         .footer-brand p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; }
@@ -162,6 +162,12 @@
         .footer-column li { margin-bottom: 14px; }
         .footer-column a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .footer-column a:hover { color: white; }
+        .footer-contact h4 { font-size: 16px; font-weight: 700; margin-bottom: 18px; color: white; }
+        .footer-contact dl { margin: 0; }
+        .footer-contact dt { color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 700; margin-top: 12px; }
+        .footer-contact dd { color: rgba(255,255,255,0.8); font-size: 14px; margin: 4px 0 0 0; line-height: 1.8; }
+        .footer-contact dd a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .footer-contact dd a:hover { color: white; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
         .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 14px; }
         .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--oracle-navy); }
@@ -170,16 +176,19 @@
         .scroll-reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
         .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
         @media (max-width: 1024px) {
+            .nav-container, .hero-container, .footer { padding-left: 20px; padding-right: 20px; }
             .hero-container { grid-template-columns: 1fr; text-align: center; }
             .hero-content p { margin-left: auto; margin-right: auto; }
             .hero-stats { justify-content: center; }
             .hero-visual { display: none; }
             .products-grid, .pricing-grid, .vps-types, .features-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-container { grid-template-columns: repeat(2, 1fr); }
+            .nav-actions { gap: 12px; }
         }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
+            .nav-container { justify-content: space-between; }
             .hero-content h1 { font-size: 40px; }
             .products-grid, .pricing-grid, .vps-types, .features-grid, .services-grid { grid-template-columns: 1fr; }
             .pricing-card.featured { transform: scale(1); }
@@ -187,6 +196,7 @@
             .cta h2 { font-size: 32px; }
             .cta-buttons { flex-direction: column; }
             .hero-stats { flex-direction: column; gap: 24px; }
+            .footer { padding-bottom: 30px; }
         }
         .new-services { padding: 120px 40px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
         .new-services-container { max-width: 1400px; margin: 0 auto; }
@@ -320,7 +330,6 @@
             <a href="#" class="logo"><img src="logo-oqline.png" alt="Oqline Logo"></a>
             <ul class="nav-links">
                 <li><a href="#products">Produk</a></li>
-                <li><a href="#new-services">Jasa Baru</a></li>
                 <li><a href="#jasa-website">Jasa Website</a></li>
                 <li><a href="#pricing">Harga</a></li>
                 <li><a href="#vps">Cloud VPS</a></li>
@@ -328,8 +337,8 @@
                 <li><a href="#features">Fitur</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" title="Chat WhatsApp 089652435067">Masuk</a>
-                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" title="Mulai Gratis via WhatsApp 089652435067">Mulai Gratis</a>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline">Masuk</a>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary">Mulai Gratis</a>
             </div>
             <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
         </div>
@@ -923,47 +932,35 @@
     <section class="features" id="features">
         <div class="features-container">
             <div class="section-header scroll-reveal">
-                <span class="section-label">Mengapa Oqline</span>
-                <h2>Built For Business</h2>
-                <p>Platform terbaik yang sudah dipercaya lebih dari 600.000 pengguna di seluruh Indonesia.</p>
+                <span class="section-label">Mengapa Oqline / Why Oqline</span>
+                <h2>Built For Business / Dibangun untuk Bisnis</h2>
+                <p>Platform terbaik yang sudah dipercaya lebih dari 600.000 pengguna di seluruh Indonesia. / The best platform trusted by over 600,000 users across Indonesia.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-item scroll-reveal">
                     <div class="feature-icon"><i class="fas fa-award"></i></div>
                     <h3>Platform Terbaik</h3>
+                    <p>Best platform with enterprise-grade reliability.</p>
                     <p>Layanan dipercaya 600K+ pengguna dengan jaminan SLA 99.5% untuk mendukung bisnis Anda.</p>
                 </div>
                 <div class="feature-item scroll-reveal">
                     <div class="feature-icon"><i class="fas fa-tags"></i></div>
                     <h3>Harga Kompetitif</h3>
+                    <p>Competitive pricing for every business size.</p>
                     <p>Harga terbaik dengan markup yang transparan untuk kualitas layanan enterprise.</p>
                 </div>
                 <div class="feature-item scroll-reveal">
                     <div class="feature-icon"><i class="fas fa-headset"></i></div>
                     <h3>Support 24/7</h3>
+                    <p>24/7 certified support for all customers.</p>
                     <p>Tim Support bersertifikasi internasional siap membantu setiap waktu.</p>
                 </div>
                 <div class="feature-item scroll-reveal">
                     <div class="feature-icon"><i class="fas fa-lock"></i></div>
                     <h3>Privasi & Keamanan</h3>
+                    <p>Privacy & security protection with modern technology.</p>
                     <p>Jaminan dan perlindungan privasi data dengan teknologi terbaru dan terbaik.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SOCIAL MEDIA SECTION -->
-    <section class="social-section">
-        <div class="social-container">
-            <h2>Ikuti Kami</h2>
-            <p>Dapatkan update terbaru, promo menarik, dan tips teknologi dari Oqline.</p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/oqlineidn?igsh=dWx5bnhzMDRhMmw3" target="_blank" class="social-link instagram">
-                    <i class="fab fa-instagram"></i> @oqlineidn
-                </a>
-                <a href="https://www.threads.com/@oqlineidn" target="_blank" class="social-link threads">
-                    <i class="fab fa-threads"></i> @oqlineidn
-                </a>
             </div>
         </div>
     </section>
@@ -987,6 +984,17 @@
                 <div class="footer-social">
                     <a href="https://www.instagram.com/oqlineidn?igsh=dWx5bnhzMDRhMmw3" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.threads.com/@oqlineidn" target="_blank"><i class="fab fa-threads"></i></a>
+                </div>
+                <div class="footer-contact">
+                    <!--<h4>Informasi Kontak / Contact Info</h4>-->
+                    <dl>
+                        <dt>Email</dt>
+                        <dd><a href="mailto:astriainternasional@gmail.com">astriainternasional@gmail.com</a></dd>
+                        <dt>Kontak / Contact</dt>
+                        <dd><a href="https://wa.me/6289652435067" target="_blank">+62 896-5243-5067</a></dd>
+                        <dt>Alamat / Address</dt>
+                        <dd>Gedung Puskopal Lt. 2, Komplek TNI AL Jl. Tabah Raya No.19, Kelapa Gading, Jakarta Utara.</dd>
+                    </dl>
                 </div>
             </div>
             <div class="footer-column">
