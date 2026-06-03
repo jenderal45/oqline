@@ -3,1396 +3,1059 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oqline - Integrated Cloud Applications and Platform Services</title>
+    <title>Oqline | Cloud Infrastructure Terbaik Indonesia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #C74634;
-            --primary-dark: #9e3627;
-            --primary-light: #e85d4a;
-            --secondary: #3C3633;
-            --dark: #1a1a1a;
-            --light: #f7f7f5;
-            --gray: #6b6b6b;
-            --success: #2e7d32;
-            --gradient-1: linear-gradient(135deg, #C74634 0%, #e85d4a 100%);
-            --gradient-2: linear-gradient(135deg, #3C3633 0%, #5a524d 100%);
-            --gradient-dark: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+            --oracle-red: #C74634;
+            --oracle-dark: #1A1A1A;
+            --oracle-navy: #0D1B2A;
+            --oracle-blue: #0077C8;
+            --oracle-light: #F5F5F5;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --border-color: #E0E0E0;
+            --gradient-dark: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 100%);
+            --gradient-hero: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 50%, #0077C8 100%);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body { font-family: 'Inter', sans-serif; color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+        .navbar { background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .logo { font-size: 28px; font-weight: 800; color: var(--oracle-navy); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--oracle-red); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 15px; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--oracle-red); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -24px; left: 0; width: 0; height: 3px; background: var(--oracle-red); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; gap: 20px; align-items: center; }
+        .btn { padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: none; }
+        .btn-primary { background: var(--oracle-red); color: white; }
+        .btn-primary:hover { background: #A33A2B; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(199,70,52,0.3); }
+        .btn-outline { background: transparent; color: var(--text-primary); border: 2px solid var(--border-color); }
+        .btn-outline:hover { border-color: var(--oracle-red); color: var(--oracle-red); }
+        .btn-white { background: white; color: var(--oracle-navy); }
+        .btn-white:hover { background: #f0f0f0; }
+        .hero { background: var(--gradient-hero); min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 72px; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.03' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); background-size: cover; background-position: bottom; }
+        .hero-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 2; }
+        .hero-content h1 { font-size: 64px; font-weight: 800; color: white; line-height: 1.1; margin-bottom: 24px; letter-spacing: -2px; }
+        .hero-content h1 span { color: #FF6B4A; }
+        .hero-content p { font-size: 20px; color: rgba(255,255,255,0.85); margin-bottom: 40px; max-width: 540px; line-height: 1.7; }
+        .hero-stats { display: flex; gap: 48px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+        .stat-item h3 { font-size: 36px; font-weight: 800; color: white; }
+        .stat-item p { font-size: 14px; color: rgba(255,255,255,0.7); margin: 0; }
+        .hero-visual { position: relative; }
+        .hero-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 40px; color: white; transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); transition: transform 0.5s; box-shadow: 0 25px 80px rgba(0,0,0,0.3); }
+        .hero-card:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg); }
+        .hero-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .hero-card-header h3 { font-size: 18px; font-weight: 600; }
+        .status-badge { background: rgba(46,204,113,0.2); color: #2ECC71; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .server-list { display: flex; flex-direction: column; gap: 12px; }
+        .server-item { background: rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.08); }
+        .server-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .server-info p { font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; }
+        .server-status { width: 10px; height: 10px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 10px #2ECC71; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 42px; font-weight: 800; margin-bottom: 16px; color: var(--oracle-navy); }
+        .section-header p { font-size: 18px; color: var(--text-secondary); }
+        .section-label { display: inline-block; color: var(--oracle-red); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+        .products { padding: 120px 40px; background: white; }
+        .products-container { max-width: 1400px; margin: 0 auto; }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .product-card { border: 1px solid var(--border-color); border-radius: 16px; padding: 40px 32px; transition: all 0.4s; position: relative; overflow: hidden; background: white; }
+        .product-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradient-dark); transform: scaleX(0); transition: transform 0.4s; }
+        .product-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.1); transform: translateY(-8px); border-color: transparent; }
+        .product-card:hover::before { transform: scaleX(1); }
+        .product-icon { width: 56px; height: 56px; background: var(--gradient-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-bottom: 24px; }
+        .product-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .product-card p { color: var(--text-secondary); font-size: 15px; margin-bottom: 24px; line-height: 1.7; }
+        .product-features { list-style: none; margin-bottom: 32px; }
+        .product-features li { padding: 8px 0; color: var(--text-secondary); font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .product-features li i { color: var(--oracle-red); font-size: 12px; }
+        .product-link { color: var(--oracle-red); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+        .product-link:hover { gap: 12px; }
+        .pricing { padding: 120px 40px; background: var(--oracle-light); }
+        .pricing-container { max-width: 1400px; margin: 0 auto; }
+        .pricing-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 60px; background: white; padding: 8px; border-radius: 12px; width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .tab-btn { padding: 12px 32px; border: none; background: transparent; font-weight: 600; font-size: 14px; cursor: pointer; border-radius: 8px; transition: all 0.3s; color: var(--text-secondary); font-family: 'Inter', sans-serif; }
+        .tab-btn.active { background: var(--oracle-navy); color: white; }
+        .tab-btn:hover:not(.active) { color: var(--oracle-navy); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .pricing-card { background: white; border-radius: 20px; padding: 48px 36px; position: relative; transition: all 0.4s; border: 2px solid transparent; }
+        .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .pricing-card.featured { border-color: var(--oracle-red); transform: scale(1.05); }
+        .pricing-card.featured:hover { transform: scale(1.05) translateY(-8px); }
+        .featured-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--oracle-red); color: white; padding: 6px 24px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .pricing-header { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border-color); }
+        .pricing-header h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--oracle-navy); }
+        .pricing-header p { font-size: 14px; color: var(--text-secondary); }
+        .pricing-price { margin-bottom: 32px; }
+        .pricing-price .currency { font-size: 24px; font-weight: 600; vertical-align: top; color: var(--oracle-navy); }
+        .pricing-price .amount { font-size: 56px; font-weight: 800; color: var(--oracle-navy); line-height: 1; }
+        .pricing-price .period { font-size: 16px; color: var(--text-secondary); font-weight: 500; }
+        .pricing-features { list-style: none; margin-bottom: 40px; }
+        .pricing-features li { padding: 12px 0; display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--text-secondary); border-bottom: 1px solid #f0f0f0; }
+        .pricing-features li:last-child { border-bottom: none; }
+        .pricing-features li i { color: var(--oracle-red); width: 20px; }
+        .pricing-features li strong { color: var(--text-primary); font-weight: 600; }
+        .vps-section { padding: 120px 40px; background: var(--oracle-navy); color: white; position: relative; overflow: hidden; }
+        .vps-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,119,200,0.15) 0%, transparent 70%); }
+        .vps-container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+        .vps-section .section-header h2, .vps-section .section-header p { color: white; }
+        .vps-section .section-label { color: #FF6B4A; }
+        .vps-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .vps-type-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; transition: all 0.4s; }
+        .vps-type-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-8px); border-color: rgba(255,255,255,0.2); }
+        .vps-type-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+        .vps-type-card .vps-price { font-size: 36px; font-weight: 800; color: #FF6B4A; margin-bottom: 8px; }
+        .vps-type-card .vps-hourly { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+        .vps-type-card p { color: rgba(255,255,255,0.7); margin-bottom: 24px; line-height: 1.7; }
+        .vps-specs { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+        .vps-spec { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+        .vps-spec span:first-child { color: rgba(255,255,255,0.6); }
+        .vps-spec span:last-child { font-weight: 600; }
+        .performance-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 20px; }
+        .badge-standard { background: rgba(255,255,255,0.1); color: white; }
+        .badge-intel { background: rgba(0,119,200,0.2); color: #4FC3F7; }
+        .badge-amd { background: rgba(199,70,52,0.2); color: #FF6B4A; }
+        .features { padding: 120px 40px; background: white; }
+        .features-container { max-width: 1400px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+        .feature-item { text-align: center; padding: 40px 24px; border-radius: 16px; transition: all 0.4s; }
+        .feature-item:hover { background: var(--oracle-light); transform: translateY(-4px); }
+        .feature-icon { width: 72px; height: 72px; background: var(--gradient-dark); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: white; font-size: 28px; }
+        .feature-item h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .feature-item p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        .hosting-section { padding: 120px 40px; background: var(--oracle-light); }
+        .hosting-container { max-width: 1400px; margin: 0 auto; }
+        .hosting-table-wrapper { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        .hosting-table { width: 100%; border-collapse: collapse; }
+        .hosting-table th { background: var(--oracle-navy); color: white; padding: 24px; text-align: left; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .hosting-table th:first-child { width: 25%; }
+        .hosting-table td { padding: 24px; border-bottom: 1px solid var(--border-color); font-size: 15px; }
+        .hosting-table tr:hover td { background: #fafafa; }
+        .hosting-table .plan-name { font-weight: 700; color: var(--oracle-navy); font-size: 16px; }
+        .hosting-table .plan-price { font-weight: 800; color: var(--oracle-red); font-size: 18px; }
+        .hosting-table .check { color: var(--oracle-red); font-weight: 700; }
+        .cta { padding: 120px 40px; background: var(--gradient-dark); text-align: center; position: relative; overflow: hidden; }
+        .cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.02' d='M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); background-size: cover; }
+        .cta-container { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+        .cta h2 { font-size: 48px; font-weight: 800; color: white; margin-bottom: 24px; }
+        .cta p { font-size: 20px; color: rgba(255,255,255,0.8); margin-bottom: 40px; }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; }
+        .footer { background: var(--oracle-dark); color: white; padding: 80px 40px 40px; }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand h3 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+        .footer-brand h3 span { color: var(--oracle-red); }
+        .footer-brand p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; }
+        .footer-social { display: flex; gap: 16px; }
+        .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: all 0.3s; }
+        .footer-social a:hover { background: var(--oracle-red); transform: translateY(-4px); }
+        .footer-column h4 { font-size: 16px; font-weight: 700; margin-bottom: 24px; color: white; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 14px; }
+        .footer-column a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-column a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 14px; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--oracle-navy); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeInUp 0.8s ease forwards; }
+        .scroll-reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content p { margin-left: auto; margin-right: auto; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { display: none; }
+            .products-grid, .pricing-grid, .vps-types, .features-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-container { grid-template-columns: repeat(2, 1fr); }
         }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
-            line-height: 1.6;
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero-content h1 { font-size: 40px; }
+            .products-grid, .pricing-grid, .vps-types, .features-grid, .services-grid { grid-template-columns: 1fr; }
+            .pricing-card.featured { transform: scale(1); }
+            .footer-container { grid-template-columns: 1fr; }
+            .cta h2 { font-size: 32px; }
+            .cta-buttons { flex-direction: column; }
+            .hero-stats { flex-direction: column; gap: 24px; }
         }
-
-        /* Navigation - Oracle Style */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 0;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.8rem;
+        .new-services { padding: 120px 40px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        .new-services-container { max-width: 1400px; margin: 0 auto; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .service-card { background: white; border-radius: 20px; padding: 48px 36px; text-align: center; transition: all 0.4s; border: 2px solid transparent; position: relative; overflow: hidden; }
+        .service-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); border-color: var(--oracle-red); }
+        .service-logo { width: 120px; height: 60px; margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .service-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .service-card .service-tag { display: inline-block; background: var(--oracle-red); color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .service-card p { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 24px; }
+        .service-features { list-style: none; text-align: left; margin-bottom: 32px; }
+        .service-features li { padding: 10px 0; color: var(--text-secondary); font-size: 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f0f0; }
+        .service-features li:last-child { border-bottom: none; }
+        .service-features li i { color: var(--oracle-red); font-size: 12px; }
+        .social-section { padding: 80px 40px; background: white; text-align: center; }
+        .social-container { max-width: 800px; margin: 0 auto; }
+        .social-section h2 { font-size: 36px; font-weight: 800; color: var(--oracle-navy); margin-bottom: 16px; }
+        .social-section p { color: var(--text-secondary); font-size: 18px; margin-bottom: 40px; }
+        .social-links { display: flex; gap: 24px; justify-content: center; }
+        .social-link { display: flex; align-items: center; gap: 12px; padding: 16px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.3s; }
+        .social-link.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .social-link.instagram:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(220,39,67,0.3); }
+        .social-link.threads { background: var(--oracle-navy); color: white; }
+        .social-link.threads:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(13,27,42,0.3); }
+        .social-link i { font-size: 24px; }
+    
+        /* JASA SECTION STYLES */
+        .service-card { position: relative; overflow: hidden; }
+        .service-badge-promo {
+            position: absolute;
+            top: 16px;
+            right: -32px;
+            background: linear-gradient(135deg, #E31837, #FF6B4A);
+            color: white;
+            padding: 6px 40px;
+            font-size: 11px;
             font-weight: 800;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo::before {
-            content: '◆';
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: var(--primary);
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
-        }
-
-        .nav-cta:hover {
-            background: transparent;
-            color: var(--primary);
-        }
-
-        /* Hero Section - Oracle Corporate Style */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-            padding: 8rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent 0%, rgba(199,70,52,0.03) 100%);
-            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 6rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(199,70,52,0.1);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(199,70,52,0.2);
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            letter-spacing: -1px;
-        }
-
-        .hero-text h1 span {
-            color: var(--primary);
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            line-height: 1.5;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            max-width: 90%;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
-            font-size: 1rem;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(199,70,52,0.2);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--dark);
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            border: 2px solid #d1d1d1;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .hero-visual {
-            position: relative;
-        }
-
-        .hero-image-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.12);
-            overflow: hidden;
-            border: 1px solid #e5e5e5;
-        }
-
-        .hero-image-header {
-            background: linear-gradient(90deg, #f8f8f8 0%, #fff 100%);
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #e5e5e5;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .hero-image-header .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e5e5e5;
-        }
-
-        .hero-image-header .dot:nth-child(1) { background: #ff5f57; }
-        .hero-image-header .dot:nth-child(2) { background: #febc2e; }
-        .hero-image-header .dot:nth-child(3) { background: #28c840; }
-
-        .hero-image-content {
-            padding: 2rem;
-            background: white;
-        }
-
-        .dashboard-preview {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-box {
-            background: #f8f8f8;
-            padding: 1.5rem;
-            border-radius: 6px;
-            text-align: center;
-            border: 1px solid #e5e5e5;
-        }
-
-        .stat-box h4 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-box p {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin: 0;
-        }
-
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
-        }
-
-        .app-item {
-            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-            border: 1px solid #e5e5e5;
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .app-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .app-item i {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .app-item span {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        /* Mission Statement Section */
-        .mission {
-            background: var(--dark);
-            padding: 5rem 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .mission-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .mission h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            line-height: 1.4;
-            font-style: italic;
-            color: #fff;
-        }
-
-        .mission h2 span {
-            color: var(--primary-light);
-            font-weight: 500;
-        }
-
-        .mission-divider {
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-            margin: 2rem auto;
-        }
-
-        /* Stats Section */
-        .stats {
-            background: white;
-            padding: 4rem 2rem;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .stats-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--gray);
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        /* Products Section - Oracle Style */
-        .products {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .section-header p {
-            font-size: 1.1rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            border: 1px solid #e5e5e5;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary);
-            transform: scaleY(0);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            border-color: #d1d1d1;
-            transform: translateY(-5px);
-        }
-
-        .product-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        .product-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            background: #f5f5f5;
-            color: var(--primary);
-            border: 1px solid #e5e5e5;
-        }
-
-        .product-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--dark);
-        }
-
-        .product-card p {
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-features li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .product-features li i {
-            color: var(--success);
-            font-size: 0.8rem;
-        }
-
-        .product-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: gap 0.3s;
-        }
-
-        .product-link:hover {
-            gap: 1rem;
-        }
-
-        .badge {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 15px rgba(227,24,55,0.4);
+            z-index: 10;
         }
-
-        .badge.live {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .badge.soon {
-            background: #f5f5f5;
-            color: var(--gray);
-            border: 1px solid #e5e5e5;
-        }
-
-        .badge.hot {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Enterprise Section */
-        .enterprise {
-            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-            padding: 6rem 2rem;
-            border-top: 1px solid #e5e5e5;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .enterprise-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
+        .service-icon-jasa {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #0D1B2A, #1B3A4B);
+            border-radius: 16px;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 8px 25px rgba(13,27,42,0.3);
         }
-
-        .enterprise-text h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
+        .service-price-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0 20px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        .service-price-normal {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+        .service-price-promo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--oracle-red);
             line-height: 1.2;
         }
-
-        .enterprise-text p {
-            font-size: 1.1rem;
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        .enterprise-features {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .feature-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
-        .feature-text h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--dark);
-        }
-
-        .feature-text p {
-            font-size: 0.95rem;
-            color: var(--gray);
-            margin: 0;
-        }
-
-        .enterprise-visual {
-            background: white;
-            border-radius: 8px;
-            padding: 3rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            border: 1px solid #e5e5e5;
-        }
-
-        .integration-diagram {
-            text-align: center;
-        }
-
-        .center-hub {
-            width: 120px;
-            height: 120px;
-            background: var(--gradient-1);
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-            box-shadow: 0 10px 30px rgba(199,70,52,0.3);
-        }
-
-        .orbit-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .orbit-item {
-            background: #f8f8f8;
-            padding: 1rem;
-            border-radius: 6px;
-            border: 1px solid #e5e5e5;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        /* Innovation Section */
-        .innovation {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .innovation-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .innovation-card {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .innovation-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .innovation-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            font-weight: 500;
-        }
-
-        /* CTA Section */
-        .cta {
-            background: var(--dark);
-            padding: 5rem 2rem;
-            text-align: center;
-            color: white;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .cta p {
-            font-size: 1.1rem;
-            color: #aaa;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-cta {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
-        }
-
-        .btn-cta:hover {
-            background: transparent;
-            color: var(--primary-light);
-        }
-
-        /* Footer - Oracle Style */
-        footer {
-            background: #f8f8f8;
-            border-top: 1px solid #e5e5e5;
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-            font-weight: 800;
-        }
-
-        .footer-brand p {
-            color: var(--gray);
-            line-height: 1.7;
-            font-size: 0.9rem;
-        }
-
-        .footer-links h4 {
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid #e5e5e5;
+        .service-price-tier {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--gray);
-            font-size: 0.85rem;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
         }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
+        .service-price-tier:last-child { border-bottom: none; }
+        .tier-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
         }
-
-        .social-links a {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: white;
-            border: 1px solid #e5e5e5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            text-decoration: none;
-            transition: all 0.3s;
+        .tier-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--oracle-navy);
         }
-
-        .social-links a:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+        .featured-jasa {
+            border: 2px solid var(--oracle-red) !important;
+            transform: scale(1.03);
         }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
-            }
-
-            .hero-text p {
-                max-width: 100%;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .enterprise-content {
-                grid-template-columns: 1fr;
-            }
-
-            .innovation-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
+        .featured-jasa:hover {
+            transform: scale(1.03) translateY(-12px) !important;
         }
-
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-
-            .innovation-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-preview {
-                grid-template-columns: 1fr;
-            }
-
-            .app-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
+            .featured-jasa { transform: scale(1) !important; }
+            .featured-jasa:hover { transform: scale(1) translateY(-12px) !important; }
         }
-    </style>
-<base target="_blank">
+
+
+        /* Dark section card fixes */
+        #jasa-website .service-card {
+            background: rgba(255,255,255,0.98);
+        }
+        #jasa-website .service-card h3 {
+            color: var(--oracle-navy);
+        }
+        #jasa-website .service-card p {
+            color: var(--text-secondary);
+        }
+        #jasa-website .service-features li {
+            color: var(--text-secondary);
+            border-bottom-color: #f0f0f0;
+        }
+        #jasa-website .service-features li i {
+            color: var(--oracle-red);
+        }
+
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">OQLINE</div>
+            <a href="#" class="logo"><i class="fas fa-cloud"></i> Oq<span>line</span></a>
             <ul class="nav-links">
-                <li><a href="#products">Cloud Applications</a></li>
-                <li><a href="#enterprise">Platform</a></li>
-                <li><a href="#innovation">Innovation</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#products">Produk</a></li>
+                <li><a href="#new-services">Jasa Baru</a></li>
+                <li><a href="#jasa-website">Jasa Website</a></li>
+                <li><a href="#pricing">Harga</a></li>
+                <li><a href="#vps">Cloud VPS</a></li>
+                <li><a href="#hosting">Hosting</a></li>
+                <li><a href="#features">Fitur</a></li>
             </ul>
-            <a href="#products" class="nav-cta">Get Started</a>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Masuk</a>
+                <a href="#" class="btn btn-primary">Mulai Gratis</a>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <div class="hero-badge">
-                    <i class="fas fa-cloud"></i>
-                    Integrated Cloud Applications and Platform Services
+        <div class="hero-container">
+            <div class="hero-content animate-in">
+                <h1>Infrastruktur Cloud <span>Terbaik</span> Indonesia</h1>
+                <p>Platform cloud terdepan dengan 6 data center, 436K+ pelanggan, dan jaminan SLA 99.5%. Deploy server Anda dalam 60 detik dengan teknologi NVMe dan prosesor AMD EPYC.</p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="#pricing" class="btn btn-primary" style="padding: 16px 36px; font-size: 16px;">Lihat Harga <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="btn btn-outline" style="padding: 16px 36px; font-size: 16px; color: white; border-color: rgba(255,255,255,0.3);"><i class="fas fa-play-circle"></i> Demo</a>
                 </div>
-                <h1>Complete. Open. <span>Integrated.</span></h1>
-                <p class="hero-subtitle">Hardware and Software, Engineered to Work Together</p>
-                <p>Oqline delivers a comprehensive and fully integrated stack of cloud applications and cloud platform services, designed to help businesses of all sizes see data in new ways, discover insights, and unlock endless possibilities.</p>
-                <div class="hero-buttons">
-                    <a href="#products" class="btn-primary">
-                        Explore Cloud Services
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#enterprise" class="btn-secondary">
-                        <i class="fas fa-play-circle"></i>
-                        Watch Overview
-                    </a>
+                <div class="hero-stats">
+                    <div class="stat-item"><h3>436K+</h3><p>Pelanggan Aktif</p></div>
+                    <div class="stat-item"><h3>6</h3><p>Data Center</p></div>
+                    <div class="stat-item"><h3>99.5%</h3><p>SLA Guarantee</p></div>
+                    <div class="stat-item"><h3>24/7</h3><p>Support Certified</p></div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-image-container">
-                    <div class="hero-image-header">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <span style="margin-left: auto; font-size: 0.8rem; color: #999;">Oqline Cloud Console</span>
+            <div class="hero-visual animate-in">
+                <div class="hero-card">
+                    <div class="hero-card-header">
+                        <h3><i class="fas fa-server"></i> Dashboard Oqline</h3>
+                        <span class="status-badge"><i class="fas fa-circle" style="font-size: 8px; margin-right: 4px;"></i> Online</span>
                     </div>
-                    <div class="hero-image-content">
-                        <div class="dashboard-preview">
-                            <div class="stat-box">
-                                <h4>14</h4>
-                                <p>Cloud Services</p>
-                            </div>
-                            <div class="stat-box">
-                                <h4>18K+</h4>
-                                <p>Active Users</p>
-                            </div>
-                            <div class="stat-box">
-                                <h4>99.9%</h4>
-                                <p>Uptime SLA</p>
-                            </div>
-                        </div>
-                        <div class="app-grid">
-                            <div class="app-item">
-                                <i class="fas fa-globe"></i>
-                                <span>Website</span>
-                            </div>
-                            <div class="app-item">
-                                <i class="fas fa-link"></i>
-                                <span>Link</span>
-                            </div>
-                            <div class="app-item">
-                                <i class="fas fa-palette"></i>
-                                <span>Design</span>
-                            </div>
-                            <div class="app-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>Invite</span>
-                            </div>
-                            <div class="app-item">
-                                <i class="fas fa-store"></i>
-                                <span>Store</span>
-                            </div>
-                            <div class="app-item">
-                                <i class="fas fa-file-invoice"></i>
-                                <span>Invoice</span>
-                            </div>
-                            <div class="app-item">
-                                <i class="fas fa-wallet"></i>
-                                <span>Finance</span>
-                            </div>
-                            <div class="app-item">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Sales</span>
-                            </div>
-                        </div>
+                    <div class="server-list">
+                        <div class="server-item"><div class="server-info"><h4>Jakarta-DC1</h4><p>Intel eXtreme - 2 CPU - 4GB RAM</p></div><div class="server-status"></div></div>
+                        <div class="server-item"><div class="server-info"><h4>Singapore-DC2</h4><p>AMD eXtreme - 4 CPU - 8GB RAM</p></div><div class="server-status"></div></div>
+                        <div class="server-item"><div class="server-info"><h4>Surabaya-DC3</h4><p>Basic Standard - 1 CPU - 2GB RAM</p></div><div class="server-status"></div></div>
+                        <div class="server-item"><div class="server-info"><h4>Bandung-DC4</h4><p>GPU Power - 4x Tesla V100</p></div><div class="server-status"></div></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission Statement -->
-    <section class="mission">
-        <div class="mission-content">
-            <h2>"Our mission is to help people see data in new ways, <span>discover insights,</span> and unlock endless possibilities."</h2>
-            <div class="mission-divider"></div>
-            <p style="color: #aaa; font-size: 1rem;">— Oqline Corporate Mission</p>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3>14+</h3>
-                <p>Integrated Cloud Services</p>
-            </div>
-            <div class="stat-item">
-                <h3>18K+</h3>
-                <p>Enterprise Customers</p>
-            </div>
-            <div class="stat-item">
-                <h3>50K+</h3>
-                <p>Monthly Transactions</p>
-            </div>
-            <div class="stat-item">
-                <h3>24/7</h3>
-                <p>Global Support</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
     <section class="products" id="products">
-        <div class="section-header">
-            <h2>Integrated Cloud Applications & Platform</h2>
-            <p>A complete suite of cloud services designed to work together seamlessly. From infrastructure to applications, everything is engineered for optimal performance.</p>
-        </div>
-
-        <div class="products-grid">
-            <!-- WebsiteMu -->
-            <div class="product-card">
-                <span class="badge live">Available Now</span>
-                <div class="product-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <h3>Oqline Cloud Sites</h3>
-                <p>Enterprise-grade website infrastructure with instant deployment. Landing pages, company profiles, and e-commerce platforms.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> 20+ Enterprise Templates</li>
-                    <li><i class="fas fa-check"></i> Auto-scaling Infrastructure</li>
-                    <li><i class="fas fa-check"></i> Global CDN & SSL</li>
-                </ul>
-                <a href="https://websitemu-puce.vercel.app/" target="_blank" class="product-link">
-                    Learn more <i class="fas fa-arrow-right"></i>
-                </a>
+        <div class="products-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Solusi Lengkap</span>
+                <h2>Produk & Layanan</h2>
+                <p>Berbagai solusi cloud yang dirancang untuk memenuhi kebutuhan bisnis Anda, dari startup hingga enterprise.</p>
             </div>
-
-            <!-- LinkMu -->
-            <div class="product-card">
-                <span class="badge hot">Popular</span>
-                <div class="product-icon">
-                    <i class="fas fa-link"></i>
+            <div class="products-grid">
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud Hosting</h3>
+                    <p>Cloud Hosting dengan teknologi NVMe untuk performa tinggi. Dilengkapi cPanel, LiteSpeed Enterprise, dan Softaculous.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> LiteSpeed Web Server</li>
+                        <li><i class="fas fa-check"></i> Daily Backup</li>
+                        <li><i class="fas fa-check"></i> Free SSL Certificate</li>
+                    </ul>
+                    <a href="#" class="product-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <h3>Oqline Cloud Links</h3>
-                <p>Unified bio-link platform with integrated mini-store capabilities. Centralize all your digital presence in one intelligent link.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Smart Link Management</li>
-                    <li><i class="fas fa-check"></i> Integrated Commerce</li>
-                    <li><i class="fas fa-check"></i> Advanced Analytics</li>
-                </ul>
-                <a href="https://biolinkmu.vercel.app/" target="_blank" class="product-link">
-                    Learn more <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- DesignMu -->
-            <div class="product-card">
-                <span class="badge live">Available Now</span>
-                <div class="product-icon">
-                    <i class="fas fa-palette"></i>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-server"></i></div>
+                    <h3>Cloud VPS</h3>
+                    <p>Server Cloud VPS dengan pembayaran Pay as You Grow. Prosesor AMD EPYC & Intel dengan storage NVMe.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Full Root Access</li>
+                        <li><i class="fas fa-check"></i> Pilihan OS & Apps</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> API & Control Panel</li>
+                    </ul>
+                    <a href="#" class="product-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <h3>Oqline Cloud Design</h3>
-                <p>Comprehensive design system with 2,400+ enterprise templates. Professional assets for marketing and branding initiatives.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Enterprise Template Library</li>
-                    <li><i class="fas fa-check"></i> Brand Asset Management</li>
-                    <li><i class="fas fa-check"></i> Collaborative Workspaces</li>
-                </ul>
-                <a href="https://designmu.vercel.app/" target="_blank" class="product-link">
-                    Learn more <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- UndanganMu -->
-            <div class="product-card">
-                <span class="badge hot">High Demand</span>
-                <div class="product-icon">
-                    <i class="fas fa-envelope-open-text"></i>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-hdd"></i></div>
+                    <h3>Dedicated Server</h3>
+                    <p>Server dedicated dengan performa maksimal. Data Center Tier 4, ISO 9001 & ISO 27001 certified.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Full Access</li>
+                        <li><i class="fas fa-check"></i> Unlimited Transfer</li>
+                        <li><i class="fas fa-check"></i> Tier 4 Data Center</li>
+                        <li><i class="fas fa-check"></i> 24/7 Monitoring</li>
+                    </ul>
+                    <a href="#" class="product-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <h3>Oqline Cloud Events</h3>
-                <p>Digital event management platform for professional invitations. Enterprise RSVP tracking and guest management.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> 50+ Premium Templates</li>
-                    <li><i class="fas fa-check"></i> Real-time RSVP Analytics</li>
-                    <li><i class="fas fa-check"></i> WhatsApp Integration</li>
-                </ul>
-                <a href="https://undanganmu-nine.vercel.app/" target="_blank" class="product-link">
-                    Learn more <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- TokoMu -->
-            <div class="product-card">
-                <span class="badge live">Available Now</span>
-                <div class="product-icon">
-                    <i class="fas fa-shopping-bag"></i>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Domain</h3>
+                    <p>Domain terlengkap dengan proses cepat dan praktis. Lindungi brand Anda sekarang juga.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> .com mulai Rp 160.000/tahun</li>
+                        <li><i class="fas fa-check"></i> .id mulai Rp 210.000/tahun</li>
+                        <li><i class="fas fa-check"></i> DNS Management</li>
+                        <li><i class="fas fa-check"></i> Domain Privacy</li>
+                    </ul>
+                    <a href="#" class="product-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <h3>Oqline Cloud Commerce</h3>
-                <p>Scalable e-commerce platform with WhatsApp Business integration. Complete order management and inventory tracking.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Unlimited Product Catalog</li>
-                    <li><i class="fas fa-check"></i> WhatsApp Checkout</li>
-                    <li><i class="fas fa-check"></i> Inventory Management</li>
-                </ul>
-                <a href="https://tokomu-black.vercel.app/" target="_blank" class="product-link">
-                    Learn more <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- NotaMu -->
-            <div class="product-card">
-                <span class="badge live">Available Now</span>
-                <div class="product-icon">
-                    <i class="fas fa-file-invoice-dollar"></i>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>GPU Server</h3>
+                    <p>GPU Power dengan 4x NVIDIA Tesla V100 untuk AI, machine learning, dan rendering.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> 4x Tesla V100</li>
+                        <li><i class="fas fa-check"></i> 4x Xeon Platinum 8176</li>
+                        <li><i class="fas fa-check"></i> High Performance Computing</li>
+                        <li><i class="fas fa-check"></i> AI & ML Ready</li>
+                    </ul>
+                    <a href="#" class="product-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <h3>Oqline Cloud Financial</h3>
-                <p>Automated invoicing and billing system. Professional document generation with integrated payment tracking.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Automated Invoice Generation</li>
-                    <li><i class="fas fa-check"></i> Payment Status Tracking</li>
-                    <li><i class="fas fa-check"></i> Financial Reporting</li>
-                </ul>
-                <a href="https://notamu.vercel.app/" target="_blank" class="product-link">
-                    Learn more <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <!-- DuitMu -->
-            <div class="product-card">
-                <span class="badge soon">Coming Soon</span>
-                <div class="product-icon">
-                    <i class="fas fa-wallet"></i>
-                </div>
-                <h3>Oqline Cloud Accounting</h3>
-                <p>Comprehensive financial management suite. Automated bookkeeping, cashflow analysis, and enterprise reporting.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Automated Bookkeeping</li>
-                    <li><i class="fas fa-check"></i> Cashflow Analytics</li>
-                    <li><i class="fas fa-check"></i> Tax Compliance Tools</li>
-                </ul>
-                <span style="color: #999; font-size: 0.85rem; font-weight: 500;">
-                    <i class="fas fa-clock"></i> Q2 2024 Release
-                </span>
-            </div>
-
-            <!-- SalesMu -->
-            <div class="product-card">
-                <span class="badge soon">Coming Soon</span>
-                <div class="product-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Oqline Cloud Sales</h3>
-                <p>Enterprise CRM and sales automation platform. Pipeline management, lead tracking, and automated follow-ups.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Sales Pipeline Management</li>
-                    <li><i class="fas fa-check"></i> Lead Scoring & Tracking</li>
-                    <li><i class="fas fa-check"></i> Automated Workflows</li>
-                </ul>
-                <span style="color: #999; font-size: 0.85rem; font-weight: 500;">
-                    <i class="fas fa-clock"></i> Q3 2024 Release
-                </span>
-            </div>
-
-            <!-- PayMu -->
-            <div class="product-card">
-                <span class="badge soon">Coming Soon</span>
-                <div class="product-icon">
-                    <i class="fas fa-credit-card"></i>
-                </div>
-                <h3>Oqline Cloud Payments</h3>
-                <p>Integrated payment gateway with multi-channel support. QRIS, virtual accounts, and comprehensive transaction management.</p>
-                <ul class="product-features">
-                    <li><i class="fas fa-check"></i> Multi-payment Channels</li>
-                    <li><i class="fas fa-check"></i> QRIS Integration</li>
-                    <li><i class="fas fa-check"></i> Fraud Protection</li>
-                </ul>
-                <span style="color: #999; font-size: 0.85rem; font-weight: 500;">
-                    <i class="fas fa-clock"></i> Q2 2024 Release
-                </span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Enterprise Section -->
-    <section class="enterprise" id="enterprise">
-        <div class="enterprise-content">
-            <div class="enterprise-text">
-                <h2>Engineered for Scale. Built for Performance.</h2>
-                <p>Oqline Cloud Infrastructure provides the foundation for digital transformation. Our integrated approach eliminates complexity, reduces costs, and accelerates innovation for businesses of every size.</p>
-
-                <div class="enterprise-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>Enterprise Security</h4>
-                            <p>End-to-end encryption and compliance standards</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>High Performance</h4>
-                            <p>Optimized infrastructure for maximum speed</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>Elastic Scalability</h4>
-                            <p>Auto-scaling resources based on demand</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>24/7 Expert Support</h4>
-                            <p>Dedicated technical assistance worldwide</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="enterprise-visual">
-                <div class="integration-diagram">
-                    <div class="center-hub">OQLINE</div>
-                    <div class="orbit-container">
-                        <div class="orbit-item">Infrastructure</div>
-                        <div class="orbit-item">Platform</div>
-                        <div class="orbit-item">Applications</div>
-                        <div class="orbit-item">Data</div>
-                        <div class="orbit-item">Security</div>
-                        <div class="orbit-item">Analytics</div>
-                    </div>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Managed Services</h3>
+                    <p>Layanan managed VPS dengan WHM cPanel. Fokus pada bisnis Anda, biarkan kami mengelola server.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> WHM & cPanel</li>
+                        <li><i class="fas fa-check"></i> 99.9% Uptime</li>
+                        <li><i class="fas fa-check"></i> Security Hardening</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="product-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Innovation Section -->
-    <section class="innovation" id="innovation">
-        <div class="section-header">
-            <h2>Innovation at Scale</h2>
-            <p>Delivering breakthrough technologies that power the modern enterprise</p>
+    <!-- NEW SERVICES SECTION -->
+    <!--<section class="new-services" id="new-services">
+        <div class="new-services-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Jasa Terbaru</span>
+                <h2>Layanan Digital Terbaru</h2>
+                <p>Kami hadirkan layanan digital terbaru untuk memenuhi kebutuhan bisnis Anda yang terus berkembang.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card scroll-reveal">
+                    <div class="service-logo">
+                        <svg viewBox="0 0 200 60" width="120" height="60">
+                            <rect x="10" y="10" width="30" height="40" rx="3" fill="#E31837"/>
+                            <rect x="45" y="15" width="25" height="30" rx="3" fill="#E31837"/>
+                            <rect x="75" y="20" width="20" height="20" rx="3" fill="#E31837"/>
+                            <text x="105" y="38" font-family="Arial" font-weight="bold" font-size="18" fill="#E31837">TELKOMSEL</text>
+                        </svg>
+                    </div>
+                    <span class="service-tag">Pulsa & Data</span>
+                    <h3>Telkomsel</h3>
+                    <p>Layanan isi ulang pulsa dan paket data Telkomsel dengan harga kompetitif dan proses instan.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Pulsa All Nominal</li>
+                        <li><i class="fas fa-check"></i> Paket Data Internet</li>
+                        <li><i class="fas fa-check"></i> Proses Instan 24/7</li>
+                        <li><i class="fas fa-check"></i> Harga Terbaik</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Pesan Sekarang</a>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <div class="service-logo">
+                        <svg viewBox="0 0 200 60" width="120" height="60">
+                            <circle cx="35" cy="30" r="22" fill="none" stroke="#0055A4" stroke-width="4"/>
+                            <circle cx="65" cy="30" r="22" fill="none" stroke="#00A0E3" stroke-width="4"/>
+                            <circle cx="95" cy="30" r="22" fill="none" stroke="#00D4AA" stroke-width="4"/>
+                            <text x="125" y="38" font-family="Arial" font-weight="bold" font-size="14" fill="#0055A4">SUCINDO</text>
+                        </svg>
+                    </div>
+                    <span class="service-tag">PPOB & Payment</span>
+                    <h3>Sucrindo</h3>
+                    <p>Layanan pembayaran tagihan PPOB lengkap mulai dari listrik, air, BPJS, hingga tagihan lainnya.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Token Listrik PLN</li>
+                        <li><i class="fas fa-check"></i> Tagihan Listrik & Air</li>
+                        <li><i class="fas fa-check"></i> BPJS Kesehatan</li>
+                        <li><i class="fas fa-check"></i> Multi Payment Gateway</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Bayar Tagihan</a>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <div class="service-logo">
+                        <svg viewBox="0 0 200 60" width="120" height="60">
+                            <rect x="5" y="5" width="190" height="50" rx="8" fill="#E31837"/>
+                            <rect x="10" y="10" width="180" height="40" rx="6" fill="none" stroke="white" stroke-width="2"/>
+                            <text x="100" y="38" font-family="Arial" font-weight="bold" font-size="20" fill="white" text-anchor="middle">Indomaret</text>
+                        </svg>
+                    </div>
+                    <span class="service-tag">Voucher & Gift</span>
+                    <h3>Indomaret</h3>
+                    <p>Beli voucher Indomaret dan layanan digital lainnya dengan mudah, cepat, dan aman.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Voucher Belanja</li>
+                        <li><i class="fas fa-check"></i> Voucher Game</li>
+                        <li><i class="fas fa-check"></i> Voucher Streaming</li>
+                        <li><i class="fas fa-check"></i> Promo Menarik</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Beli Voucher</a>
+                </div>
+            </div>
         </div>
+    </section> -->
 
-        <div class="innovation-grid">
-            <div class="innovation-card">
-                <div class="innovation-number">150+</div>
-                <div class="innovation-label">Cloud Services</div>
+
+    <!-- JASA WEBSITE & APLIKASI SECTION -->
+    <section class="new-services" id="jasa-website" style="background: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 100%);">
+        <div class="new-services-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" style="color: #FF6B4A;">Jasa Terbaru</span>
+                <h2 style="color: white;">Jasa Pembuatan Website & Aplikasi</h2>
+                <p style="color: rgba(255,255,255,0.7);">Solusi digital lengkap untuk bisnis Anda — dari company profile hingga aplikasi custom enterprise.</p>
             </div>
-            <div class="innovation-card">
-                <div class="innovation-number">60+</div>
-                <div class="innovation-label">Data Centers</div>
-            </div>
-            <div class="innovation-card">
-                <div class="innovation-number">99.9%</div>
-                <div class="innovation-label">Uptime SLA</div>
-            </div>
-            <div class="innovation-card">
-                <div class="innovation-number">&lt;50ms</div>
-                <div class="innovation-label">Global Latency</div>
+            <div class="services-grid">
+                <!-- Website Company Profile -->
+                <div class="service-card scroll-reveal">
+                    <div class="service-badge-promo">PROMO</div>
+                    <div class="service-icon-jasa"><i class="fas fa-building"></i></div>
+                    <span class="service-tag">Website</span>
+                    <h3>Company Profile</h3>
+                    <div class="service-price-box">
+                        <div class="service-price-normal">Rp 7.500.000</div>
+                        <div class="service-price-promo">Rp 4.999.000</div>
+                    </div>
+                    <p>Website profesional untuk meningkatkan trust, branding, dan closing client.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Home (Landing utama)</li>
+                        <li><i class="fas fa-check"></i> About Us (Profil & brand)</li>
+                        <li><i class="fas fa-check"></i> Services / Layanan</li>
+                        <li><i class="fas fa-check"></i> Portfolio / Project</li>
+                        <li><i class="fas fa-check"></i> Contact Us + WhatsApp CTA</li>
+                        <li><i class="fas fa-check"></i> Optional: Blog / Artikel</li>
+                        <li><i class="fas fa-check"></i> Desain UI/UX profesional & modern</li>
+                        <li><i class="fas fa-check"></i> Responsive (Mobile, Tablet, Desktop)</li>
+                        <li><i class="fas fa-check"></i> Google Maps lokasi bisnis</li>
+                        <li><i class="fas fa-check"></i> Integrasi social media</li>
+                        <li><i class="fas fa-check"></i> Domain (.com / .id) 1 tahun</li>
+                        <li><i class="fas fa-check"></i> Hosting 1 tahun + SSL Security</li>
+                        <li><i class="fas fa-check"></i> Training penggunaan website</li>
+                        <li><i class="fas fa-check"></i> Revisi 2x + Support 14 hari</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Pesan Sekarang</a>
+                </div>
+
+                <!-- Website Toko Online (E-Commerce) -->
+                <div class="service-card scroll-reveal featured-jasa">
+                    <div class="service-badge-promo">PROMO</div>
+                    <div class="service-icon-jasa"><i class="fas fa-shopping-cart"></i></div>
+                    <span class="service-tag" style="background: var(--oracle-blue);">E-Commerce</span>
+                    <h3>Toko Online</h3>
+                    <div class="service-price-box">
+                        <div class="service-price-normal">Rp 18.000.000</div>
+                        <div class="service-price-promo">Rp 11.999.000</div>
+                    </div>
+                    <p>Website jualan online otomatis + sistem lengkap seperti marketplace pribadi.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Home, Katalog & Detail Produk</li>
+                        <li><i class="fas fa-check"></i> Keranjang Belanja & Checkout</li>
+                        <li><i class="fas fa-check"></i> Upload produk (nama, harga, foto)</li>
+                        <li><i class="fas fa-check"></i> Kategori produk & stok otomatis</li>
+                        <li><i class="fas fa-check"></i> Add to cart & checkout system</li>
+                        <li><i class="fas fa-check"></i> Notifikasi pesanan & manajemen order</li>
+                        <li><i class="fas fa-check"></i> Transfer bank manual & QRIS</li>
+                        <li><i class="fas fa-check"></i> Payment gateway (Midtrans/Xendit)</li>
+                        <li><i class="fas fa-check"></i> Integrasi ekspedisi (JNE, J&T)</li>
+                        <li><i class="fas fa-check"></i> Ongkir otomatis</li>
+                        <li><i class="fas fa-check"></i> Login/register & riwayat pembelian</li>
+                        <li><i class="fas fa-check"></i> Tracking pesanan</li>
+                        <li><i class="fas fa-check"></i> Dashboard admin & laporan penjualan</li>
+                        <li><i class="fas fa-check"></i> Domain, hosting 1 tahun + SSL</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Pesan Sekarang</a>
+                </div>
+
+                <!-- Aplikasi Custom -->
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon-jasa"><i class="fas fa-code"></i></div>
+                    <span class="service-tag" style="background: linear-gradient(135deg, #6B21A8, #9333EA);">Custom App</span>
+                    <h3>Aplikasi Custom</h3>
+                    <div class="service-price-box">
+                        <div class="service-price-tier">
+                            <span class="tier-name">Basic</span>
+                            <span class="tier-price">Rp 25.000.000</span>
+                        </div>
+                        <div class="service-price-tier">
+                            <span class="tier-name">Business</span>
+                            <span class="tier-price">Rp 35.000.000-</span>
+                        </div>
+                        <div class="service-price-tier">
+                            <span class="tier-name">Enterprise</span>
+                            <span class="tier-price">Rp 50.000.000+</span>
+                        </div>
+                    </div>
+                    <p>Sistem/aplikasi yang dibuat sesuai kebutuhan bisnis Anda.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Analisis kebutuhan bisnis & flow sistem</li>
+                        <li><i class="fas fa-check"></i> UI/UX design custom</li>
+                        <li><i class="fas fa-check"></i> Backend & Frontend system</li>
+                        <li><i class="fas fa-check"></i> Database design & security</li>
+                        <li><i class="fas fa-check"></i> Payment Gateway integration</li>
+                        <li><i class="fas fa-check"></i> API Integration & WhatsApp API</li>
+                        <li><i class="fas fa-check"></i> Role user (admin/staff/user)</li>
+                        <li><i class="fas fa-check"></i> Backup system</li>
+                        <li><i class="fas fa-check"></i> Custom module: booking, inventory, CRM</li>
+                        <li><i class="fas fa-check"></i> Membership system & dashboard analytics</li>
+                        <li><i class="fas fa-check"></i> Setup server & domain</li>
+                        <li><i class="fas fa-check"></i> Maintenance awal</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Konsultasi Gratis</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
+
+    <section class="vps-section" id="vps">
+        <div class="vps-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Cloud VPS eXtreme</span>
+                <h2>Pilih Performa Server Anda</h2>
+                <p>Layanan server Cloud VPS dengan pembayaran Pay as You Grow yang transparan & berkualitas.</p>
+            </div>
+            <div class="vps-types">
+                <div class="vps-type-card scroll-reveal">
+                    <span class="performance-badge badge-standard">Standard</span>
+                    <h3>Basic Standard</h3>
+                    <div class="vps-price">Rp 121.800</div>
+                    <div class="vps-hourly">Rp 168 /jam - /bulan</div>
+                    <p>Performa andal untuk website dan aplikasi skala kecil hingga menengah.</p>
+                    <div class="vps-specs">
+                        <div class="vps-spec"><span>CPU</span><span>Scalable</span></div>
+                        <div class="vps-spec"><span>RAM</span><span>Scalable</span></div>
+                        <div class="vps-spec"><span>Storage</span><span>NVMe SSD</span></div>
+                        <div class="vps-spec"><span>Bandwidth</span><span>Unlimited</span></div>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Deploy Sekarang</a>
+                </div>
+                <div class="vps-type-card scroll-reveal">
+                    <span class="performance-badge badge-intel">4-5x Faster</span>
+                    <h3>Intel eXtreme</h3>
+                    <div class="vps-price">Rp 208.600</div>
+                    <div class="vps-hourly">Rp 286 /jam - /bulan</div>
+                    <p>Intel eXtreme hadir dengan performa tinggi & kecepatan 4-5x lebih cepat.</p>
+                    <div class="vps-specs">
+                        <div class="vps-spec"><span>CPU</span><span>Intel High Performance</span></div>
+                        <div class="vps-spec"><span>RAM</span><span>Scalable</span></div>
+                        <div class="vps-spec"><span>Storage</span><span>NVMe SSD</span></div>
+                        <div class="vps-spec"><span>Bandwidth</span><span>Unlimited Premium</span></div>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Deploy Sekarang</a>
+                </div>
+                <div class="vps-type-card scroll-reveal">
+                    <span class="performance-badge badge-amd">6-8x Faster</span>
+                    <h3>AMD eXtreme</h3>
+                    <div class="vps-price">Rp 208.600</div>
+                    <div class="vps-hourly">Rp 286 /jam - /bulan</div>
+                    <p>Komputasi 6-8x lebih cepat dengan CPU AMD EPYC 7542.</p>
+                    <div class="vps-specs">
+                        <div class="vps-spec"><span>CPU</span><span>AMD EPYC 7542</span></div>
+                        <div class="vps-spec"><span>RAM</span><span>Scalable</span></div>
+                        <div class="vps-spec"><span>Storage</span><span>NVMe SSD</span></div>
+                        <div class="vps-spec"><span>Bandwidth</span><span>Unlimited Premium</span></div>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Deploy Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pricing" id="pricing">
+        <div class="pricing-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Harga Transparan</span>
+                <h2>Pilih Paket Cloud Hosting</h2>
+                <p>Harga kompetitif dengan kualitas enterprise. Semua harga sudah termasuk pajak.</p>
+            </div>
+            <div class="pricing-tabs">
+                <button class="tab-btn active" onclick="switchTab('cloud')">Cloud Hosting</button>
+                <button class="tab-btn" onclick="switchTab('vps')">Cloud VPS</button>
+                <button class="tab-btn" onclick="switchTab('dedicated')">Dedicated</button>
+            </div>
+
+            <div id="cloud-pricing" class="pricing-grid">
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3>Starter Pro</h3><p>Untuk personal blog & testing</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">21.000</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>1 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>1 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>512 MB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> cPanel Control Panel</li>
+                        <li><i class="fas fa-check"></i> Softaculous Auto Installer</li>
+                        <li><i class="fas fa-check"></i> Unlimited Email</li>
+                        <li><i class="fas fa-check"></i> Free SSL Certificate</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card featured scroll-reveal">
+                    <span class="featured-badge">Paling Populer</span>
+                    <div class="pricing-header"><h3>Business Pro</h3><p>Untuk medium enterprise</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">147.000</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>13 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>3 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>2 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> Gratis Domain</li>
+                        <li><i class="fas fa-check"></i> Add-on Domain</li>
+                        <li><i class="fas fa-check"></i> LiteSpeed Enterprise</li>
+                        <li><i class="fas fa-check"></i> Daily Backup</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3>Advanced Pro</h3><p>Untuk enterprise applications</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">343.000</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>35 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>5 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>4 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> Unlimited Addon Domains</li>
+                        <li><i class="fas fa-check"></i> Unlimited Subdomains</li>
+                        <li><i class="fas fa-check"></i> Unlimited Database</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+            </div>
+
+            <div id="vps-pricing" class="pricing-grid" style="display: none;">
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3>VPS Pro + 1</h3><p>Entry level VPS</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">140.000</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>1 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>2 CPU</strong> Core</li>
+                        <li><i class="fas fa-check"></i> <strong>30 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> Full Root Access</li>
+                        <li><i class="fas fa-check"></i> Pilihan OS & Apps</li>
+                        <li><i class="fas fa-check"></i> Dedicated IPv4 & IPv6</li>
+                        <li><i class="fas fa-check"></i> Free Webuzo Premium</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card featured scroll-reveal">
+                    <span class="featured-badge">Best Value</span>
+                    <div class="pricing-header"><h3>Cloud VPS - Shiny</h3><p>Performa tinggi</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">600.600</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>4 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>4 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>100 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> cPanel / Plesk / DirectAdmin</li>
+                        <li><i class="fas fa-check"></i> 1 Dedicated IP</li>
+                        <li><i class="fas fa-check"></i> NVMe Storage</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3>VPS Pro + 5</h3><p>Enterprise grade</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">1.960.000</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>16 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>16 CPU</strong> Core</li>
+                        <li><i class="fas fa-check"></i> <strong>200 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> HPE Nimble Storage</li>
+                        <li><i class="fas fa-check"></i> High Security Level</li>
+                        <li><i class="fas fa-check"></i> Upgradable Anytime</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+            </div>
+
+            <div id="dedicated-pricing" class="pricing-grid" style="display: none;">
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3>Dedicated 160</h3><p>Starter dedicated</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">1.118.600</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>4 CPU</strong> Core</li>
+                        <li><i class="fas fa-check"></i> <strong>8 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>160 GB</strong> NVMe SSD</li>
+                        <li><i class="fas fa-check"></i> <strong>4 TB</strong> Data Transfer</li>
+                        <li><i class="fas fa-check"></i> Unlimited Hosted Domains</li>
+                        <li><i class="fas fa-check"></i> 1 Dedicated IP</li>
+                        <li><i class="fas fa-check"></i> Full Root Access</li>
+                        <li><i class="fas fa-check"></i> Indonesia Data Center</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card featured scroll-reveal">
+                    <span class="featured-badge">Enterprise</span>
+                    <div class="pricing-header"><h3>Dedicated Server 1</h3><p>High performance</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">3.640.000</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>Quad Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>16 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>2000 GB</strong> Storage</li>
+                        <li><i class="fas fa-check"></i> Unlimited Transfer</li>
+                        <li><i class="fas fa-check"></i> Unlimited Hosted Domains</li>
+                        <li><i class="fas fa-check"></i> Full Access</li>
+                        <li><i class="fas fa-check"></i> Tier 4 Data Center</li>
+                        <li><i class="fas fa-check"></i> 24/7 Monitoring</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3>Dedicated Server 8</h3><p>Maximum power</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">14.000.000</span><span class="period">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>High-End</strong> Processor</li>
+                        <li><i class="fas fa-check"></i> <strong>64+ GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>Large</strong> Storage</li>
+                        <li><i class="fas fa-check"></i> Unlimited Transfer</li>
+                        <li><i class="fas fa-check"></i> Custom Configuration</li>
+                        <li><i class="fas fa-check"></i> ISO 9001 & 27001</li>
+                        <li><i class="fas fa-check"></i> DDoS Protection</li>
+                        <li><i class="fas fa-check"></i> Dedicated Support Team</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Pilih Paket</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="hosting-section" id="hosting">
+        <div class="hosting-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Perbandingan Lengkap</span>
+                <h2>Semua Paket Cloud Hosting</h2>
+                <p>Pilih paket yang sesuai dengan kebutuhan bisnis Anda.</p>
+            </div>
+            <div class="hosting-table-wrapper scroll-reveal">
+                <table class="hosting-table">
+                    <thead>
+                        <tr>
+                            <th>Fitur</th>
+                            <th>Starter Pro</th>
+                            <th>Basic Pro</th>
+                            <th>Entrepreneur Pro</th>
+                            <th>Business Pro</th>
+                            <th>Elite Pro</th>
+                            <th>Advanced Pro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="plan-name">Harga /bulan</td>
+                            <td class="plan-price">Rp 21.000</td>
+                            <td class="plan-price">Rp 42.000</td>
+                            <td class="plan-price">Rp 70.000</td>
+                            <td class="plan-price">Rp 147.000</td>
+                            <td class="plan-price">Rp 287.000</td>
+                            <td class="plan-price">Rp 343.000</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">Storage SSD</td>
+                            <td>1 GB</td><td>3 GB</td><td>7 GB</td><td>13 GB</td><td>25 GB</td><td>35 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">CPU Core</td>
+                            <td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">RAM</td>
+                            <td>512 MB</td><td>1 GB</td><td>2 GB</td><td>2 GB</td><td>3 GB</td><td>4 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">Bandwidth</td>
+                            <td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">Addon Domain</td>
+                            <td>-</td><td>-</td><td>-</td><td class="check">v</td><td class="check">v</td><td class="check">v</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">Gratis Domain</td>
+                            <td>-</td><td>-</td><td>-</td><td class="check">v</td><td class="check">v</td><td class="check">v</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">SSL Certificate</td>
+                            <td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">Daily Backup</td>
+                            <td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td>
+                        </tr>
+                        <tr>
+                            <td class="plan-name">LiteSpeed</td>
+                            <td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td><td class="check">v</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Mengapa Oqline</span>
+                <h2>Built For Business</h2>
+                <p>Platform terbaik yang sudah dipercaya lebih dari 600.000 pengguna di seluruh Indonesia.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-award"></i></div>
+                    <h3>Platform Terbaik</h3>
+                    <p>Layanan dipercaya 600K+ pengguna dengan jaminan SLA 99.5% untuk mendukung bisnis Anda.</p>
+                </div>
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                    <h3>Harga Kompetitif</h3>
+                    <p>Harga terbaik dengan markup yang transparan untuk kualitas layanan enterprise.</p>
+                </div>
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Support 24/7</h3>
+                    <p>Tim Support bersertifikasi internasional siap membantu setiap waktu.</p>
+                </div>
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Privasi & Keamanan</h3>
+                    <p>Jaminan dan perlindungan privasi data dengan teknologi terbaru dan terbaik.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA SECTION -->
+    <section class="social-section">
+        <div class="social-container">
+            <h2>Ikuti Kami</h2>
+            <p>Dapatkan update terbaru, promo menarik, dan tips teknologi dari Oqline.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/oqlineidn?igsh=dWx5bnhzMDRhMmw3" target="_blank" class="social-link instagram">
+                    <i class="fab fa-instagram"></i> @oqlineidn
+                </a>
+                <a href="https://www.threads.com/@oqlineidn" target="_blank" class="social-link threads">
+                    <i class="fab fa-threads"></i> @oqlineidn
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section class="cta">
-        <h2>Ready to Transform Your Business?</h2>
-        <p>Join thousands of enterprises that trust Oqline Cloud to power their digital transformation journey.</p>
-        <a href="#products" class="btn-cta">
-            Start Your Free Trial
-            <i class="fas fa-arrow-right"></i>
-        </a>
+        <div class="cta-container">
+            <h2>Siap Memulai?</h2>
+            <p>Dalam waktu 3 menit, Anda akan mendapatkan semua layanan dengan cepat. Tidak ada kewajiban untuk upgrade, downgrade, atau cancel setiap waktu.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" style="padding: 18px 40px; font-size: 16px;">Buat Private Cloud <i class="fas fa-arrow-right"></i></a>
+                <a href="#" class="btn btn-outline" style="padding: 18px 40px; font-size: 16px; color: white; border-color: rgba(255,255,255,0.3);">Hubungi Sales</a>
+            </div>
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
+    <footer class="footer">
+        <div class="footer-container">
             <div class="footer-brand">
-                <h3>OQLINE</h3>
-                <p>Integrated Cloud Applications and Platform Services. Helping businesses see data in new ways, discover insights, and unlock endless possibilities.</p>
+                <h3>Oq<span>line</span></h3>
+                <p>Platform cloud infrastructure terdepan di Indonesia. Menyediakan layanan Cloud Hosting, VPS, Dedicated Server, dan solusi enterprise dengan teknologi terkini.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/oqlineidn?igsh=dWx5bnhzMDRhMmw3" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.threads.com/@oqlineidn" target="_blank"><i class="fab fa-threads"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
-            <div class="footer-links">
-                <h4>Products</h4>
+            <div class="footer-column">
+                <h4>Produk</h4>
                 <ul>
-                    <li><a href="#">Cloud Sites</a></li>
-                    <li><a href="#">Cloud Commerce</a></li>
-                    <li><a href="#">Cloud Financial</a></li>
-                    <li><a href="#">Cloud Design</a></li>
+                    <li><a href="#">Cloud Hosting</a></li>
+                    <li><a href="#">Cloud VPS</a></li>
+                    <li><a href="#">Dedicated Server</a></li>
+                    <li><a href="#">GPU Server</a></li>
+                    <li><a href="#">Domain</a></li>
                 </ul>
             </div>
-            <div class="footer-links">
-                <h4>Solutions</h4>
+            <div class="footer-column">
+                <h4>Solusi</h4>
                 <ul>
-                    <li><a href="#">Small Business</a></li>
+                    <li><a href="#">Startup</a></li>
                     <li><a href="#">Enterprise</a></li>
-                    <li><a href="#">Startups</a></li>
-                    <li><a href="#">Developers</a></li>
+                    <li><a href="#">E-commerce</a></li>
+                    <li><a href="#">Fintech</a></li>
+                    <li><a href="#">Game Server</a></li>
                 </ul>
             </div>
-            <div class="footer-links">
-                <h4>Company</h4>
+            <div class="footer-column">
+                <h4>Perusahaan</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Newsroom</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">API Reference</a></li>
-                    <li><a href="#">Status</a></li>
-                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Karir</a></li>
+                    <li><a href="#">Partner</a></li>
+                    <li><a href="#">Kontak</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Oqline Corporation. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-            </div>
+            <p>&copy; 2026 Oqline. All rights reserved.</p>
+            <p>Member of Astria</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        function switchTab(tab) {
+            document.getElementById('cloud-pricing').style.display = 'none';
+            document.getElementById('vps-pricing').style.display = 'none';
+            document.getElementById('dedicated-pricing').style.display = 'none';
+            document.getElementById(tab + '-pricing').style.display = 'grid';
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
-            } else {
-                nav.style.boxShadow = 'none';
-            }
         });
     </script>
 </body>
