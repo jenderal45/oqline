@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oqline | Layanan Pelanggan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --oracle-red: #C74634;
+            --oracle-dark: #1A1A1A;
+            --oracle-navy: #0D1B2A;
+            --oracle-blue: #0077C8;
+            --oracle-light: #F5F5F5;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --border-color: #E0E0E0;
+            --gradient-dark: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 100%);
+            --gradient-hero: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 50%, #0077C8 100%);
+        }
+        body { font-family: 'Inter', sans-serif; color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+
+        /* ===== LANGUAGE SWITCHER ===== */
+        .lang-switcher { display: flex; gap: 4px; align-items: center; margin-left: 20px; }
+        .lang-btn { padding: 6px 14px; border: 2px solid var(--border-color); background: transparent; border-radius: 20px; font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.3s; color: var(--text-secondary); font-family: 'Inter', sans-serif; }
+        .lang-btn.active { background: var(--oracle-navy); color: white; border-color: var(--oracle-navy); }
+        .lang-btn:hover:not(.active) { border-color: var(--oracle-navy); color: var(--oracle-navy); }
+        @media (max-width: 768px) { .lang-switcher { margin-left: 0; margin-top: 12px; justify-content: center; } }
+
+        /* ===== NAVBAR ===== */
+        .navbar { background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .logo { max-width: 180px; height: auto; display: block; text-decoration: none; }
+        .logo img { width: 100%; height: auto; display: block; }
+        .logo-text { font-size: 28px; font-weight: 800; color: var(--oracle-navy); letter-spacing: -1px; }
+        .logo-text span { color: var(--oracle-red); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 15px; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--oracle-red); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -24px; left: 0; width: 0; height: 3px; background: var(--oracle-red); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; gap: 20px; align-items: center; }
+        .btn { padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: none; }
+        .btn-primary { background: var(--oracle-red); color: white; }
+        .btn-primary:hover { background: #A33A2B; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(199,70,52,0.3); }
+        .btn-outline { background: transparent; color: var(--text-primary); border: 2px solid var(--border-color); }
+        .btn-outline:hover { border-color: var(--oracle-red); color: var(--oracle-red); }
+        .btn-navy { background: var(--oracle-navy); color: white; }
+        .btn-navy:hover { background: #1B3A4B; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--oracle-navy); padding: 8px; }
+
+        /* Mobile Nav Drawer */
+        .mobile-nav { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; opacity: 0; transition: opacity 0.3s; }
+        .mobile-nav.open { opacity: 1; }
+        .mobile-nav-drawer { background: white; width: 80%; max-width: 320px; height: 100%; overflow-y: auto; padding: 24px 0; transform: translateX(-100%); transition: transform 0.3s ease; }
+        .mobile-nav.open .mobile-nav-drawer { transform: translateX(0); }
+        .mobile-nav-header { display: flex; align-items: center; justify-content: space-between; padding: 0 24px 20px; border-bottom: 1px solid var(--border-color); margin-bottom: 8px; }
+        .mobile-nav-close { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-primary); padding: 4px; }
+        .mobile-nav-links { list-style: none; }
+        .mobile-nav-links li a { display: block; padding: 14px 24px; color: var(--text-primary); text-decoration: none; font-weight: 500; font-size: 15px; border-bottom: 1px solid #f5f5f5; transition: background 0.2s, color 0.2s; }
+        .mobile-nav-links li a:hover { background: #fafafa; color: var(--oracle-red); }
+        .mobile-nav-actions { padding: 20px 24px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--border-color); margin-top: 8px; }
+        .mobile-nav-actions .btn { justify-content: center; padding: 14px 20px; font-size: 15px; }
+
+        /* ===== HERO CS ===== */
+        .cs-hero { background: var(--gradient-hero); min-height: 50vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 72px; }
+        .cs-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.03' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); background-size: cover; background-position: bottom; }
+        .cs-hero-container { max-width: 1400px; margin: 0 auto; padding: 60px 40px; text-align: center; position: relative; z-index: 2; }
+        .cs-hero-content h1 { font-size: 48px; font-weight: 800; color: white; line-height: 1.2; margin-bottom: 16px; letter-spacing: -1px; }
+        .cs-hero-content h1 span { color: #FF6B4A; }
+        .cs-hero-content p { font-size: 20px; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* ===== CONTACT CARDS ===== */
+        .contact-cards { padding: 80px 40px; background: white; }
+        .contact-cards-container { max-width: 1200px; margin: 0 auto; }
+        .contact-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .contact-card { background: var(--oracle-light); border-radius: 20px; padding: 48px 36px; text-align: center; transition: all 0.4s; border: 2px solid transparent; }
+        .contact-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: var(--oracle-red); }
+        .contact-card-icon { width: 72px; height: 72px; background: var(--gradient-dark); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: white; font-size: 28px; }
+        .contact-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .contact-card p { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+        .contact-card a { color: var(--oracle-red); font-weight: 600; text-decoration: none; font-size: 16px; }
+        .contact-card a:hover { text-decoration: underline; }
+
+        /* ===== FORMS SECTION ===== */
+        .forms-section { padding: 80px 40px; background: var(--oracle-light); }
+        .forms-container { max-width: 1200px; margin: 0 auto; }
+        .forms-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 60px; background: white; padding: 8px; border-radius: 12px; width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .form-tab-btn { padding: 14px 36px; border: none; background: transparent; font-weight: 600; font-size: 14px; cursor: pointer; border-radius: 8px; transition: all 0.3s; color: var(--text-secondary); font-family: 'Inter', sans-serif; }
+        .form-tab-btn.active { background: var(--oracle-navy); color: white; }
+        .form-tab-btn:hover:not(.active) { color: var(--oracle-navy); }
+        .form-tab-btn i { margin-right: 8px; }
+
+        .form-panel { display: none; background: white; border-radius: 20px; padding: 48px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        .form-panel.active { display: block; }
+        .form-panel h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; color: var(--oracle-navy); }
+        .form-panel .subtitle { color: var(--text-secondary); font-size: 16px; margin-bottom: 40px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-group label { font-weight: 600; font-size: 14px; color: var(--text-primary); }
+        .form-group label .required { color: var(--oracle-red); }
+        .form-group input, .form-group select, .form-group textarea { padding: 14px 16px; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 15px; transition: all 0.3s; background: white; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--oracle-red); box-shadow: 0 0 0 3px rgba(199,70,52,0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+        .form-submit { margin-top: 32px; display: flex; justify-content: center; }
+        .form-submit .btn { padding: 16px 48px; font-size: 16px; }
+        .form-note { margin-top: 24px; padding: 16px; background: #FFF8E1; border-left: 4px solid #FFC107; border-radius: 8px; font-size: 14px; color: #666; }
+        .form-note i { color: #FFC107; margin-right: 8px; }
+
+        /* Success message */
+        .success-message { display: none; text-align: center; padding: 60px 40px; }
+        .success-message.show { display: block; }
+        .success-icon { width: 80px; height: 80px; background: linear-gradient(135deg, #2ECC71, #27AE60); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: white; font-size: 36px; }
+        .success-message h3 { font-size: 28px; font-weight: 800; color: var(--oracle-navy); margin-bottom: 12px; }
+        .success-message p { color: var(--text-secondary); font-size: 16px; margin-bottom: 32px; }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-section { padding: 80px 40px; background: white; }
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 42px; font-weight: 800; margin-bottom: 16px; color: var(--oracle-navy); }
+        .section-header p { font-size: 18px; color: var(--text-secondary); }
+        .section-label { display: inline-block; color: var(--oracle-red); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+        .faq-item { border-bottom: 1px solid var(--border-color); }
+        .faq-question { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 17px; color: var(--oracle-navy); transition: color 0.3s; }
+        .faq-question:hover { color: var(--oracle-red); }
+        .faq-question i { transition: transform 0.3s; color: var(--oracle-red); }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; color: var(--text-secondary); font-size: 15px; line-height: 1.7; }
+        .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 24px; }
+
+        /* ===== FOOTER ===== */
+        .footer { background: var(--oracle-dark); color: white; padding: 80px 40px 40px; }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; }
+        .footer-brand .footer-logo-link img { max-width: 100px; width: 100%; height: auto; display: block; margin-bottom: 20px; }
+        .footer-social { display: flex; gap: 16px; margin-bottom: 24px; }
+        .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: all 0.3s; }
+        .footer-social a:hover { background: var(--oracle-red); transform: translateY(-4px); }
+        .footer-column h4 { font-size: 16px; font-weight: 700; margin-bottom: 24px; color: white; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 14px; }
+        .footer-column a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-column a:hover { color: white; }
+        .footer-contact h4 { font-size: 16px; font-weight: 700; margin-bottom: 18px; color: white; }
+        .footer-contact dl { margin: 0; }
+        .footer-contact dt { color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 700; margin-top: 12px; }
+        .footer-contact dd { color: rgba(255,255,255,0.8); font-size: 14px; margin: 4px 0 0 0; line-height: 1.8; }
+        .footer-contact dd a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .footer-contact dd a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 14px; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeInUp 0.8s ease forwards; }
+        .scroll-reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .nav-container { padding-left: 20px; padding-right: 20px; }
+            .contact-cards-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-grid { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .contact-cards, .forms-section, .faq-section { padding: 60px 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-actions { display: none; }
+            .mobile-menu-btn { display: block; }
+            .mobile-nav { display: block; }
+            .nav-container { padding: 0 16px; }
+            .logo { max-width: 130px; }
+            .cs-hero { padding-top: 72px; min-height: auto; padding-bottom: 40px; }
+            .cs-hero-content h1 { font-size: 32px; }
+            .cs-hero-content p { font-size: 16px; }
+            .contact-cards-grid { grid-template-columns: 1fr; }
+            .forms-tabs { flex-wrap: wrap; width: 100%; gap: 6px; padding: 6px; }
+            .form-tab-btn { padding: 12px 20px; font-size: 13px; flex: 1; text-align: center; }
+            .form-panel { padding: 32px 24px; }
+            .form-panel h2 { font-size: 24px; }
+            .faq-section { padding: 60px 16px; }
+            .section-header h2 { font-size: 28px; }
+            .faq-question { font-size: 15px; }
+            .footer { padding: 50px 16px 30px; }
+            .footer-container { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding-top: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">Oq<span>line</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#products" data-lang="nav_products">Produk</a></li>
+                <li><a href="index.html#jasa-website" data-lang="nav_jasa">Jasa Website</a></li>
+                <li><a href="index.html#pricing" data-lang="nav_pricing">Harga</a></li>
+                <li><a href="index.html#vps" data-lang="nav_vps">Cloud VPS</a></li>
+                <li><a href="index.html#hosting" data-lang="nav_hosting">Hosting</a></li>
+                <li><a href="index.html#features" data-lang="nav_features">Fitur</a></li>
+                <li><a href="customer-service.html" data-lang="nav_support">Layanan Pelanggan</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-btn active" data-lang="id" onclick="switchLanguage('id')">ID</button>
+                    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+                </div>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" data-lang="nav_login">Masuk</a>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" data-lang="nav_start">Mulai Gratis</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- MOBILE NAV DRAWER -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-drawer">
+            <div class="mobile-nav-header">
+                <div class="logo-text" style="font-size: 24px;">Oq<span style="color: var(--oracle-red);">line</span></div>
+                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Tutup menu"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="index.html#products" class="mobile-nav-link" data-lang="nav_products">Produk</a></li>
+                <li><a href="index.html#jasa-website" class="mobile-nav-link" data-lang="nav_jasa">Jasa Website</a></li>
+                <li><a href="index.html#pricing" class="mobile-nav-link" data-lang="nav_pricing">Harga</a></li>
+                <li><a href="index.html#vps" class="mobile-nav-link" data-lang="nav_vps">Cloud VPS</a></li>
+                <li><a href="index.html#hosting" class="mobile-nav-link" data-lang="nav_hosting">Hosting</a></li>
+                <li><a href="index.html#features" class="mobile-nav-link" data-lang="nav_features">Fitur</a></li>
+                <li><a href="customer-service.html" class="mobile-nav-link" data-lang="nav_support">Layanan Pelanggan</a></li>
+            </ul>
+            <div class="mobile-nav-actions">
+                <div class="lang-switcher" style="margin-bottom: 12px;">
+                    <button class="lang-btn active" data-lang="id" onclick="switchLanguage('id')">ID</button>
+                    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+                </div>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" data-lang="nav_login">Masuk</a>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" data-lang="nav_start">Mulai Gratis</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-hero-container">
+            <div class="cs-hero-content animate-in">
+                <h1 data-lang="cs_hero_title">Layanan <span>Pelanggan</span></h1>
+                <p data-lang="cs_hero_desc">Kami siap membantu Anda. Hubungi kami melalui berbagai saluran atau kirimkan formulir di bawah ini.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT CARDS -->
+    <section class="contact-cards">
+        <div class="contact-cards-container">
+            <div class="contact-cards-grid">
+                <div class="contact-card scroll-reveal">
+                    <div class="contact-card-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3 data-lang="cs_whatsapp_title">WhatsApp</h3>
+                    <p data-lang="cs_whatsapp_desc">Respons tercepat untuk pertanyaan dan bantuan teknis.</p>
+                    <a href="https://wa.me/6289652435067" target="_blank">+62 896-5243-5067</a>
+                </div>
+                <div class="contact-card scroll-reveal">
+                    <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                    <h3 data-lang="cs_email_title">Email</h3>
+                    <p data-lang="cs_email_desc">Kirimkan pertanyaan detail atau dokumen melalui email.</p>
+                    <a href="mailto:astriainternasional@gmail.com">astriainternasional@gmail.com</a>
+                </div>
+                <div class="contact-card scroll-reveal">
+                    <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3 data-lang="cs_office_title">Kantor</h3>
+                    <p data-lang="cs_office_desc">Kunjungi kantor kami untuk konsultasi langsung.</p>
+                    <a href="#" style="pointer-events: none; color: var(--text-secondary);">Jakarta Utara, Indonesia</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMS SECTION -->
+    <section class="forms-section" id="forms">
+        <div class="forms-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" data-lang="cs_forms_label">Formulir</span>
+                <h2 data-lang="cs_forms_title">Hubungi Kami</h2>
+                <p data-lang="cs_forms_desc">Pilih jenis formulir yang sesuai dengan kebutuhan Anda dan kami akan merespons dalam 24 jam.</p>
+            </div>
+
+            <div class="forms-tabs scroll-reveal">
+                <button class="form-tab-btn active" onclick="switchFormTab('feedback', event)" data-lang="tab_feedback"><i class="fas fa-comment-dots"></i> Feedback</button>
+                <button class="form-tab-btn" onclick="switchFormTab('complaint', event)" data-lang="tab_complaint"><i class="fas fa-exclamation-circle"></i> Komplain</button>
+                <button class="form-tab-btn" onclick="switchFormTab('suggestion', event)" data-lang="tab_suggestion"><i class="fas fa-lightbulb"></i> Saran</button>
+            </div>
+
+            <!-- FEEDBACK FORM -->
+            <div id="feedback-form" class="form-panel active scroll-reveal">
+                <h2 data-lang="feedback_title">Kirim Feedback</h2>
+                <p class="subtitle" data-lang="feedback_subtitle">Beritahu kami pengalaman Anda menggunakan layanan Oqline.</p>
+                <form onsubmit="return handleSubmit(event, 'feedback')">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label data-lang="label_name">Nama Lengkap <span class="required">*</span></label>
+                            <input type="text" name="name" required placeholder="John Doe" data-lang-placeholder="placeholder_name">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_email">Email <span class="required">*</span></label>
+                            <input type="email" name="email" required placeholder="email@example.com" data-lang-placeholder="placeholder_email">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_phone">Nomor Telepon</label>
+                            <input type="tel" name="phone" placeholder="+62 8xx-xxxx-xxxx" data-lang-placeholder="placeholder_phone">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_service">Layanan yang Digunakan <span class="required">*</span></label>
+                            <select name="service" required>
+                                <option value="" data-lang="select_service">Pilih Layanan</option>
+                                <option value="cloud_hosting">Cloud Hosting</option>
+                                <option value="cloud_vps">Cloud VPS</option>
+                                <option value="dedicated">Dedicated Server</option>
+                                <option value="domain">Domain</option>
+                                <option value="website_service">Jasa Website</option>
+                                <option value="other">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_rating">Rating <span class="required">*</span></label>
+                            <select name="rating" required>
+                                <option value="5" data-lang="rating_5">⭐⭐⭐⭐⭐ Sangat Puas</option>
+                                <option value="4" data-lang="rating_4">⭐⭐⭐⭐ Puas</option>
+                                <option value="3" data-lang="rating_3">⭐⭐⭐ Cukup</option>
+                                <option value="2" data-lang="rating_2">⭐⭐ Kurang Puas</option>
+                                <option value="1" data-lang="rating_1">⭐ Sangat Kurang Puas</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang="label_message">Pesan Feedback <span class="required">*</span></label>
+                            <textarea name="message" required placeholder="Ceritakan pengalaman Anda..." data-lang-placeholder="placeholder_feedback"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary" data-lang="btn_submit_feedback"><i class="fas fa-paper-plane"></i> Kirim Feedback</button>
+                    </div>
+                    <div class="form-note">
+                        <i class="fas fa-info-circle"></i> <span data-lang="form_note">Formulir ini akan dikirim ke tim kami melalui WhatsApp. Pastikan data yang Anda masukkan sudah benar.</span>
+                    </div>
+                </form>
+                <div class="success-message" id="feedback-success">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h3 data-lang="success_title">Terima Kasih!</h3>
+                    <p data-lang="success_feedback">Feedback Anda telah berhasil dikirim. Kami sangat menghargai masukan Anda untuk terus meningkatkan layanan.</p>
+                    <a href="index.html" class="btn btn-primary" data-lang="btn_back_home">Kembali ke Beranda</a>
+                </div>
+            </div>
+
+            <!-- COMPLAINT FORM -->
+            <div id="complaint-form" class="form-panel scroll-reveal">
+                <h2 data-lang="complaint_title">Ajukan Komplain</h2>
+                <p class="subtitle" data-lang="complaint_subtitle">Sampaikan keluhan Anda dan kami akan segera menindaklanjuti.</p>
+                <form onsubmit="return handleSubmit(event, 'complaint')">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label data-lang="label_name">Nama Lengkap <span class="required">*</span></label>
+                            <input type="text" name="name" required placeholder="John Doe" data-lang-placeholder="placeholder_name">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_email">Email <span class="required">*</span></label>
+                            <input type="email" name="email" required placeholder="email@example.com" data-lang-placeholder="placeholder_email">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_phone">Nomor Telepon <span class="required">*</span></label>
+                            <input type="tel" name="phone" required placeholder="+62 8xx-xxxx-xxxx" data-lang-placeholder="placeholder_phone">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_service">Layanan yang Bermasalah <span class="required">*</span></label>
+                            <select name="service" required>
+                                <option value="" data-lang="select_service">Pilih Layanan</option>
+                                <option value="cloud_hosting">Cloud Hosting</option>
+                                <option value="cloud_vps">Cloud VPS</option>
+                                <option value="dedicated">Dedicated Server</option>
+                                <option value="domain">Domain</option>
+                                <option value="website_service">Jasa Website</option>
+                                <option value="billing">Billing & Pembayaran</option>
+                                <option value="support">Technical Support</option>
+                                <option value="other">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_ticket">Nomor Tiket (jika ada)</label>
+                            <input type="text" name="ticket" placeholder="TCK-12345" data-lang-placeholder="placeholder_ticket">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_priority">Prioritas <span class="required">*</span></label>
+                            <select name="priority" required>
+                                <option value="low" data-lang="priority_low">Rendah - Tidak mendesak</option>
+                                <option value="medium" data-lang="priority_medium">Sedang - Memerlukan perhatian</option>
+                                <option value="high" data-lang="priority_high">Tinggi - Service terdampak</option>
+                                <option value="critical" data-lang="priority_critical">Kritis - Service down</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang="label_subject">Subjek Komplain <span class="required">*</span></label>
+                            <input type="text" name="subject" required placeholder="Masalah dengan..." data-lang-placeholder="placeholder_subject">
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang="label_message">Detail Komplain <span class="required">*</span></label>
+                            <textarea name="message" required placeholder="Jelaskan detail masalah yang Anda alami..." data-lang-placeholder="placeholder_complaint"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary" data-lang="btn_submit_complaint"><i class="fas fa-paper-plane"></i> Kirim Komplain</button>
+                    </div>
+                    <div class="form-note">
+                        <i class="fas fa-info-circle"></i> <span data-lang="form_note_complaint">Tim kami akan merespons komplain Anda dalam 1x24 jam pada jam kerja. Untuk masalah kritis, silakan hubungi WhatsApp langsung.</span>
+                    </div>
+                </form>
+                <div class="success-message" id="complaint-success">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h3 data-lang="success_title">Komplain Diterima!</h3>
+                    <p data-lang="success_complaint">Komplain Anda telah dicatat. Nomor tiket akan dikirim ke email Anda. Tim kami akan segera menindaklanjuti.</p>
+                    <a href="index.html" class="btn btn-primary" data-lang="btn_back_home">Kembali ke Beranda</a>
+                </div>
+            </div>
+
+            <!-- SUGGESTION FORM -->
+            <div id="suggestion-form" class="form-panel scroll-reveal">
+                <h2 data-lang="suggestion_title">Kirim Saran</h2>
+                <p class="subtitle" data-lang="suggestion_subtitle">Punya ide untuk meningkatkan layanan kami? Kami ingin mendengarnya!</p>
+                <form onsubmit="return handleSubmit(event, 'suggestion')">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label data-lang="label_name">Nama Lengkap <span class="required">*</span></label>
+                            <input type="text" name="name" required placeholder="John Doe" data-lang-placeholder="placeholder_name">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_email">Email <span class="required">*</span></label>
+                            <input type="email" name="email" required placeholder="email@example.com" data-lang-placeholder="placeholder_email">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_phone">Nomor Telepon</label>
+                            <input type="tel" name="phone" placeholder="+62 8xx-xxxx-xxxx" data-lang-placeholder="placeholder_phone">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="label_category">Kategori Saran <span class="required">*</span></label>
+                            <select name="category" required>
+                                <option value="product" data-lang="cat_product">Produk & Layanan</option>
+                                <option value="website" data-lang="cat_website">Website & Aplikasi</option>
+                                <option value="pricing" data-lang="cat_pricing">Harga & Paket</option>
+                                <option value="support" data-lang="cat_support">Customer Support</option>
+                                <option value="feature" data-lang="cat_feature">Fitur Baru</option>
+                                <option value="other" data-lang="cat_other">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang="label_subject">Judul Saran <span class="required">*</span></label>
+                            <input type="text" name="subject" required placeholder="Saran untuk..." data-lang-placeholder="placeholder_suggestion_subject">
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang="label_message">Detail Saran <span class="required">*</span></label>
+                            <textarea name="message" required placeholder="Jelaskan saran Anda secara detail..." data-lang-placeholder="placeholder_suggestion"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang="label_benefit">Manfaat yang Diharapkan</label>
+                            <textarea name="benefit" placeholder="Bagaimana saran ini akan membantu..." data-lang-placeholder="placeholder_benefit"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary" data-lang="btn_submit_suggestion"><i class="fas fa-paper-plane"></i> Kirim Saran</button>
+                    </div>
+                    <div class="form-note">
+                        <i class="fas fa-info-circle"></i> <span data-lang="form_note_suggestion">Saran terbaik akan dipertimbangkan untuk pengembangan layanan kami di masa mendatang. Terima kasih atas kontribusi Anda!</span>
+                    </div>
+                </form>
+                <div class="success-message" id="suggestion-success">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h3 data-lang="success_title">Saran Diterima!</h3>
+                    <p data-lang="success_suggestion">Terima kasih atas saran berharga Anda. Tim produk kami akan meninjau dan mempertimbangkan untuk pengembangan berikutnya.</p>
+                    <a href="index.html" class="btn btn-primary" data-lang="btn_back_home">Kembali ke Beranda</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" data-lang="faq_label">FAQ</span>
+                <h2 data-lang="faq_title">Pertanyaan Umum</h2>
+                <p data-lang="faq_desc">Temukan jawaban untuk pertanyaan yang sering diajukan tentang layanan pelanggan kami.</p>
+            </div>
+            <div class="faq-list scroll-reveal">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang="faq_q1">Berapa lama waktu respons untuk komplain?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" data-lang="faq_a1">
+                        Kami berkomitmen untuk merespons komplain dalam waktu 1x24 jam pada hari kerja. Untuk masalah dengan prioritas kritis, tim kami akan merespons dalam 2 jam melalui WhatsApp.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang="faq_q2">Bagaimana cara melacak status komplain saya?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" data-lang="faq_a2">
+                        Setelah mengirimkan komplain, Anda akan menerima nomor tiket melalui email. Anda dapat menggunakan nomor tiket ini untuk menanyakan status penanganan melalui WhatsApp atau email kami.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang="faq_q3">Apakah ada biaya untuk mengajukan komplain?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" data-lang="faq_a3">
+                        Tidak, pengajuan komplain, feedback, dan saran sepenuhnya gratis. Kami menghargai setiap masukan dari pelanggan untuk terus meningkatkan kualitas layanan.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang="faq_q4">Bisakah saya mengubah komplain setelah dikirim?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" data-lang="faq_a4">
+                        Ya, Anda dapat menambahkan informasi tambahan ke komplain yang sudah diajukan dengan menyebutkan nomor tiket Anda. Silakan hubungi kami melalui WhatsApp atau email.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang="faq_q5">Apakah saran saya akan benar-benar diimplementasikan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" data-lang="faq_a5">
+                        Setiap saran akan ditinjau oleh tim produk kami. Saran yang feasible dan bermanfaat untuk banyak pengguna akan dipertimbangkan dalam roadmap pengembangan produk kami.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo-link">
+                    <div class="logo-text" style="color: white; font-size: 32px; margin-bottom: 20px;">Oq<span style="color: var(--oracle-red);">line</span></div>
+                </a>
+                <p data-lang="footer_desc">Platform cloud infrastructure terdepan di Indonesia. Menyediakan layanan Cloud Hosting, VPS, Dedicated Server, dan solusi enterprise dengan teknologi terkini.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/oqlineidn?igsh=dWx5bnhzMDRhMmw3" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.threads.com/@oqlineidn" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
+                    <a href="https://wa.me/6289652435067" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <div class="footer-contact">
+                    <h4 data-lang="footer_contact">Informasi Kontak</h4>
+                    <dl>
+                        <dt data-lang="footer_email">Email</dt>
+                        <dd><a href="mailto:astriainternasional@gmail.com">astriainternasional@gmail.com</a></dd>
+                        <dt data-lang="footer_wa">WhatsApp</dt>
+                        <dd><a href="https://wa.me/6289652435067" target="_blank">+62 896-5243-5067</a></dd>
+                        <dt data-lang="footer_address">Alamat</dt>
+                        <dd data-lang="footer_address_text">Gedung Puskopal Lt. 2, Komplek TNI AL Jl. Tabah Raya No.19, Kelapa Gading, Jakarta Utara.</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4 data-lang="footer_products">Produk</h4>
+                <ul>
+                    <li><a href="index.html#hosting">Cloud Hosting</a></li>
+                    <li><a href="index.html#vps">Cloud VPS</a></li>
+                    <li><a href="index.html#pricing">Dedicated Server</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">GPU Server</a></li>
+                    <li><a href="index.html#domain">Domain</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 data-lang="footer_solutions">Solusi</h4>
+                <ul>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Startup</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Enterprise</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">E-commerce</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Fintech</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Game Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 data-lang="footer_company">Perusahaan</h4>
+                <ul>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Tentang Kami</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Blog</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Karir</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Partner</a></li>
+                    <li><a href="customer-service.html">Kontak & Layanan Pelanggan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-lang="footer_copyright">&copy; 2026 Oqline. All rights reserved.</p>
+            <p data-lang="footer_member">Member of Astria</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Form tabs
+        function switchFormTab(tab, e) {
+            document.getElementById('feedback-form').classList.remove('active');
+            document.getElementById('complaint-form').classList.remove('active');
+            document.getElementById('suggestion-form').classList.remove('active');
+            document.getElementById(tab + '-form').classList.add('active');
+            document.querySelectorAll('.form-tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (e && e.target) e.target.classList.add('active');
+        }
+
+        // FAQ toggle
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('open');
+        }
+
+        // Form submission - sends to WhatsApp
+        function handleSubmit(event, type) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            let message = '';
+            if (type === 'feedback') {
+                message = `*FEEDBACK OQLINE*\n\n` +
+                    `Nama: ${data.name}\n` +
+                    `Email: ${data.email}\n` +
+                    `Telepon: ${data.phone || '-'}\n` +
+                    `Layanan: ${data.service}\n` +
+                    `Rating: ${data.rating}/5\n\n` +
+                    `Pesan:\n${data.message}`;
+            } else if (type === 'complaint') {
+                message = `*KOMPLAIN OQLINE*\n\n` +
+                    `Nama: ${data.name}\n` +
+                    `Email: ${data.email}\n` +
+                    `Telepon: ${data.phone}\n` +
+                    `Layanan: ${data.service}\n` +
+                    `Tiket: ${data.ticket || '-'}\n` +
+                    `Prioritas: ${data.priority}\n` +
+                    `Subjek: ${data.subject}\n\n` +
+                    `Detail:\n${data.message}`;
+            } else if (type === 'suggestion') {
+                message = `*SARAN OQLINE*\n\n` +
+                    `Nama: ${data.name}\n` +
+                    `Email: ${data.email}\n` +
+                    `Telepon: ${data.phone || '-'}\n` +
+                    `Kategori: ${data.category}\n` +
+                    `Judul: ${data.subject}\n\n` +
+                    `Detail:\n${data.message}\n\n` +
+                    `Manfaat: ${data.benefit || '-'}`;
+            }
+
+            // Show success message
+            form.style.display = 'none';
+            document.getElementById(type + '-success').classList.add('show');
+
+            // Open WhatsApp with the message
+            const whatsappUrl = `https://wa.me/6289652435067?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            return false;
+        }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Mobile nav
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        function openMobileNav() {
+            mobileNav.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => mobileNav.classList.add('open'), 10);
+        }
+        function closeMobileNav() {
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(() => { mobileNav.style.display = 'none'; }, 300);
+        }
+
+        mobileMenuBtn.addEventListener('click', openMobileNav);
+        mobileNavClose.addEventListener('click', closeMobileNav);
+        mobileNav.addEventListener('click', function(e) {
+            if (e.target === mobileNav) closeMobileNav();
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileNav);
+        });
+    </script>
+
+    <script>
+    // Language data
+    const langData = {
+        "id": {
+            "nav_products": "Produk",
+            "nav_jasa": "Jasa Website",
+            "nav_pricing": "Harga",
+            "nav_vps": "Cloud VPS",
+            "nav_hosting": "Hosting",
+            "nav_features": "Fitur",
+            "nav_support": "Layanan Pelanggan",
+            "nav_login": "Masuk",
+            "nav_start": "Mulai Gratis",
+            "cs_hero_title": "Layanan <span>Pelanggan</span>",
+            "cs_hero_desc": "Kami siap membantu Anda. Hubungi kami melalui berbagai saluran atau kirimkan formulir di bawah ini.",
+            "cs_whatsapp_title": "WhatsApp",
+            "cs_whatsapp_desc": "Respons tercepat untuk pertanyaan dan bantuan teknis.",
+            "cs_email_title": "Email",
+            "cs_email_desc": "Kirimkan pertanyaan detail atau dokumen melalui email.",
+            "cs_office_title": "Kantor",
+            "cs_office_desc": "Kunjungi kantor kami untuk konsultasi langsung.",
+            "cs_forms_label": "Formulir",
+            "cs_forms_title": "Hubungi Kami",
+            "cs_forms_desc": "Pilih jenis formulir yang sesuai dengan kebutuhan Anda dan kami akan merespons dalam 24 jam.",
+            "tab_feedback": "Feedback",
+            "tab_complaint": "Komplain",
+            "tab_suggestion": "Saran",
+            "feedback_title": "Kirim Feedback",
+            "feedback_subtitle": "Beritahu kami pengalaman Anda menggunakan layanan Oqline.",
+            "complaint_title": "Ajukan Komplain",
+            "complaint_subtitle": "Sampaikan keluhan Anda dan kami akan segera menindaklanjuti.",
+            "suggestion_title": "Kirim Saran",
+            "suggestion_subtitle": "Punya ide untuk meningkatkan layanan kami? Kami ingin mendengarnya!",
+            "label_name": "Nama Lengkap",
+            "label_email": "Email",
+            "label_phone": "Nomor Telepon",
+            "label_service": "Layanan yang Digunakan",
+            "label_rating": "Rating",
+            "label_ticket": "Nomor Tiket (jika ada)",
+            "label_priority": "Prioritas",
+            "label_category": "Kategori Saran",
+            "label_subject": "Subjek",
+            "label_message": "Pesan",
+            "label_benefit": "Manfaat yang Diharapkan",
+            "placeholder_name": "John Doe",
+            "placeholder_email": "email@example.com",
+            "placeholder_phone": "+62 8xx-xxxx-xxxx",
+            "placeholder_ticket": "TCK-12345",
+            "placeholder_subject": "Masalah dengan...",
+            "placeholder_feedback": "Ceritakan pengalaman Anda...",
+            "placeholder_complaint": "Jelaskan detail masalah yang Anda alami...",
+            "placeholder_suggestion_subject": "Saran untuk...",
+            "placeholder_suggestion": "Jelaskan saran Anda secara detail...",
+            "placeholder_benefit": "Bagaimana saran ini akan membantu...",
+            "select_service": "Pilih Layanan",
+            "rating_5": "⭐⭐⭐⭐⭐ Sangat Puas",
+            "rating_4": "⭐⭐⭐⭐ Puas",
+            "rating_3": "⭐⭐⭐ Cukup",
+            "rating_2": "⭐⭐ Kurang Puas",
+            "rating_1": "⭐ Sangat Kurang Puas",
+            "priority_low": "Rendah - Tidak mendesak",
+            "priority_medium": "Sedang - Memerlukan perhatian",
+            "priority_high": "Tinggi - Service terdampak",
+            "priority_critical": "Kritis - Service down",
+            "cat_product": "Produk & Layanan",
+            "cat_website": "Website & Aplikasi",
+            "cat_pricing": "Harga & Paket",
+            "cat_support": "Customer Support",
+            "cat_feature": "Fitur Baru",
+            "cat_other": "Lainnya",
+            "btn_submit_feedback": "Kirim Feedback",
+            "btn_submit_complaint": "Kirim Komplain",
+            "btn_submit_suggestion": "Kirim Saran",
+            "form_note": "Formulir ini akan dikirim ke tim kami melalui WhatsApp. Pastikan data yang Anda masukkan sudah benar.",
+            "form_note_complaint": "Tim kami akan merespons komplain Anda dalam 1x24 jam pada jam kerja. Untuk masalah kritis, silakan hubungi WhatsApp langsung.",
+            "form_note_suggestion": "Saran terbaik akan dipertimbangkan untuk pengembangan layanan kami di masa mendatang. Terima kasih atas kontribusi Anda!",
+            "success_title": "Terima Kasih!",
+            "success_feedback": "Feedback Anda telah berhasil dikirim. Kami sangat menghargai masukan Anda untuk terus meningkatkan layanan.",
+            "success_complaint": "Komplain Anda telah dicatat. Nomor tiket akan dikirim ke email Anda. Tim kami akan segera menindaklanjuti.",
+            "success_suggestion": "Terima kasih atas saran berharga Anda. Tim produk kami akan meninjau dan mempertimbangkan untuk pengembangan berikutnya.",
+            "btn_back_home": "Kembali ke Beranda",
+            "faq_label": "FAQ",
+            "faq_title": "Pertanyaan Umum",
+            "faq_desc": "Temukan jawaban untuk pertanyaan yang sering diajukan tentang layanan pelanggan kami.",
+            "faq_q1": "Berapa lama waktu respons untuk komplain?",
+            "faq_a1": "Kami berkomitmen untuk merespons komplain dalam waktu 1x24 jam pada hari kerja. Untuk masalah dengan prioritas kritis, tim kami akan merespons dalam 2 jam melalui WhatsApp.",
+            "faq_q2": "Bagaimana cara melacak status komplain saya?",
+            "faq_a2": "Setelah mengirimkan komplain, Anda akan menerima nomor tiket melalui email. Anda dapat menggunakan nomor tiket ini untuk menanyakan status penanganan melalui WhatsApp atau email kami.",
+            "faq_q3": "Apakah ada biaya untuk mengajukan komplain?",
+            "faq_a3": "Tidak, pengajuan komplain, feedback, dan saran sepenuhnya gratis. Kami menghargai setiap masukan dari pelanggan untuk terus meningkatkan kualitas layanan.",
+            "faq_q4": "Bisakah saya mengubah komplain setelah dikirim?",
+            "faq_a4": "Ya, Anda dapat menambahkan informasi tambahan ke komplain yang sudah diajukan dengan menyebutkan nomor tiket Anda. Silakan hubungi kami melalui WhatsApp atau email.",
+            "faq_q5": "Apakah saran saya akan benar-benar diimplementasikan?",
+            "faq_a5": "Setiap saran akan ditinjau oleh tim produk kami. Saran yang feasible dan bermanfaat untuk banyak pengguna akan dipertimbangkan dalam roadmap pengembangan produk kami.",
+            "footer_desc": "Platform cloud infrastructure terdepan di Indonesia. Menyediakan layanan Cloud Hosting, VPS, Dedicated Server, dan solusi enterprise dengan teknologi terkini.",
+            "footer_contact": "Informasi Kontak",
+            "footer_email": "Email",
+            "footer_wa": "WhatsApp",
+            "footer_address": "Alamat",
+            "footer_address_text": "Gedung Puskopal Lt. 2, Komplek TNI AL Jl. Tabah Raya No.19, Kelapa Gading, Jakarta Utara.",
+            "footer_products": "Produk",
+            "footer_solutions": "Solusi",
+            "footer_company": "Perusahaan",
+            "footer_copyright": "© 2026 Oqline. All rights reserved.",
+            "footer_member": "Member of Astria"
+        },
+        "en": {
+            "nav_products": "Products",
+            "nav_jasa": "Web Services",
+            "nav_pricing": "Pricing",
+            "nav_vps": "Cloud VPS",
+            "nav_hosting": "Hosting",
+            "nav_features": "Features",
+            "nav_support": "Customer Service",
+            "nav_login": "Login",
+            "nav_start": "Start Free",
+            "cs_hero_title": "Customer <span>Service</span>",
+            "cs_hero_desc": "We are ready to help you. Contact us through various channels or submit the form below.",
+            "cs_whatsapp_title": "WhatsApp",
+            "cs_whatsapp_desc": "Fastest response for questions and technical support.",
+            "cs_email_title": "Email",
+            "cs_email_desc": "Send detailed questions or documents via email.",
+            "cs_office_title": "Office",
+            "cs_office_desc": "Visit our office for direct consultation.",
+            "cs_forms_label": "Forms",
+            "cs_forms_title": "Contact Us",
+            "cs_forms_desc": "Choose the form type that suits your needs and we will respond within 24 hours.",
+            "tab_feedback": "Feedback",
+            "tab_complaint": "Complaint",
+            "tab_suggestion": "Suggestion",
+            "feedback_title": "Send Feedback",
+            "feedback_subtitle": "Tell us about your experience using Oqline services.",
+            "complaint_title": "Submit Complaint",
+            "complaint_subtitle": "Submit your complaint and we will follow up immediately.",
+            "suggestion_title": "Send Suggestion",
+            "suggestion_subtitle": "Have an idea to improve our service? We want to hear it!",
+            "label_name": "Full Name",
+            "label_email": "Email",
+            "label_phone": "Phone Number",
+            "label_service": "Service Used",
+            "label_rating": "Rating",
+            "label_ticket": "Ticket Number (if any)",
+            "label_priority": "Priority",
+            "label_category": "Suggestion Category",
+            "label_subject": "Subject",
+            "label_message": "Message",
+            "label_benefit": "Expected Benefit",
+            "placeholder_name": "John Doe",
+            "placeholder_email": "email@example.com",
+            "placeholder_phone": "+62 8xx-xxxx-xxxx",
+            "placeholder_ticket": "TCK-12345",
+            "placeholder_subject": "Issue with...",
+            "placeholder_feedback": "Tell us about your experience...",
+            "placeholder_complaint": "Explain the problem you are experiencing in detail...",
+            "placeholder_suggestion_subject": "Suggestion for...",
+            "placeholder_suggestion": "Explain your suggestion in detail...",
+            "placeholder_benefit": "How this suggestion will help...",
+            "select_service": "Select Service",
+            "rating_5": "⭐⭐⭐⭐⭐ Very Satisfied",
+            "rating_4": "⭐⭐⭐⭐ Satisfied",
+            "rating_3": "⭐⭐⭐ Fair",
+            "rating_2": "⭐⭐ Dissatisfied",
+            "rating_1": "⭐ Very Dissatisfied",
+            "priority_low": "Low - Not urgent",
+            "priority_medium": "Medium - Needs attention",
+            "priority_high": "High - Service affected",
+            "priority_critical": "Critical - Service down",
+            "cat_product": "Products & Services",
+            "cat_website": "Website & Applications",
+            "cat_pricing": "Pricing & Packages",
+            "cat_support": "Customer Support",
+            "cat_feature": "New Feature",
+            "cat_other": "Other",
+            "btn_submit_feedback": "Send Feedback",
+            "btn_submit_complaint": "Send Complaint",
+            "btn_submit_suggestion": "Send Suggestion",
+            "form_note": "This form will be sent to our team via WhatsApp. Please make sure the data you enter is correct.",
+            "form_note_complaint": "Our team will respond to your complaint within 1x24 hours on business days. For critical issues, please contact WhatsApp directly.",
+            "form_note_suggestion": "The best suggestions will be considered for the development of our services in the future. Thank you for your contribution!",
+            "success_title": "Thank You!",
+            "success_feedback": "Your feedback has been successfully sent. We greatly appreciate your input to continuously improve our services.",
+            "success_complaint": "Your complaint has been recorded. A ticket number will be sent to your email. Our team will follow up immediately.",
+            "success_suggestion": "Thank you for your valuable suggestion. Our product team will review and consider it for future development.",
+            "btn_back_home": "Back to Home",
+            "faq_label": "FAQ",
+            "faq_title": "Frequently Asked Questions",
+            "faq_desc": "Find answers to frequently asked questions about our customer service.",
+            "faq_q1": "How long is the response time for complaints?",
+            "faq_a1": "We are committed to responding to complaints within 1x24 hours on business days. For critical priority issues, our team will respond within 2 hours via WhatsApp.",
+            "faq_q2": "How do I track my complaint status?",
+            "faq_a2": "After submitting a complaint, you will receive a ticket number via email. You can use this ticket number to inquire about the handling status via WhatsApp or our email.",
+            "faq_q3": "Is there a fee to submit a complaint?",
+            "faq_a3": "No, submitting complaints, feedback, and suggestions is completely free. We value every input from customers to continuously improve service quality.",
+            "faq_q4": "Can I modify my complaint after submission?",
+            "faq_a4": "Yes, you can add additional information to a complaint that has already been submitted by mentioning your ticket number. Please contact us via WhatsApp or email.",
+            "faq_q5": "Will my suggestion actually be implemented?",
+            "faq_a5": "Every suggestion will be reviewed by our product team. Suggestions that are feasible and beneficial to many users will be considered in our product development roadmap.",
+            "footer_desc": "Indonesia's leading cloud infrastructure platform. Providing Cloud Hosting, VPS, Dedicated Server, and enterprise solutions with the latest technology.",
+            "footer_contact": "Contact Information",
+            "footer_email": "Email",
+            "footer_wa": "WhatsApp",
+            "footer_address": "Address",
+            "footer_address_text": "Puskopal Building 2nd Floor, TNI AL Complex Jl. Tabah Raya No.19, Kelapa Gading, North Jakarta.",
+            "footer_products": "Products",
+            "footer_solutions": "Solutions",
+            "footer_company": "Company",
+            "footer_copyright": "© 2026 Oqline. All rights reserved.",
+            "footer_member": "Member of Astria"
+        }
+    };
+
+    let currentLang = localStorage.getItem('oqline-lang') || 'id';
+
+    function switchLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('oqline-lang', lang);
+        applyLanguage();
+        updateLangButtons();
+    }
+
+    function applyLanguage() {
+        const data = langData[currentLang];
+        if (!data) return;
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            const key = el.getAttribute('data-lang');
+            if (data[key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = data[key];
+                } else {
+                    el.innerHTML = data[key];
+                }
+            }
+        });
+        document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-lang-placeholder');
+            if (data[key]) el.placeholder = data[key];
+        });
+        document.documentElement.lang = currentLang === 'id' ? 'id' : 'en';
+        document.title = currentLang === 'id' ? 'Oqline | Layanan Pelanggan' : 'Oqline | Customer Service';
+    }
+
+    function updateLangButtons() {
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === currentLang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        applyLanguage();
+        updateLangButtons();
+    });
+    </script>
+
+</body>
+</html>
