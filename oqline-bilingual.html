@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oqline | Cloud Infrastructure Terbaik Indonesia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --oracle-red: #C74634;
+            --oracle-dark: #1A1A1A;
+            --oracle-navy: #0D1B2A;
+            --oracle-blue: #0077C8;
+            --oracle-light: #F5F5F5;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --border-color: #E0E0E0;
+            --gradient-dark: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 100%);
+            --gradient-hero: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 50%, #0077C8 100%);
+        }
+        body { font-family: 'Inter', sans-serif; color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+
+        /* ===== LANGUAGE SWITCHER ===== */
+        .lang-switcher { display: flex; gap: 4px; align-items: center; margin-left: 20px; }
+        .lang-btn { padding: 6px 14px; border: 2px solid var(--border-color); background: transparent; border-radius: 20px; font-weight: 600; font-size: 12px; cursor: pointer; transition: all 0.3s; color: var(--text-secondary); font-family: 'Inter', sans-serif; }
+        .lang-btn.active { background: var(--oracle-navy); color: white; border-color: var(--oracle-navy); }
+        .lang-btn:hover:not(.active) { border-color: var(--oracle-navy); color: var(--oracle-navy); }
+        @media (max-width: 768px) { .lang-switcher { margin-left: 0; margin-top: 12px; justify-content: center; } }
+
+
+        /* ===== NAVBAR ===== */
+        .navbar { background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .logo { max-width: 180px; height: auto; display: block; }
+        .logo img { width: 100%; height: auto; display: block; }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 15px; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--oracle-red); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -24px; left: 0; width: 0; height: 3px; background: var(--oracle-red); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; gap: 20px; align-items: center; }
+        .btn { padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: none; }
+        .btn-primary { background: var(--oracle-red); color: white; }
+        .btn-primary:hover { background: #A33A2B; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(199,70,52,0.3); }
+        .btn-outline { background: transparent; color: var(--text-primary); border: 2px solid var(--border-color); }
+        .btn-outline:hover { border-color: var(--oracle-red); color: var(--oracle-red); }
+        .btn-white { background: white; color: var(--oracle-navy); }
+        .btn-white:hover { background: #f0f0f0; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--oracle-navy); padding: 8px; }
+
+        /* Mobile Nav Drawer */
+        .mobile-nav { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; opacity: 0; transition: opacity 0.3s; }
+        .mobile-nav.open { opacity: 1; }
+        .mobile-nav-drawer { background: white; width: 80%; max-width: 320px; height: 100%; overflow-y: auto; padding: 24px 0; transform: translateX(-100%); transition: transform 0.3s ease; }
+        .mobile-nav.open .mobile-nav-drawer { transform: translateX(0); }
+        .mobile-nav-header { display: flex; align-items: center; justify-content: space-between; padding: 0 24px 20px; border-bottom: 1px solid var(--border-color); margin-bottom: 8px; }
+        .mobile-nav-header img { max-width: 120px; height: auto; }
+        .mobile-nav-close { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-primary); padding: 4px; }
+        .mobile-nav-links { list-style: none; }
+        .mobile-nav-links li a { display: block; padding: 14px 24px; color: var(--text-primary); text-decoration: none; font-weight: 500; font-size: 15px; border-bottom: 1px solid #f5f5f5; transition: background 0.2s, color 0.2s; }
+        .mobile-nav-links li a:hover { background: #fafafa; color: var(--oracle-red); }
+        .mobile-nav-actions { padding: 20px 24px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--border-color); margin-top: 8px; }
+        .mobile-nav-actions .btn { justify-content: center; padding: 14px 20px; font-size: 15px; }
+
+        /* ===== HERO ===== */
+        .hero { background: var(--gradient-hero); min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 72px; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.03' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); background-size: cover; background-position: bottom; }
+        .hero-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 2; }
+        .hero-content h1 { font-size: 64px; font-weight: 800; color: white; line-height: 1.1; margin-bottom: 24px; letter-spacing: -2px; }
+        .hero-content h1 span { color: #FF6B4A; }
+        .hero-content p { font-size: 20px; color: rgba(255,255,255,0.85); margin-bottom: 40px; max-width: 540px; line-height: 1.7; }
+        .hero-stats { display: flex; gap: 48px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+        .stat-item h3 { font-size: 36px; font-weight: 800; color: white; }
+        .stat-item p { font-size: 14px; color: rgba(255,255,255,0.7); margin: 0; }
+        .hero-visual { position: relative; }
+        .hero-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 40px; color: white; transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); transition: transform 0.5s; box-shadow: 0 25px 80px rgba(0,0,0,0.3); }
+        .hero-card:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg); }
+        .hero-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .hero-card-header h3 { font-size: 18px; font-weight: 600; }
+        .status-badge { background: rgba(46,204,113,0.2); color: #2ECC71; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .server-list { display: flex; flex-direction: column; gap: 12px; }
+        .server-item { background: rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.08); }
+        .server-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .server-info p { font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; }
+        .server-status { width: 10px; height: 10px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 10px #2ECC71; flex-shrink: 0; }
+
+        /* ===== SECTIONS ===== */
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 42px; font-weight: 800; margin-bottom: 16px; color: var(--oracle-navy); }
+        .section-header p { font-size: 18px; color: var(--text-secondary); }
+        .section-label { display: inline-block; color: var(--oracle-red); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+
+        /* ===== PRODUCTS ===== */
+        .products { padding: 120px 40px; background: white; }
+        .products-container { max-width: 1400px; margin: 0 auto; }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .product-card { border: 1px solid var(--border-color); border-radius: 16px; padding: 40px 32px; transition: all 0.4s; position: relative; overflow: hidden; background: white; }
+        .product-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradient-dark); transform: scaleX(0); transition: transform 0.4s; }
+        .product-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.1); transform: translateY(-8px); border-color: transparent; }
+        .product-card:hover::before { transform: scaleX(1); }
+        .product-icon { width: 56px; height: 56px; background: var(--gradient-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-bottom: 24px; }
+        .product-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .product-card p { color: var(--text-secondary); font-size: 15px; margin-bottom: 24px; line-height: 1.7; }
+        .product-features { list-style: none; margin-bottom: 32px; }
+        .product-features li { padding: 8px 0; color: var(--text-secondary); font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .product-features li i { color: var(--oracle-red); font-size: 12px; }
+        .product-link { color: var(--oracle-red); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+        .product-link:hover { gap: 12px; }
+
+        /* ===== PRICING ===== */
+        .pricing { padding: 120px 40px; background: var(--oracle-light); }
+        .pricing-container { max-width: 1400px; margin: 0 auto; }
+        .pricing-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 60px; background: white; padding: 8px; border-radius: 12px; width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .tab-btn { padding: 12px 32px; border: none; background: transparent; font-weight: 600; font-size: 14px; cursor: pointer; border-radius: 8px; transition: all 0.3s; color: var(--text-secondary); font-family: 'Inter', sans-serif; }
+        .tab-btn.active { background: var(--oracle-navy); color: white; }
+        .tab-btn:hover:not(.active) { color: var(--oracle-navy); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .pricing-card { background: white; border-radius: 20px; padding: 48px 36px; position: relative; transition: all 0.4s; border: 2px solid transparent; }
+        .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .pricing-card.featured { border-color: var(--oracle-red); transform: scale(1.05); }
+        .pricing-card.featured:hover { transform: scale(1.05) translateY(-8px); }
+        .featured-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--oracle-red); color: white; padding: 6px 24px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+        .pricing-header { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border-color); }
+        .pricing-header h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--oracle-navy); }
+        .pricing-header p { font-size: 14px; color: var(--text-secondary); }
+        .pricing-price { margin-bottom: 32px; }
+        .pricing-price .currency { font-size: 24px; font-weight: 600; vertical-align: top; color: var(--oracle-navy); }
+        .pricing-price .amount { font-size: 56px; font-weight: 800; color: var(--oracle-navy); line-height: 1; }
+        .pricing-price .period { font-size: 16px; color: var(--text-secondary); font-weight: 500; }
+        .pricing-features { list-style: none; margin-bottom: 40px; }
+        .pricing-features li { padding: 12px 0; display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--text-secondary); border-bottom: 1px solid #f0f0f0; }
+        .pricing-features li:last-child { border-bottom: none; }
+        .pricing-features li i { color: var(--oracle-red); width: 20px; }
+        .pricing-features li strong { color: var(--text-primary); font-weight: 600; }
+
+        /* ===== VPS ===== */
+        .vps-section { padding: 120px 40px; background: var(--oracle-navy); color: white; position: relative; overflow: hidden; }
+        .vps-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,119,200,0.15) 0%, transparent 70%); }
+        .vps-container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+        .vps-section .section-header h2, .vps-section .section-header p { color: white; }
+        .vps-section .section-label { color: #FF6B4A; }
+        .vps-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .vps-type-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; transition: all 0.4s; }
+        .vps-type-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-8px); border-color: rgba(255,255,255,0.2); }
+        .vps-type-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+        .vps-type-card .vps-price { font-size: 36px; font-weight: 800; color: #FF6B4A; margin-bottom: 8px; }
+        .vps-type-card .vps-hourly { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+        .vps-type-card p { color: rgba(255,255,255,0.7); margin-bottom: 24px; line-height: 1.7; }
+        .vps-specs { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+        .vps-spec { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+        .vps-spec span:first-child { color: rgba(255,255,255,0.6); }
+        .vps-spec span:last-child { font-weight: 600; }
+        .performance-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 20px; }
+        .badge-standard { background: rgba(255,255,255,0.1); color: white; }
+        .badge-intel { background: rgba(0,119,200,0.2); color: #4FC3F7; }
+        .badge-amd { background: rgba(199,70,52,0.2); color: #FF6B4A; }
+
+        /* ===== FEATURES ===== */
+        .features { padding: 120px 40px; background: white; }
+        .features-container { max-width: 1400px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+        .feature-item { text-align: center; padding: 40px 24px; border-radius: 16px; transition: all 0.4s; }
+        .feature-item:hover { background: var(--oracle-light); transform: translateY(-4px); }
+        .feature-icon { width: 72px; height: 72px; background: var(--gradient-dark); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: white; font-size: 28px; }
+        .feature-item h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .feature-item p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ===== HOSTING TABLE ===== */
+        .hosting-section { padding: 120px 40px; background: var(--oracle-light); }
+        .hosting-container { max-width: 1400px; margin: 0 auto; }
+        .hosting-table-wrapper { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.06); overflow-x: auto; }
+        .hosting-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        .hosting-table th { background: var(--oracle-navy); color: white; padding: 24px; text-align: left; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+        .hosting-table th:first-child { width: 25%; }
+        .hosting-table td { padding: 24px; border-bottom: 1px solid var(--border-color); font-size: 15px; }
+        .hosting-table tr:hover td { background: #fafafa; }
+        .hosting-table .plan-name { font-weight: 700; color: var(--oracle-navy); font-size: 16px; }
+        .hosting-table .plan-price { font-weight: 800; color: var(--oracle-red); font-size: 18px; }
+        .hosting-table .check { color: var(--oracle-red); font-weight: 700; }
+
+        /* ===== CTA ===== */
+        .cta { padding: 120px 40px; background: var(--gradient-dark); text-align: center; position: relative; overflow: hidden; }
+        .cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.02' d='M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); background-size: cover; }
+        .cta-container { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+        .cta h2 { font-size: 48px; font-weight: 800; color: white; margin-bottom: 24px; }
+        .cta p { font-size: 20px; color: rgba(255,255,255,0.8); margin-bottom: 40px; }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; }
+
+        /* ===== FOOTER ===== */
+        .footer { background: var(--oracle-dark); color: white; padding: 80px 40px 40px; }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; }
+        /* Footer logo diperkeicl */
+        .footer-brand .footer-logo-link img { max-width: 100px; width: 100%; height: auto; display: block; margin-bottom: 20px; }
+        .footer-social { display: flex; gap: 16px; margin-bottom: 24px; }
+        .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: all 0.3s; }
+        .footer-social a:hover { background: var(--oracle-red); transform: translateY(-4px); }
+        .footer-column h4 { font-size: 16px; font-weight: 700; margin-bottom: 24px; color: white; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 14px; }
+        .footer-column a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-column a:hover { color: white; }
+        .footer-contact h4 { font-size: 16px; font-weight: 700; margin-bottom: 18px; color: white; }
+        .footer-contact dl { margin: 0; }
+        .footer-contact dt { color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 700; margin-top: 12px; }
+        .footer-contact dd { color: rgba(255,255,255,0.8); font-size: 14px; margin: 4px 0 0 0; line-height: 1.8; }
+        .footer-contact dd a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .footer-contact dd a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 14px; }
+
+        /* ===== NEW SERVICES ===== */
+        .new-services { padding: 120px 40px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        .new-services-container { max-width: 1400px; margin: 0 auto; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .service-card { background: white; border-radius: 20px; padding: 48px 36px; text-align: center; transition: all 0.4s; border: 2px solid transparent; position: relative; overflow: hidden; }
+        .service-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); border-color: var(--oracle-red); }
+        .service-logo { width: 120px; height: 60px; margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .service-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .service-card .service-tag { display: inline-block; background: var(--oracle-red); color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .service-card p { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 24px; }
+        .service-features { list-style: none; text-align: left; margin-bottom: 32px; }
+        .service-features li { padding: 10px 0; color: var(--text-secondary); font-size: 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f0f0; }
+        .service-features li:last-child { border-bottom: none; }
+        .service-features li i { color: var(--oracle-red); font-size: 12px; }
+
+        /* ===== JASA SECTION ===== */
+        .service-badge-promo { position: absolute; top: 16px; right: -32px; background: linear-gradient(135deg, #E31837, #FF6B4A); color: white; padding: 6px 40px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transform: rotate(45deg); box-shadow: 0 4px 15px rgba(227,24,55,0.4); z-index: 10; }
+        .service-icon-jasa { width: 64px; height: 64px; background: linear-gradient(135deg, #0D1B2A, #1B3A4B); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 28px; box-shadow: 0 8px 25px rgba(13,27,42,0.3); }
+        .service-price-box { background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 12px; padding: 16px; margin: 16px 0 20px; text-align: center; border: 1px solid #e0e0e0; }
+        .service-price-normal { font-size: 14px; color: #999; text-decoration: line-through; margin-bottom: 4px; }
+        .service-price-promo { font-size: 28px; font-weight: 800; color: var(--oracle-red); line-height: 1.2; }
+        .service-price-tier { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e0e0e0; }
+        .service-price-tier:last-child { border-bottom: none; }
+        .tier-name { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+        .tier-price { font-size: 14px; font-weight: 700; color: var(--oracle-navy); }
+        .featured-jasa { border: 2px solid var(--oracle-red) !important; transform: scale(1.03); }
+        .featured-jasa:hover { transform: scale(1.03) translateY(-12px) !important; }
+        #jasa-website .service-card { background: rgba(255,255,255,0.98); }
+        #jasa-website .service-card h3 { color: var(--oracle-navy); }
+        #jasa-website .service-card p { color: var(--text-secondary); }
+        #jasa-website .service-features li { color: var(--text-secondary); border-bottom-color: #f0f0f0; }
+        #jasa-website .service-features li i { color: var(--oracle-red); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeInUp 0.8s ease forwards; }
+        .scroll-reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE: TABLET ===== */
+        @media (max-width: 1024px) {
+            .nav-container { padding-left: 20px; padding-right: 20px; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; padding: 60px 20px; gap: 40px; }
+            .hero-content p { margin-left: auto; margin-right: auto; }
+            .hero-stats { justify-content: center; flex-wrap: wrap; gap: 24px; }
+            .hero-visual { display: none; }
+            .products-grid, .pricing-grid, .vps-types, .features-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-container { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .nav-actions { gap: 12px; }
+            .products { padding: 80px 20px; }
+            .pricing { padding: 80px 20px; }
+            .vps-section { padding: 80px 20px; }
+            .features { padding: 80px 20px; }
+            .hosting-section { padding: 80px 20px; }
+            .new-services { padding: 80px 20px; }
+            .cta { padding: 80px 20px; }
+            .footer { padding: 60px 20px 40px; }
+        }
+
+        /* ===== RESPONSIVE: MOBILE ===== */
+        @media (max-width: 768px) {
+            /* Nav */
+            .nav-links { display: none; }
+            .nav-actions { display: none; }
+            .mobile-menu-btn { display: block; }
+            .mobile-nav { display: block; }
+            .nav-container { padding: 0 16px; }
+            .logo { max-width: 130px; }
+
+            /* Hero */
+            .hero { padding-top: 72px; min-height: auto; padding-bottom: 60px; }
+            .hero-container { padding: 40px 16px; gap: 32px; }
+            .hero-content h1 { font-size: 34px; letter-spacing: -1px; margin-bottom: 16px; }
+            .hero-content p { font-size: 16px; margin-bottom: 28px; }
+            .hero-content > div { flex-direction: column; gap: 12px; }
+            .hero-content > div .btn { justify-content: center; padding: 14px 24px; font-size: 15px; }
+            .hero-stats { flex-wrap: wrap; gap: 16px; margin-top: 36px; padding-top: 28px; justify-content: center; }
+            .stat-item { text-align: center; min-width: 80px; }
+            .stat-item h3 { font-size: 26px; }
+            .stat-item p { font-size: 12px; }
+
+            /* Section headers */
+            .section-header { margin-bottom: 40px; padding: 0 4px; }
+            .section-header h2 { font-size: 28px; margin-bottom: 12px; }
+            .section-header p { font-size: 15px; }
+
+            /* Products */
+            .products { padding: 60px 16px; }
+            .products-grid { grid-template-columns: 1fr; gap: 20px; }
+            .product-card { padding: 28px 24px; }
+            .product-card h3 { font-size: 19px; }
+
+            /* Pricing */
+            .pricing { padding: 60px 16px; }
+            .pricing-tabs { flex-wrap: wrap; width: 100%; gap: 6px; padding: 6px; }
+            .tab-btn { padding: 10px 16px; font-size: 13px; flex: 1; text-align: center; }
+            .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+            .pricing-card { padding: 32px 24px; }
+            .pricing-card.featured { transform: scale(1); }
+            .pricing-card.featured:hover { transform: translateY(-8px); }
+            .pricing-price .amount { font-size: 44px; }
+
+            /* VPS */
+            .vps-section { padding: 60px 16px; }
+            .vps-types { grid-template-columns: 1fr; gap: 20px; margin-top: 40px; }
+            .vps-type-card { padding: 28px 24px; }
+
+            /* Features */
+            .features { padding: 60px 16px; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .feature-item { padding: 24px 16px; }
+            .feature-icon { width: 56px; height: 56px; font-size: 22px; border-radius: 14px; }
+            .feature-item h3 { font-size: 15px; }
+            .feature-item p { font-size: 13px; }
+
+            /* Hosting table */
+            .hosting-section { padding: 60px 16px; }
+            .hosting-table-wrapper { border-radius: 12px; }
+            .hosting-table th, .hosting-table td { padding: 14px 12px; font-size: 13px; }
+
+            /* Jasa/Services */
+            .new-services { padding: 60px 16px; }
+            .services-grid { grid-template-columns: 1fr; gap: 20px; }
+            .service-card { padding: 32px 24px; }
+            .featured-jasa { transform: scale(1) !important; }
+            .featured-jasa:hover { transform: translateY(-12px) !important; }
+            .service-price-promo { font-size: 22px; }
+
+            /* CTA */
+            .cta { padding: 60px 16px; }
+            .cta h2 { font-size: 28px; }
+            .cta p { font-size: 16px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .cta-buttons .btn { width: 100%; max-width: 320px; justify-content: center; padding: 16px 24px; font-size: 15px; }
+
+            /* Footer */
+            .footer { padding: 50px 16px 30px; }
+            .footer-container { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+            .footer-brand .footer-logo-link img { max-width: 80px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding-top: 24px; }
+            .footer-bottom p { font-size: 13px; }
+
+            /* Footer nav columns: 2 columns on mobile */
+            .footer-columns-mobile { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        }
+
+        @media (max-width: 400px) {
+            .hero-content h1 { font-size: 28px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .tab-btn { padding: 10px 10px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo"><img src="logo-oqline.png" alt="Oqline Logo"></a>
+            <ul class="nav-links">
+                <li><a href="#products" data-lang="nav_products">Produk</a></li>
+                <li><a href="#jasa-website" data-lang="nav_jasa">Jasa Website</a></li>
+                <li><a href="#pricing" data-lang="nav_pricing">Harga</a></li>
+                <li><a href="#vps" data-lang="nav_vps">Cloud VPS</a></li>
+                <li><a href="#hosting" data-lang="nav_hosting">Hosting</a></li>
+                <li><a href="#features" data-lang="nav_features">Fitur</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-btn active" data-lang="id" onclick="switchLanguage('id')">ID</button>
+                    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+                </div>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" data-lang="nav_login">Masuk</a>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" data-lang="nav_start">Mulai Gratis</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- MOBILE NAV DRAWER -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-drawer">
+            <div class="mobile-nav-header">
+                <img src="logo-oqline.png" alt="Oqline Logo">
+                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Tutup menu"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#products" class="mobile-nav-link" data-lang="nav_products">Produk</a></li>
+                <li><a href="#jasa-website" class="mobile-nav-link" data-lang="nav_jasa">Jasa Website</a></li>
+                <li><a href="#pricing" class="mobile-nav-link" data-lang="nav_pricing">Harga</a></li>
+                <li><a href="#vps" class="mobile-nav-link" data-lang="nav_vps">Cloud VPS</a></li>
+                <li><a href="#hosting" class="mobile-nav-link" data-lang="nav_hosting">Hosting</a></li>
+                <li><a href="#features" class="mobile-nav-link" data-lang="nav_features">Fitur</a></li>
+            </ul>
+            <div class="mobile-nav-actions">
+                <div class="lang-switcher" style="margin-bottom: 12px;">
+                    <button class="lang-btn active" data-lang="id" onclick="switchLanguage('id')">ID</button>
+                    <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+                </div>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" data-lang="nav_login">Masuk</a>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" data-lang="nav_start">Mulai Gratis</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content animate-in">
+                <h1 data-lang="hero_title">Infrastruktur Cloud <span>Terbaik</span> Indonesia</h1>
+                <p data-lang="hero_desc">Platform cloud terdepan dengan 6 data center, 436K+ pelanggan, dan jaminan SLA 99.5%. Deploy server Anda dalam 60 detik dengan teknologi NVMe dan prosesor AMD EPYC.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#pricing" class="btn btn-primary" style="padding: 16px 36px; font-size: 16px;" data-lang="hero_price_btn">Lihat Harga <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="btn btn-outline" style="padding: 16px 36px; font-size: 16px; color: white; border-color: rgba(255,255,255,0.3);" data-lang="hero_demo_btn"><i class="fas fa-play-circle"></i> Demo</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item"><h3>436K+</h3><p data-lang="stat_customers">Pelanggan Aktif</p></div>
+                    <div class="stat-item"><h3>6</h3><p data-lang="stat_dc">Data Center</p></div>
+                    <div class="stat-item"><h3>99.5%</h3><p data-lang="stat_sla">SLA Guarantee</p></div>
+                    <div class="stat-item"><h3>24/7</h3><p data-lang="stat_support">Support Certified</p></div>
+                </div>
+            </div>
+            <div class="hero-visual animate-in">
+                <div class="hero-card">
+                    <div class="hero-card-header">
+                        <h3><i class="fas fa-server"></i> <span data-lang="dashboard_title">Dashboard Oqline</span></h3>
+                        <span class="status-badge"><i class="fas fa-circle" style="font-size: 8px; margin-right: 4px;"></i> <span data-lang="dashboard_status">Online</span></span>
+                    </div>
+                    <div class="server-list">
+                        <div class="server-item"><div class="server-info"><h4 data-lang="server_jakarta">Jakarta-DC1</h4><p data-lang="server_jakarta_spec">Intel eXtreme - 2 CPU - 4GB RAM</p></div><div class="server-status"></div></div>
+                        <div class="server-item"><div class="server-info"><h4 data-lang="server_singapore">Singapore-DC2</h4><p data-lang="server_singapore_spec">AMD eXtreme - 4 CPU - 8GB RAM</p></div><div class="server-status"></div></div>
+                        <div class="server-item"><div class="server-info"><h4 data-lang="server_surabaya">Surabaya-DC3</h4><p data-lang="server_surabaya_spec">Basic Standard - 1 CPU - 2GB RAM</p></div><div class="server-status"></div></div>
+                        <div class="server-item"><div class="server-info"><h4 data-lang="server_bandung">Bandung-DC4</h4><p data-lang="server_bandung_spec">GPU Power - 4x Tesla V100</p></div><div class="server-status"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products" id="products">
+        <div class="products-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" data-lang="products_label">Solusi Lengkap</span>
+                <h2 data-lang="products_title">Produk & Layanan</h2>
+                <p data-lang="products_desc">Berbagai solusi cloud yang dirancang untuk memenuhi kebutuhan bisnis Anda, dari startup hingga enterprise.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-cloud"></i></div>
+                    <h3 data-lang="product_hosting_title">Cloud Hosting</h3>
+                    <p data-lang="product_hosting_desc">Cloud Hosting dengan teknologi NVMe untuk performa tinggi. Dilengkapi cPanel, LiteSpeed Enterprise, dan Softaculous.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_litespeed">LiteSpeed Web Server</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_backup">Daily Backup</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_ssl">Free SSL Certificate</span></li>
+                    </ul>
+                    <a href="#pricing" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-server"></i></div>
+                    <h3 data-lang="product_vps_title">Cloud VPS</h3>
+                    <p data-lang="product_vps_desc">Server Cloud VPS dengan pembayaran Pay as You Grow. Prosesor AMD EPYC & Intel dengan storage NVMe.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_root">Full Root Access</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_os">Pilihan OS & Apps</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_api">API & Control Panel</span></li>
+                    </ul>
+                    <a href="#vps" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-hdd"></i></div>
+                    <h3 data-lang="product_dedicated_title">Dedicated Server</h3>
+                    <p data-lang="product_dedicated_desc">Server dedicated dengan performa maksimal. Data Center Tier 4, ISO 9001 & ISO 27001 certified.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_access">Full Access</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_transfer">Unlimited Transfer</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_tier4">Tier 4 Data Center</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_monitoring">24/7 Monitoring</span></li>
+                    </ul>
+                    <a href="#pricing" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-globe"></i></div>
+                    <h3 data-lang="product_domain_title">Domain</h3>
+                    <p data-lang="product_domain_desc">Domain terlengkap dengan proses cepat dan praktis. Lindungi brand Anda sekarang juga.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_domain_com">.com mulai Rp 160.000/tahun</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_domain_id">.id mulai Rp 210.000/tahun</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_dns">DNS Management</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_privacy">Domain Privacy</span></li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-microchip"></i></div>
+                    <h3 data-lang="product_gpu_title">GPU Server</h3>
+                    <p data-lang="product_gpu_desc">GPU Power dengan 4x NVIDIA Tesla V100 untuk AI, machine learning, dan rendering.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_tesla">4x Tesla V100</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_xeon">4x Xeon Platinum 8176</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_hpc">High Performance Computing</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_ai">AI & ML Ready</span></li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-card scroll-reveal">
+                    <div class="product-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 data-lang="product_managed_title">Managed Services</h3>
+                    <p data-lang="product_managed_desc">Layanan managed VPS dengan WHM cPanel. Fokus pada bisnis Anda, biarkan kami mengelola server.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_whm">WHM & cPanel</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_uptime">99.9% Uptime</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_security">Security Hardening</span></li>
+                        <li><i class="fas fa-check"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JASA WEBSITE -->
+    <section class="new-services" id="jasa-website" style="background: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 100%);">
+        <div class="new-services-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" style="color: #FF6B4A;" data-lang="jasa_label">Jasa Terbaru</span>
+                <h2 style="color: white;" data-lang="jasa_title">Jasa Pembuatan Website & Aplikasi</h2>
+                <p style="color: rgba(255,255,255,0.7);" data-lang="jasa_desc">Solusi digital lengkap untuk bisnis Anda — dari company profile hingga aplikasi custom enterprise.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card scroll-reveal">
+                    <div class="service-badge-promo" data-lang="promo_badge">PROMO</div>
+                    <div class="service-icon-jasa"><i class="fas fa-building"></i></div>
+                    <span class="service-tag" data-lang="website_tag">Website</span>
+                    <h3 data-lang="jasa_company_title">Company Profile</h3>
+                    <div class="service-price-box">
+                        <div class="service-price-normal">Rp 7.500.000</div>
+                        <div class="service-price-promo" data-lang="jasa_company_price">Rp 4.999.000</div>
+                    </div>
+                    <p data-lang="jasa_company_desc">Website profesional untuk meningkatkan trust, branding, dan closing client.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Home (Landing utama)</li>
+                        <li><i class="fas fa-check"></i> About Us (Profil & brand)</li>
+                        <li><i class="fas fa-check"></i> Services / Layanan</li>
+                        <li><i class="fas fa-check"></i> Portfolio / Project</li>
+                        <li><i class="fas fa-check"></i> Contact Us + WhatsApp CTA</li>
+                        <li><i class="fas fa-check"></i> Optional: Blog / Artikel</li>
+                        <li><i class="fas fa-check"></i> Desain UI/UX profesional & modern</li>
+                        <li><i class="fas fa-check"></i> Responsive (Mobile, Tablet, Desktop)</li>
+                        <li><i class="fas fa-check"></i> Google Maps lokasi bisnis</li>
+                        <li><i class="fas fa-check"></i> Integrasi social media</li>
+                        <li><i class="fas fa-check"></i> Domain (.com / .id) 1 tahun</li>
+                        <li><i class="fas fa-check"></i> Hosting 1 tahun + SSL Security</li>
+                        <li><i class="fas fa-check"></i> Training penggunaan website</li>
+                        <li><i class="fas fa-check"></i> Revisi 2x + Support 14 hari</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="jasa_order">Pesan Sekarang</a>
+                </div>
+                <div class="service-card scroll-reveal featured-jasa">
+                    <div class="service-badge-promo" data-lang="promo_badge">PROMO</div>
+                    <div class="service-icon-jasa"><i class="fas fa-shopping-cart"></i></div>
+                    <span class="service-tag" style="background: var(--oracle-blue);" data-lang="ecommerce_tag">E-Commerce</span>
+                    <h3 data-lang="jasa_ecommerce_title">Toko Online</h3>
+                    <div class="service-price-box">
+                        <div class="service-price-normal">Rp 18.000.000</div>
+                        <div class="service-price-promo" data-lang="jasa_ecommerce_price">Rp 11.999.000</div>
+                    </div>
+                    <p data-lang="jasa_ecommerce_desc">Website jualan online otomatis + sistem lengkap seperti marketplace pribadi.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Home, Katalog & Detail Produk</li>
+                        <li><i class="fas fa-check"></i> Keranjang Belanja & Checkout</li>
+                        <li><i class="fas fa-check"></i> Upload produk (nama, harga, foto)</li>
+                        <li><i class="fas fa-check"></i> Kategori produk & stok otomatis</li>
+                        <li><i class="fas fa-check"></i> Add to cart & checkout system</li>
+                        <li><i class="fas fa-check"></i> Notifikasi pesanan & manajemen order</li>
+                        <li><i class="fas fa-check"></i> Transfer bank manual & QRIS</li>
+                        <li><i class="fas fa-check"></i> Payment gateway (Midtrans/Xendit)</li>
+                        <li><i class="fas fa-check"></i> Integrasi ekspedisi (JNE, J&T)</li>
+                        <li><i class="fas fa-check"></i> Ongkir otomatis</li>
+                        <li><i class="fas fa-check"></i> Login/register & riwayat pembelian</li>
+                        <li><i class="fas fa-check"></i> Tracking pesanan</li>
+                        <li><i class="fas fa-check"></i> Dashboard admin & laporan penjualan</li>
+                        <li><i class="fas fa-check"></i> Domain, hosting 1 tahun + SSL</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="jasa_order">Pesan Sekarang</a>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon-jasa"><i class="fas fa-code"></i></div>
+                    <span class="service-tag" style="background: linear-gradient(135deg, #6B21A8, #9333EA);" data-lang="custom_tag">Custom App</span>
+                    <h3 data-lang="jasa_custom_title">Aplikasi Custom</h3>
+                    <div class="service-price-box">
+                        <div class="service-price-tier"><span class="tier-name">Basic</span><span class="tier-price">Rp 25.000.000</span></div>
+                        <div class="service-price-tier"><span class="tier-name">Business</span><span class="tier-price">Rp 35.000.000-</span></div>
+                        <div class="service-price-tier"><span class="tier-name">Enterprise</span><span class="tier-price">Rp 50.000.000+</span></div>
+                    </div>
+                    <p data-lang="jasa_custom_desc">Sistem/aplikasi yang dibuat sesuai kebutuhan bisnis Anda.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Analisis kebutuhan bisnis & flow sistem</li>
+                        <li><i class="fas fa-check"></i> UI/UX design custom</li>
+                        <li><i class="fas fa-check"></i> Backend & Frontend system</li>
+                        <li><i class="fas fa-check"></i> Database design & security</li>
+                        <li><i class="fas fa-check"></i> Payment Gateway integration</li>
+                        <li><i class="fas fa-check"></i> API Integration & WhatsApp API</li>
+                        <li><i class="fas fa-check"></i> Role user (admin/staff/user)</li>
+                        <li><i class="fas fa-check"></i> Backup system</li>
+                        <li><i class="fas fa-check"></i> Custom module: booking, inventory, CRM</li>
+                        <li><i class="fas fa-check"></i> Membership system & dashboard analytics</li>
+                        <li><i class="fas fa-check"></i> Setup server & domain</li>
+                        <li><i class="fas fa-check"></i> Maintenance awal</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="jasa_consult">Konsultasi Gratis</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VPS -->
+    <section class="vps-section" id="vps">
+        <div class="vps-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" data-lang="vps_label">Cloud VPS eXtreme</span>
+                <h2 data-lang="vps_title">Pilih Performa Server Anda</h2>
+                <p data-lang="vps_desc">Layanan server Cloud VPS dengan pembayaran Pay as You Grow yang transparan & berkualitas.</p>
+            </div>
+            <div class="vps-types">
+                <div class="vps-type-card scroll-reveal">
+                    <span class="performance-badge badge-standard" data-lang="vps_standard">Standard</span>
+                    <h3 data-lang="vps_basic_title">Basic Standard</h3>
+                    <div class="vps-price">Rp 121.800</div>
+                    <div class="vps-hourly">Rp 168 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
+                    <p data-lang="vps_basic_desc">Performa andal untuk website dan aplikasi skala kecil hingga menengah.</p>
+                    <div class="vps-specs">
+                        <div class="vps-spec"><span data-lang="vps_cpu">CPU</span><span data-lang="vps_scalable">Scalable</span></div>
+                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span data-lang="vps_scalable">Scalable</span></div>
+                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span data-lang="vps_nvme">NVMe SSD</span></div>
+                        <div class="vps-spec"><span data-lang="vps_bandwidth">Bandwidth</span><span data-lang="vps_unlimited">Unlimited</span></div>
+                    </div>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="vps_deploy">Deploy Sekarang</a>
+                </div>
+                <div class="vps-type-card scroll-reveal">
+                    <span class="performance-badge badge-intel" data-lang="vps_intel_badge">4-5x Faster</span>
+                    <h3 data-lang="vps_intel_title">Intel eXtreme</h3>
+                    <div class="vps-price">Rp 208.600</div>
+                    <div class="vps-hourly">Rp 286 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
+                    <p data-lang="vps_intel_desc">Intel eXtreme hadir dengan performa tinggi & kecepatan 4-5x lebih cepat.</p>
+                    <div class="vps-specs">
+                        <div class="vps-spec"><span data-lang="vps_cpu">CPU</span><span data-lang="vps_intel_cpu">Intel High Performance</span></div>
+                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span data-lang="vps_scalable">Scalable</span></div>
+                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span data-lang="vps_nvme">NVMe SSD</span></div>
+                        <div class="vps-spec"><span data-lang="vps_bandwidth">Bandwidth</span><span data-lang="vps_premium">Unlimited Premium</span></div>
+                    </div>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="vps_deploy">Deploy Sekarang</a>
+                </div>
+                <div class="vps-type-card scroll-reveal">
+                    <span class="performance-badge badge-amd" data-lang="vps_amd_badge">6-8x Faster</span>
+                    <h3 data-lang="vps_amd_title">AMD eXtreme</h3>
+                    <div class="vps-price">Rp 208.600</div>
+                    <div class="vps-hourly">Rp 286 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
+                    <p data-lang="vps_amd_desc">Komputasi 6-8x lebih cepat dengan CPU AMD EPYC 7542.</p>
+                    <div class="vps-specs">
+                        <div class="vps-spec"><span data-lang="vps_cpu">CPU</span><span data-lang="vps_amd_cpu">AMD EPYC 7542</span></div>
+                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span data-lang="vps_scalable">Scalable</span></div>
+                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span data-lang="vps_nvme">NVMe SSD</span></div>
+                        <div class="vps-spec"><span data-lang="vps_bandwidth">Bandwidth</span><span data-lang="vps_premium">Unlimited Premium</span></div>
+                    </div>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="vps_deploy">Deploy Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="pricing-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" data-lang="pricing_label">Harga Transparan</span>
+                <h2 data-lang="pricing_title">Pilih Paket Cloud Hosting</h2>
+                <p data-lang="pricing_desc">Harga kompetitif dengan kualitas enterprise. Semua harga sudah termasuk pajak.</p>
+            </div>
+            <div class="pricing-tabs">
+                <button class="tab-btn active" onclick="switchTab('cloud', event)" data-lang="tab_cloud">Cloud Hosting</button>
+                <button class="tab-btn" onclick="switchTab('vps', event)" data-lang="tab_vps">Cloud VPS</button>
+                <button class="tab-btn" onclick="switchTab('dedicated', event)" data-lang="tab_dedicated">Dedicated</button>
+            </div>
+            <div id="cloud-pricing" class="pricing-grid">
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3 data-lang="starter_title">Starter Pro</h3><p data-lang="starter_desc">Untuk personal blog & testing</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">21.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>1 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>1 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>512 MB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> cPanel Control Panel</li>
+                        <li><i class="fas fa-check"></i> Softaculous Auto Installer</li>
+                        <li><i class="fas fa-check"></i> Unlimited Email</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_ssl">Free SSL Certificate</span></li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+                <div class="pricing-card featured scroll-reveal">
+                    <span class="featured-badge" data-lang="featured_popular">Paling Populer</span>
+                    <div class="pricing-header"><h3 data-lang="business_title">Business Pro</h3><p data-lang="business_desc">Untuk medium enterprise</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">147.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>13 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>3 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>2 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> Gratis Domain</li>
+                        <li><i class="fas fa-check"></i> Add-on Domain</li>
+                        <li><i class="fas fa-check"></i> LiteSpeed Enterprise</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_backup">Daily Backup</span></li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3 data-lang="advanced_title">Advanced Pro</h3><p data-lang="advanced_desc">Untuk enterprise applications</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">343.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>35 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>5 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>4 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> Unlimited Addon Domains</li>
+                        <li><i class="fas fa-check"></i> Unlimited Subdomains</li>
+                        <li><i class="fas fa-check"></i> Unlimited Database</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+            </div>
+            <div id="vps-pricing" class="pricing-grid" style="display: none;">
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3 data-lang="vps_pro1_title">VPS Pro + 1</h3><p data-lang="vps_pro1_desc">Entry level VPS</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">140.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>1 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>2 CPU</strong> Core</li>
+                        <li><i class="fas fa-check"></i> <strong>30 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_root">Full Root Access</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_os">Pilihan OS & Apps</span></li>
+                        <li><i class="fas fa-check"></i> Dedicated IPv4 & IPv6</li>
+                        <li><i class="fas fa-check"></i> Free Webuzo Premium</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+                <div class="pricing-card featured scroll-reveal">
+                    <span class="featured-badge" data-lang="featured_value">Best Value</span>
+                    <div class="pricing-header"><h3 data-lang="vps_shiny_title">Cloud VPS - Shiny</h3><p data-lang="vps_shiny_desc">Performa tinggi</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">600.600</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>4 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>4 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>100 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> cPanel / Plesk / DirectAdmin</li>
+                        <li><i class="fas fa-check"></i> 1 Dedicated IP</li>
+                        <li><i class="fas fa-check"></i> NVMe Storage</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3 data-lang="vps_pro5_title">VPS Pro + 5</h3><p data-lang="vps_pro5_desc">Enterprise grade</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">1.960.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>16 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>16 CPU</strong> Core</li>
+                        <li><i class="fas fa-check"></i> <strong>200 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
+                        <li><i class="fas fa-check"></i> HPE Nimble Storage</li>
+                        <li><i class="fas fa-check"></i> High Security Level</li>
+                        <li><i class="fas fa-check"></i> Upgradable Anytime</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+            </div>
+            <div id="dedicated-pricing" class="pricing-grid" style="display: none;">
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3 data-lang="dedicated_160_title">Dedicated 160</h3><p data-lang="dedicated_160_desc">Starter dedicated</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">1.118.600</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>4 CPU</strong> Core</li>
+                        <li><i class="fas fa-check"></i> <strong>8 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>160 GB</strong> NVMe SSD</li>
+                        <li><i class="fas fa-check"></i> <strong>4 TB</strong> Data Transfer</li>
+                        <li><i class="fas fa-check"></i> Unlimited Hosted Domains</li>
+                        <li><i class="fas fa-check"></i> 1 Dedicated IP</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_root">Full Root Access</span></li>
+                        <li><i class="fas fa-check"></i> Indonesia Data Center</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+                <div class="pricing-card featured scroll-reveal">
+                    <span class="featured-badge" data-lang="featured_enterprise">Enterprise</span>
+                    <div class="pricing-header"><h3 data-lang="dedicated_1_title">Dedicated Server 1</h3><p data-lang="dedicated_1_desc">High performance</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">3.640.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>Quad Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>16 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>2000 GB</strong> Storage</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_transfer">Unlimited Transfer</span></li>
+                        <li><i class="fas fa-check"></i> Unlimited Hosted Domains</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_access">Full Access</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_tier4">Tier 4 Data Center</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_monitoring">24/7 Monitoring</span></li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+                <div class="pricing-card scroll-reveal">
+                    <div class="pricing-header"><h3 data-lang="dedicated_8_title">Dedicated Server 8</h3><p data-lang="dedicated_8_desc">Maximum power</p></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">14.000.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <strong>High-End</strong> Processor</li>
+                        <li><i class="fas fa-check"></i> <strong>64+ GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>Large</strong> Storage</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_transfer">Unlimited Transfer</span></li>
+                        <li><i class="fas fa-check"></i> Custom Configuration</li>
+                        <li><i class="fas fa-check"></i> ISO 9001 & 27001</li>
+                        <li><i class="fas fa-check"></i> DDoS Protection</li>
+                        <li><i class="fas fa-check"></i> Dedicated Support Team</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOSTING TABLE -->
+    <section class="hosting-section" id="hosting">
+        <div class="hosting-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" data-lang="hosting_label">Perbandingan Lengkap</span>
+                <h2 data-lang="hosting_title">Semua Paket Cloud Hosting</h2>
+                <p data-lang="hosting_desc">Pilih paket yang sesuai dengan kebutuhan bisnis Anda.</p>
+            </div>
+            <div class="hosting-table-wrapper scroll-reveal">
+                <table class="hosting-table">
+                    <thead>
+                        <tr>
+                            <th data-lang="feature_label">Fitur</th>
+                            <th data-lang="starter_title">Starter Pro</th>
+                            <th data-lang="basic_title">Basic Pro</th>
+                            <th data-lang="entrepreneur_title">Entrepreneur Pro</th>
+                            <th data-lang="business_title">Business Pro</th>
+                            <th data-lang="elite_title">Elite Pro</th>
+                            <th data-lang="advanced_title">Advanced Pro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="plan-name" data-lang="feature_label">Harga <span data-lang="price_month">/bulan</span></td><td class="plan-price">Rp 21.000</td><td class="plan-price">Rp 42.000</td><td class="plan-price">Rp 70.000</td><td class="plan-price">Rp 147.000</td><td class="plan-price">Rp 287.000</td><td class="plan-price">Rp 343.000</td></tr>
+                        <tr><td class="plan-name">Storage SSD</td><td>1 GB</td><td>3 GB</td><td>7 GB</td><td>13 GB</td><td>25 GB</td><td>35 GB</td></tr>
+                        <tr><td class="plan-name">CPU Core</td><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                        <tr><td class="plan-name">RAM</td><td>512 MB</td><td>1 GB</td><td>2 GB</td><td>2 GB</td><td>3 GB</td><td>4 GB</td></tr>
+                        <tr><td class="plan-name" data-lang="vps_bandwidth">Bandwidth</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td></tr>
+                        <tr><td class="plan-name">Addon Domain</td><td>-</td><td>-</td><td>-</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td class="plan-name">Gratis Domain</td><td>-</td><td>-</td><td>-</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td class="plan-name">SSL Certificate</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td class="plan-name" data-lang="feature_backup">Daily Backup</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                        <tr><td class="plan-name">LiteSpeed</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label" data-lang="features_label">Mengapa Oqline</span>
+                <h2 data-lang="features_title">Dibangun untuk Bisnis</h2>
+                <p data-lang="features_desc">Platform terbaik yang sudah dipercaya lebih dari 600.000 pengguna di seluruh Indonesia.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-award"></i></div>
+                    <h3 data-lang="feat_platform_title">Platform Terbaik</h3>
+                    <p data-lang="feat_platform_desc">Layanan dipercaya 600K+ pengguna dengan jaminan SLA 99.5% untuk mendukung bisnis Anda.</p>
+                </div>
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                    <h3 data-lang="feat_price_title">Harga Kompetitif</h3>
+                    <p data-lang="feat_price_desc">Harga terbaik dengan markup yang transparan untuk kualitas layanan enterprise.</p>
+                </div>
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <h3 data-lang="feat_support_title">Support 24/7</h3>
+                    <p data-lang="feat_support_desc">Tim Support bersertifikasi internasional siap membantu setiap waktu.</p>
+                </div>
+                <div class="feature-item scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3 data-lang="feat_privacy_title">Privasi & Keamanan</h3>
+                    <p data-lang="feat_privacy_desc">Jaminan dan perlindungan privasi data dengan teknologi terbaru dan terbaik.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-container">
+            <h2 data-lang="cta_title">Siap Memulai?</h2>
+            <p data-lang="cta_desc">Dalam waktu 3 menit, Anda akan mendapatkan semua layanan dengan cepat. Tidak ada kewajiban untuk upgrade, downgrade, atau cancel setiap waktu.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="padding: 18px 40px; font-size: 16px;" data-lang="cta_cloud">Buat Private Cloud <i class="fas fa-arrow-right"></i></a>
+                <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="padding: 18px 40px; font-size: 16px; color: white; border-color: rgba(255,255,255,0.3);" data-lang="cta_sales">Hubungi Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="footer-logo-link"><img src="logo-oqline.png" alt="Oqline Logo"></a>
+                <p data-lang="footer_desc">Platform cloud infrastructure terdepan di Indonesia. Menyediakan layanan Cloud Hosting, VPS, Dedicated Server, dan solusi enterprise dengan teknologi terkini.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/oqlineidn?igsh=dWx5bnhzMDRhMmw3" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.threads.com/@oqlineidn" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
+                    <a href="https://wa.me/6289652435067" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <div class="footer-contact">
+                    <h4 data-lang="footer_contact">Informasi Kontak</h4>
+                    <dl>
+                        <dt data-lang="footer_email">Email</dt>
+                        <dd><a href="mailto:astriainternasional@gmail.com">astriainternasional@gmail.com</a></dd>
+                        <dt data-lang="footer_wa">WhatsApp</dt>
+                        <dd><a href="https://wa.me/6289652435067" target="_blank">+62 896-5243-5067</a></dd>
+                        <dt data-lang="footer_address">Alamat</dt>
+                        <dd data-lang="footer_address_text">Gedung Puskopal Lt. 2, Komplek TNI AL Jl. Tabah Raya No.19, Kelapa Gading, Jakarta Utara.</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Footer columns: wrapped in a div for mobile 2-col layout -->
+            <div class="footer-column">
+                <h4 data-lang="footer_products">Produk</h4>
+                <ul>
+                    <li><a href="#hosting">Cloud Hosting</a></li>
+                    <li><a href="#vps" data-lang="nav_vps">Cloud VPS</a></li>
+                    <li><a href="#pricing">Dedicated Server</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">GPU Server</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank">Domain</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 data-lang="footer_solutions">Solusi</h4>
+                <ul>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_startup">Startup</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_enterprise">Enterprise</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_ecommerce">E-commerce</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_fintech">Fintech</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_gameserver">Game Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 data-lang="footer_company">Perusahaan</h4>
+                <ul>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_about">Tentang Kami</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_blog">Blog</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_career">Karir</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_partner">Partner</a></li>
+                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_contact_link">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-lang="footer_copyright">&copy; 2026 Oqline. All rights reserved.</p>
+            <p data-lang="footer_member">Member of Astria</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Pricing tabs
+        function switchTab(tab, e) {
+            document.getElementById('cloud-pricing').style.display = 'none';
+            document.getElementById('vps-pricing').style.display = 'none';
+            document.getElementById('dedicated-pricing').style.display = 'none';
+            document.getElementById(tab + '-pricing').style.display = 'grid';
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (e && e.target) e.target.classList.add('active');
+        }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Mobile nav
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        function openMobileNav() {
+            mobileNav.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => mobileNav.classList.add('open'), 10);
+        }
+        function closeMobileNav() {
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(() => { mobileNav.style.display = 'none'; }, 300);
+        }
+
+        mobileMenuBtn.addEventListener('click', openMobileNav);
+        mobileNavClose.addEventListener('click', closeMobileNav);
+        mobileNav.addEventListener('click', function(e) {
+            if (e.target === mobileNav) closeMobileNav();
+        });
+
+        // Close mobile nav on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileNav);
+        });
+    </script>
+
+    <script>
+    // Language data
+    const langData = {
+        "id": {
+            "nav_products": "Produk",
+            "nav_jasa": "Jasa Website",
+            "nav_pricing": "Harga",
+            "nav_vps": "Cloud VPS",
+            "nav_hosting": "Hosting",
+            "nav_features": "Fitur",
+            "nav_login": "Masuk",
+            "nav_start": "Mulai Gratis",
+            "hero_title": "Infrastruktur Cloud <span>Terbaik</span> Indonesia",
+            "hero_desc": "Platform cloud terdepan dengan 6 data center, 436K+ pelanggan, dan jaminan SLA 99.5%. Deploy server Anda dalam 60 detik dengan teknologi NVMe dan prosesor AMD EPYC.",
+            "hero_price_btn": "Lihat Harga",
+            "hero_demo_btn": "Demo",
+            "stat_customers": "Pelanggan Aktif",
+            "stat_dc": "Data Center",
+            "stat_sla": "SLA Guarantee",
+            "stat_support": "Support Certified",
+            "dashboard_title": "Dashboard Oqline",
+            "dashboard_status": "Online",
+            "products_label": "Solusi Lengkap",
+            "products_title": "Produk & Layanan",
+            "products_desc": "Berbagai solusi cloud yang dirancang untuk memenuhi kebutuhan bisnis Anda, dari startup hingga enterprise.",
+            "product_hosting_title": "Cloud Hosting",
+            "product_hosting_desc": "Cloud Hosting dengan teknologi NVMe untuk performa tinggi. Dilengkapi cPanel, LiteSpeed Enterprise, dan Softaculous.",
+            "product_vps_title": "Cloud VPS",
+            "product_vps_desc": "Server Cloud VPS dengan pembayaran Pay as You Grow. Prosesor AMD EPYC & Intel dengan storage NVMe.",
+            "product_dedicated_title": "Dedicated Server",
+            "product_dedicated_desc": "Server dedicated dengan performa maksimal. Data Center Tier 4, ISO 9001 & ISO 27001 certified.",
+            "product_domain_title": "Domain",
+            "product_domain_desc": "Domain terlengkap dengan proses cepat dan praktis. Lindungi brand Anda sekarang juga.",
+            "product_gpu_title": "GPU Server",
+            "product_gpu_desc": "GPU Power dengan 4x NVIDIA Tesla V100 untuk AI, machine learning, dan rendering.",
+            "product_managed_title": "Managed Services",
+            "product_managed_desc": "Layanan managed VPS dengan WHM cPanel. Fokus pada bisnis Anda, biarkan kami mengelola server.",
+            "feature_unlimited": "Unlimited Bandwidth",
+            "feature_litespeed": "LiteSpeed Web Server",
+            "feature_backup": "Daily Backup",
+            "feature_ssl": "Free SSL Certificate",
+            "feature_root": "Full Root Access",
+            "feature_os": "Pilihan OS & Apps",
+            "feature_api": "API & Control Panel",
+            "feature_access": "Full Access",
+            "feature_transfer": "Unlimited Transfer",
+            "feature_tier4": "Tier 4 Data Center",
+            "feature_monitoring": "24/7 Monitoring",
+            "feature_domain_com": ".com mulai Rp 160.000/tahun",
+            "feature_domain_id": ".id mulai Rp 210.000/tahun",
+            "feature_dns": "DNS Management",
+            "feature_privacy": "Domain Privacy",
+            "feature_tesla": "4x Tesla V100",
+            "feature_xeon": "4x Xeon Platinum 8176",
+            "feature_hpc": "High Performance Computing",
+            "feature_ai": "AI & ML Ready",
+            "feature_whm": "WHM & cPanel",
+            "feature_uptime": "99.9% Uptime",
+            "feature_security": "Security Hardening",
+            "learn_more": "Pelajari Lebih Lanjut",
+            "jasa_label": "Jasa Terbaru",
+            "jasa_title": "Jasa Pembuatan Website & Aplikasi",
+            "jasa_desc": "Solusi digital lengkap untuk bisnis Anda — dari company profile hingga aplikasi custom enterprise.",
+            "jasa_company_title": "Company Profile",
+            "jasa_company_desc": "Website profesional untuk meningkatkan trust, branding, dan closing client.",
+            "jasa_ecommerce_title": "Toko Online",
+            "jasa_ecommerce_desc": "Website jualan online otomatis + sistem lengkap seperti marketplace pribadi.",
+            "jasa_custom_title": "Aplikasi Custom",
+            "jasa_custom_desc": "Sistem/aplikasi yang dibuat sesuai kebutuhan bisnis Anda.",
+            "jasa_basic": "Basic",
+            "jasa_business": "Business",
+            "jasa_enterprise": "Enterprise",
+            "jasa_order": "Pesan Sekarang",
+            "jasa_consult": "Konsultasi Gratis",
+            "jasa_company_price": "Rp 4.999.000",
+            "jasa_ecommerce_price": "Rp 11.999.000",
+            "vps_label": "Cloud VPS eXtreme",
+            "vps_title": "Pilih Performa Server Anda",
+            "vps_desc": "Layanan server Cloud VPS dengan pembayaran Pay as You Grow yang transparan & berkualitas.",
+            "vps_standard": "Standard",
+            "vps_basic_title": "Basic Standard",
+            "vps_basic_desc": "Performa andal untuk website dan aplikasi skala kecil hingga menengah.",
+            "vps_intel_badge": "4-5x Faster",
+            "vps_intel_title": "Intel eXtreme",
+            "vps_intel_desc": "Intel eXtreme hadir dengan performa tinggi & kecepatan 4-5x lebih cepat.",
+            "vps_amd_badge": "6-8x Faster",
+            "vps_amd_title": "AMD eXtreme",
+            "vps_amd_desc": "Komputasi 6-8x lebih cepat dengan CPU AMD EPYC 7542.",
+            "vps_deploy": "Deploy Sekarang",
+            "vps_cpu": "CPU",
+            "vps_ram": "RAM",
+            "vps_storage": "Storage",
+            "vps_bandwidth": "Bandwidth",
+            "vps_scalable": "Scalable",
+            "vps_nvme": "NVMe SSD",
+            "vps_unlimited": "Unlimited",
+            "vps_premium": "Unlimited Premium",
+            "vps_intel_cpu": "Intel High Performance",
+            "vps_amd_cpu": "AMD EPYC 7542",
+            "pricing_label": "Harga Transparan",
+            "pricing_title": "Pilih Paket Cloud Hosting",
+            "pricing_desc": "Harga kompetitif dengan kualitas enterprise. Semua harga sudah termasuk pajak.",
+            "tab_cloud": "Cloud Hosting",
+            "tab_vps": "Cloud VPS",
+            "tab_dedicated": "Dedicated",
+            "starter_title": "Starter Pro",
+            "starter_desc": "Untuk personal blog & testing",
+            "basic_title": "Basic Pro",
+            "basic_desc": "Untuk personal & small business",
+            "entrepreneur_title": "Entrepreneur Pro",
+            "entrepreneur_desc": "Untuk growing business",
+            "business_title": "Business Pro",
+            "business_desc": "Untuk medium enterprise",
+            "elite_title": "Elite Pro",
+            "elite_desc": "Untuk high traffic sites",
+            "advanced_title": "Advanced Pro",
+            "advanced_desc": "Untuk enterprise applications",
+            "vps_pro1_title": "VPS Pro + 1",
+            "vps_pro1_desc": "Entry level VPS",
+            "vps_shiny_title": "Cloud VPS - Shiny",
+            "vps_shiny_desc": "Performa tinggi",
+            "vps_pro5_title": "VPS Pro + 5",
+            "vps_pro5_desc": "Enterprise grade",
+            "dedicated_160_title": "Dedicated 160",
+            "dedicated_160_desc": "Starter dedicated",
+            "dedicated_1_title": "Dedicated Server 1",
+            "dedicated_1_desc": "High performance",
+            "dedicated_8_title": "Dedicated Server 8",
+            "dedicated_8_desc": "Maximum power",
+            "price_month": "/bulan",
+            "price_hour": "/jam",
+            "per_month": "- /bulan",
+            "select_package": "Pilih Paket",
+            "featured_popular": "Paling Populer",
+            "featured_value": "Best Value",
+            "featured_enterprise": "Enterprise",
+            "hosting_label": "Perbandingan Lengkap",
+            "hosting_title": "Semua Paket Cloud Hosting",
+            "hosting_desc": "Pilih paket yang sesuai dengan kebutuhan bisnis Anda.",
+            "feature_label": "Fitur",
+            "features_label": "Mengapa Oqline",
+            "features_title": "Dibangun untuk Bisnis",
+            "features_desc": "Platform terbaik yang sudah dipercaya lebih dari 600.000 pengguna di seluruh Indonesia.",
+            "feat_platform_title": "Platform Terbaik",
+            "feat_platform_desc": "Layanan dipercaya 600K+ pengguna dengan jaminan SLA 99.5% untuk mendukung bisnis Anda.",
+            "feat_price_title": "Harga Kompetitif",
+            "feat_price_desc": "Harga terbaik dengan markup yang transparan untuk kualitas layanan enterprise.",
+            "feat_support_title": "Support 24/7",
+            "feat_support_desc": "Tim Support bersertifikasi internasional siap membantu setiap waktu.",
+            "feat_privacy_title": "Privasi & Keamanan",
+            "feat_privacy_desc": "Jaminan dan perlindungan privasi data dengan teknologi terbaru dan terbaik.",
+            "cta_title": "Siap Memulai?",
+            "cta_desc": "Dalam waktu 3 menit, Anda akan mendapatkan semua layanan dengan cepat. Tidak ada kewajiban untuk upgrade, downgrade, atau cancel setiap waktu.",
+            "cta_cloud": "Buat Private Cloud",
+            "cta_sales": "Hubungi Sales",
+            "footer_desc": "Platform cloud infrastructure terdepan di Indonesia. Menyediakan layanan Cloud Hosting, VPS, Dedicated Server, dan solusi enterprise dengan teknologi terkini.",
+            "footer_contact": "Informasi Kontak",
+            "footer_email": "Email",
+            "footer_wa": "WhatsApp",
+            "footer_address": "Alamat",
+            "footer_address_text": "Gedung Puskopal Lt. 2, Komplek TNI AL Jl. Tabah Raya No.19, Kelapa Gading, Jakarta Utara.",
+            "footer_products": "Produk",
+            "footer_solutions": "Solusi",
+            "footer_company": "Perusahaan",
+            "footer_about": "Tentang Kami",
+            "footer_blog": "Blog",
+            "footer_career": "Karir",
+            "footer_partner": "Partner",
+            "footer_contact_link": "Kontak",
+            "footer_startup": "Startup",
+            "footer_enterprise": "Enterprise",
+            "footer_ecommerce": "E-commerce",
+            "footer_fintech": "Fintech",
+            "footer_gameserver": "Game Server",
+            "footer_copyright": "© 2026 Oqline. All rights reserved.",
+            "footer_member": "Member of Astria",
+            "promo_badge": "PROMO",
+            "website_tag": "Website",
+            "ecommerce_tag": "E-Commerce",
+            "custom_tag": "Custom App",
+            "hour": "/jam",
+            "server_jakarta": "Jakarta-DC1",
+            "server_singapore": "Singapore-DC2",
+            "server_surabaya": "Surabaya-DC3",
+            "server_bandung": "Bandung-DC4",
+            "server_jakarta_spec": "Intel eXtreme - 2 CPU - 4GB RAM",
+            "server_singapore_spec": "AMD eXtreme - 4 CPU - 8GB RAM",
+            "server_surabaya_spec": "Basic Standard - 1 CPU - 2GB RAM",
+            "server_bandung_spec": "GPU Power - 4x Tesla V100"
+        },
+        "en": {
+            "nav_products": "Products",
+            "nav_jasa": "Web Services",
+            "nav_pricing": "Pricing",
+            "nav_vps": "Cloud VPS",
+            "nav_hosting": "Hosting",
+            "nav_features": "Features",
+            "nav_login": "Login",
+            "nav_start": "Start Free",
+            "hero_title": "Indonesia's <span>Best</span> Cloud Infrastructure",
+            "hero_desc": "Leading cloud platform with 6 data centers, 436K+ customers, and 99.5% SLA guarantee. Deploy your server in 60 seconds with NVMe technology and AMD EPYC processors.",
+            "hero_price_btn": "View Pricing",
+            "hero_demo_btn": "Demo",
+            "stat_customers": "Active Customers",
+            "stat_dc": "Data Centers",
+            "stat_sla": "SLA Guarantee",
+            "stat_support": "Certified Support",
+            "dashboard_title": "Oqline Dashboard",
+            "dashboard_status": "Online",
+            "products_label": "Complete Solutions",
+            "products_title": "Products & Services",
+            "products_desc": "Various cloud solutions designed to meet your business needs, from startup to enterprise.",
+            "product_hosting_title": "Cloud Hosting",
+            "product_hosting_desc": "Cloud Hosting with NVMe technology for high performance. Equipped with cPanel, LiteSpeed Enterprise, and Softaculous.",
+            "product_vps_title": "Cloud VPS",
+            "product_vps_desc": "Cloud VPS server with Pay as You Grow billing. AMD EPYC & Intel processors with NVMe storage.",
+            "product_dedicated_title": "Dedicated Server",
+            "product_dedicated_desc": "Dedicated server with maximum performance. Tier 4 Data Center, ISO 9001 & ISO 27001 certified.",
+            "product_domain_title": "Domain",
+            "product_domain_desc": "Most complete domain with fast and practical process. Protect your brand now.",
+            "product_gpu_title": "GPU Server",
+            "product_gpu_desc": "GPU Power with 4x NVIDIA Tesla V100 for AI, machine learning, and rendering.",
+            "product_managed_title": "Managed Services",
+            "product_managed_desc": "Managed VPS service with WHM cPanel. Focus on your business, let us manage the server.",
+            "feature_unlimited": "Unlimited Bandwidth",
+            "feature_litespeed": "LiteSpeed Web Server",
+            "feature_backup": "Daily Backup",
+            "feature_ssl": "Free SSL Certificate",
+            "feature_root": "Full Root Access",
+            "feature_os": "OS & Apps Selection",
+            "feature_api": "API & Control Panel",
+            "feature_access": "Full Access",
+            "feature_transfer": "Unlimited Transfer",
+            "feature_tier4": "Tier 4 Data Center",
+            "feature_monitoring": "24/7 Monitoring",
+            "feature_domain_com": ".com from Rp 160.000/year",
+            "feature_domain_id": ".id from Rp 210.000/year",
+            "feature_dns": "DNS Management",
+            "feature_privacy": "Domain Privacy",
+            "feature_tesla": "4x Tesla V100",
+            "feature_xeon": "4x Xeon Platinum 8176",
+            "feature_hpc": "High Performance Computing",
+            "feature_ai": "AI & ML Ready",
+            "feature_whm": "WHM & cPanel",
+            "feature_uptime": "99.9% Uptime",
+            "feature_security": "Security Hardening",
+            "learn_more": "Learn More",
+            "jasa_label": "New Services",
+            "jasa_title": "Website & Application Development",
+            "jasa_desc": "Complete digital solutions for your business — from company profile to custom enterprise applications.",
+            "jasa_company_title": "Company Profile",
+            "jasa_company_desc": "Professional website to increase trust, branding, and client closing.",
+            "jasa_ecommerce_title": "Online Store",
+            "jasa_ecommerce_desc": "Automatic online selling website + complete system like a private marketplace.",
+            "jasa_custom_title": "Custom Application",
+            "jasa_custom_desc": "System/application built according to your business needs.",
+            "jasa_basic": "Basic",
+            "jasa_business": "Business",
+            "jasa_enterprise": "Enterprise",
+            "jasa_order": "Order Now",
+            "jasa_consult": "Free Consultation",
+            "jasa_company_price": "Rp 4.999.000",
+            "jasa_ecommerce_price": "Rp 11.999.000",
+            "vps_label": "Cloud VPS eXtreme",
+            "vps_title": "Choose Your Server Performance",
+            "vps_desc": "Cloud VPS server service with transparent & quality Pay as You Grow billing.",
+            "vps_standard": "Standard",
+            "vps_basic_title": "Basic Standard",
+            "vps_basic_desc": "Reliable performance for small to medium scale websites and applications.",
+            "vps_intel_badge": "4-5x Faster",
+            "vps_intel_title": "Intel eXtreme",
+            "vps_intel_desc": "Intel eXtreme comes with high performance & 4-5x faster speed.",
+            "vps_amd_badge": "6-8x Faster",
+            "vps_amd_title": "AMD eXtreme",
+            "vps_amd_desc": "6-8x faster computing with AMD EPYC 7542 CPU.",
+            "vps_deploy": "Deploy Now",
+            "vps_cpu": "CPU",
+            "vps_ram": "RAM",
+            "vps_storage": "Storage",
+            "vps_bandwidth": "Bandwidth",
+            "vps_scalable": "Scalable",
+            "vps_nvme": "NVMe SSD",
+            "vps_unlimited": "Unlimited",
+            "vps_premium": "Unlimited Premium",
+            "vps_intel_cpu": "Intel High Performance",
+            "vps_amd_cpu": "AMD EPYC 7542",
+            "pricing_label": "Transparent Pricing",
+            "pricing_title": "Choose Cloud Hosting Package",
+            "pricing_desc": "Competitive prices with enterprise quality. All prices include tax.",
+            "tab_cloud": "Cloud Hosting",
+            "tab_vps": "Cloud VPS",
+            "tab_dedicated": "Dedicated",
+            "starter_title": "Starter Pro",
+            "starter_desc": "For personal blog & testing",
+            "basic_title": "Basic Pro",
+            "basic_desc": "For personal & small business",
+            "entrepreneur_title": "Entrepreneur Pro",
+            "entrepreneur_desc": "For growing business",
+            "business_title": "Business Pro",
+            "business_desc": "For medium enterprise",
+            "elite_title": "Elite Pro",
+            "elite_desc": "For high traffic sites",
+            "advanced_title": "Advanced Pro",
+            "advanced_desc": "For enterprise applications",
+            "vps_pro1_title": "VPS Pro + 1",
+            "vps_pro1_desc": "Entry level VPS",
+            "vps_shiny_title": "Cloud VPS - Shiny",
+            "vps_shiny_desc": "High performance",
+            "vps_pro5_title": "VPS Pro + 5",
+            "vps_pro5_desc": "Enterprise grade",
+            "dedicated_160_title": "Dedicated 160",
+            "dedicated_160_desc": "Starter dedicated",
+            "dedicated_1_title": "Dedicated Server 1",
+            "dedicated_1_desc": "High performance",
+            "dedicated_8_title": "Dedicated Server 8",
+            "dedicated_8_desc": "Maximum power",
+            "price_month": "/month",
+            "price_hour": "/hour",
+            "per_month": "- /month",
+            "select_package": "Select Package",
+            "featured_popular": "Most Popular",
+            "featured_value": "Best Value",
+            "featured_enterprise": "Enterprise",
+            "hosting_label": "Complete Comparison",
+            "hosting_title": "All Cloud Hosting Packages",
+            "hosting_desc": "Choose the package that suits your business needs.",
+            "feature_label": "Feature",
+            "features_label": "Why Oqline",
+            "features_title": "Built for Business",
+            "features_desc": "The best platform trusted by more than 600,000 users throughout Indonesia.",
+            "feat_platform_title": "Best Platform",
+            "feat_platform_desc": "Service trusted by 600K+ users with 99.5% SLA guarantee to support your business.",
+            "feat_price_title": "Competitive Pricing",
+            "feat_price_desc": "Best prices with transparent markup for enterprise quality service.",
+            "feat_support_title": "24/7 Support",
+            "feat_support_desc": "Internationally certified Support Team ready to help anytime.",
+            "feat_privacy_title": "Privacy & Security",
+            "feat_privacy_desc": "Guarantee and protection of data privacy with the latest and best technology.",
+            "cta_title": "Ready to Start?",
+            "cta_desc": "In 3 minutes, you will get all services quickly. No obligation to upgrade, downgrade, or cancel anytime.",
+            "cta_cloud": "Create Private Cloud",
+            "cta_sales": "Contact Sales",
+            "footer_desc": "Indonesia's leading cloud infrastructure platform. Providing Cloud Hosting, VPS, Dedicated Server, and enterprise solutions with the latest technology.",
+            "footer_contact": "Contact Information",
+            "footer_email": "Email",
+            "footer_wa": "WhatsApp",
+            "footer_address": "Address",
+            "footer_address_text": "Puskopal Building 2nd Floor, TNI AL Complex Jl. Tabah Raya No.19, Kelapa Gading, North Jakarta.",
+            "footer_products": "Products",
+            "footer_solutions": "Solutions",
+            "footer_company": "Company",
+            "footer_about": "About Us",
+            "footer_blog": "Blog",
+            "footer_career": "Career",
+            "footer_partner": "Partner",
+            "footer_contact_link": "Contact",
+            "footer_startup": "Startup",
+            "footer_enterprise": "Enterprise",
+            "footer_ecommerce": "E-commerce",
+            "footer_fintech": "Fintech",
+            "footer_gameserver": "Game Server",
+            "footer_copyright": "© 2026 Oqline. All rights reserved.",
+            "footer_member": "Member of Astria",
+            "promo_badge": "PROMO",
+            "website_tag": "Website",
+            "ecommerce_tag": "E-Commerce",
+            "custom_tag": "Custom App",
+            "hour": "/hour",
+            "server_jakarta": "Jakarta-DC1",
+            "server_singapore": "Singapore-DC2",
+            "server_surabaya": "Surabaya-DC3",
+            "server_bandung": "Bandung-DC4",
+            "server_jakarta_spec": "Intel eXtreme - 2 CPU - 4GB RAM",
+            "server_singapore_spec": "AMD eXtreme - 4 CPU - 8GB RAM",
+            "server_surabaya_spec": "Basic Standard - 1 CPU - 2GB RAM",
+            "server_bandung_spec": "GPU Power - 4x Tesla V100"
+        }
+    };
+
+    let currentLang = localStorage.getItem('oqline-lang') || 'id';
+
+    function switchLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('oqline-lang', lang);
+        applyLanguage();
+        updateLangButtons();
+    }
+
+    function applyLanguage() {
+        const data = langData[currentLang];
+        if (!data) return;
+
+        // Update all elements with data-lang attribute
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            const key = el.getAttribute('data-lang');
+            if (data[key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = data[key];
+                } else {
+                    el.innerHTML = data[key];
+                }
+            }
+        });
+
+        // Update HTML lang attribute
+        document.documentElement.lang = currentLang === 'id' ? 'id' : 'en';
+
+        // Update title
+        document.title = currentLang === 'id' ? 'Oqline | Cloud Infrastructure Terbaik Indonesia' : "Oqline | Indonesia's Best Cloud Infrastructure";
+    }
+
+    function updateLangButtons() {
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === currentLang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+        applyLanguage();
+        updateLangButtons();
+    });
+    </script>
+
+</body>
+</html>
