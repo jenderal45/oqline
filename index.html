@@ -30,13 +30,14 @@
         .lang-btn:hover:not(.active) { border-color: var(--oracle-navy); color: var(--oracle-navy); }
         @media (max-width: 768px) { .lang-switcher { margin-left: 0; margin-top: 12px; justify-content: center; } }
 
-
         /* ===== NAVBAR ===== */
         .navbar { background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
         .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
         .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
-        .logo { max-width: 180px; height: auto; display: block; }
+        .logo { max-width: 180px; height: auto; display: block; text-decoration: none; }
         .logo img { width: 100%; height: auto; display: block; }
+        .logo-text { font-size: 28px; font-weight: 800; color: var(--oracle-navy); letter-spacing: -1px; }
+        .logo-text span { color: var(--oracle-red); }
         .nav-links { display: flex; gap: 40px; list-style: none; }
         .nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 15px; transition: color 0.3s; position: relative; }
         .nav-links a:hover { color: var(--oracle-red); }
@@ -50,6 +51,8 @@
         .btn-outline:hover { border-color: var(--oracle-red); color: var(--oracle-red); }
         .btn-white { background: white; color: var(--oracle-navy); }
         .btn-white:hover { background: #f0f0f0; }
+        .btn-navy { background: var(--oracle-navy); color: white; }
+        .btn-navy:hover { background: #1B3A4B; }
         .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--oracle-navy); padding: 8px; }
 
         /* Mobile Nav Drawer */
@@ -137,7 +140,7 @@
         .pricing-features li i { color: var(--oracle-red); width: 20px; }
         .pricing-features li strong { color: var(--text-primary); font-weight: 600; }
 
-        /* ===== VPS ===== */
+        /* ===== VPS SECTIONS ===== */
         .vps-section { padding: 120px 40px; background: var(--oracle-navy); color: white; position: relative; overflow: hidden; }
         .vps-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,119,200,0.15) 0%, transparent 70%); }
         .vps-container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
@@ -194,7 +197,6 @@
         .footer { background: var(--oracle-dark); color: white; padding: 80px 40px 40px; }
         .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
         .footer-brand p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; }
-        /* Footer logo diperkeicl */
         .footer-brand .footer-logo-link img { max-width: 100px; width: 100%; height: auto; display: block; margin-bottom: 20px; }
         .footer-social { display: flex; gap: 16px; margin-bottom: 24px; }
         .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: all 0.3s; }
@@ -213,7 +215,7 @@
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
         .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 14px; }
 
-        /* ===== NEW SERVICES ===== */
+        /* ===== NEW SERVICES / JASA ===== */
         .new-services { padding: 120px 40px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
         .new-services-container { max-width: 1400px; margin: 0 auto; }
         .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -227,8 +229,6 @@
         .service-features li { padding: 10px 0; color: var(--text-secondary); font-size: 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f0f0; }
         .service-features li:last-child { border-bottom: none; }
         .service-features li i { color: var(--oracle-red); font-size: 12px; }
-
-        /* ===== JASA SECTION ===== */
         .service-badge-promo { position: absolute; top: 16px; right: -32px; background: linear-gradient(135deg, #E31837, #FF6B4A); color: white; padding: 6px 40px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transform: rotate(45deg); box-shadow: 0 4px 15px rgba(227,24,55,0.4); z-index: 10; }
         .service-icon-jasa { width: 64px; height: 64px; background: linear-gradient(135deg, #0D1B2A, #1B3A4B); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 28px; box-shadow: 0 8px 25px rgba(13,27,42,0.3); }
         .service-price-box { background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 12px; padding: 16px; margin: 16px 0 20px; text-align: center; border: 1px solid #e0e0e0; }
@@ -240,11 +240,49 @@
         .tier-price { font-size: 14px; font-weight: 700; color: var(--oracle-navy); }
         .featured-jasa { border: 2px solid var(--oracle-red) !important; transform: scale(1.03); }
         .featured-jasa:hover { transform: scale(1.03) translateY(-12px) !important; }
-        #jasa-website .service-card { background: rgba(255,255,255,0.98); }
-        #jasa-website .service-card h3 { color: var(--oracle-navy); }
-        #jasa-website .service-card p { color: var(--text-secondary); }
-        #jasa-website .service-features li { color: var(--text-secondary); border-bottom-color: #f0f0f0; }
-        #jasa-website .service-features li i { color: var(--oracle-red); }
+
+        /* ===== COMPREHENSIVE PRICING TABLES ===== */
+        .pricing-tables { padding: 80px 40px; background: white; }
+        .pricing-tables-container { max-width: 1400px; margin: 0 auto; }
+        .pricing-table-wrapper { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.06); overflow-x: auto; margin-bottom: 60px; border: 1px solid var(--border-color); }
+        .pricing-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        .pricing-table th { background: var(--oracle-navy); color: white; padding: 20px 16px; text-align: left; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+        .pricing-table td { padding: 16px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        .pricing-table tr:hover td { background: #fafafa; }
+        .pricing-table .table-title { font-size: 24px; font-weight: 800; color: var(--oracle-navy); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .pricing-table .table-title i { color: var(--oracle-red); }
+        .pricing-table .price-highlight { font-weight: 800; color: var(--oracle-red); font-size: 15px; }
+        .pricing-table .spec-name { font-weight: 600; color: var(--oracle-navy); }
+        .pricing-table .text-muted { color: var(--text-secondary); font-size: 13px; }
+        .pricing-table .badge-custom { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; background: var(--oracle-red); color: white; }
+
+        /* ===== DOMAIN SECTION ===== */
+        .domain-section { padding: 80px 40px; background: var(--oracle-light); }
+        .domain-container { max-width: 1400px; margin: 0 auto; }
+        .domain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .domain-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        .domain-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 24px; color: var(--oracle-navy); display: flex; align-items: center; gap: 12px; }
+        .domain-card h3 i { color: var(--oracle-red); }
+        .domain-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+        .domain-item:last-child { border-bottom: none; }
+        .domain-name { font-weight: 600; color: var(--oracle-navy); font-size: 16px; }
+        .domain-price { font-weight: 700; color: var(--oracle-red); font-size: 15px; }
+        .domain-price small { color: var(--text-secondary); font-weight: 400; font-size: 12px; }
+
+        /* ===== ADDONS SECTION ===== */
+        .addons-section { padding: 80px 40px; background: white; }
+        .addons-container { max-width: 1400px; margin: 0 auto; }
+        .addons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .addon-card { background: var(--oracle-light); border-radius: 20px; padding: 40px 32px; transition: all 0.4s; border: 2px solid transparent; }
+        .addon-card:hover { border-color: var(--oracle-red); transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+        .addon-icon { width: 56px; height: 56px; background: var(--gradient-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-bottom: 24px; }
+        .addon-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--oracle-navy); }
+        .addon-card p { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; line-height: 1.7; }
+        .addon-price { font-size: 24px; font-weight: 800; color: var(--oracle-red); margin-bottom: 8px; }
+        .addon-price small { font-size: 13px; color: var(--text-secondary); font-weight: 400; }
+        .addon-features { list-style: none; }
+        .addon-features li { padding: 6px 0; color: var(--text-secondary); font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .addon-features li i { color: var(--oracle-red); font-size: 10px; }
 
         /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -252,37 +290,27 @@
         .scroll-reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
         .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
 
-        /* ===== RESPONSIVE: TABLET ===== */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .nav-container { padding-left: 20px; padding-right: 20px; }
             .hero-container { grid-template-columns: 1fr; text-align: center; padding: 60px 20px; gap: 40px; }
             .hero-content p { margin-left: auto; margin-right: auto; }
             .hero-stats { justify-content: center; flex-wrap: wrap; gap: 24px; }
             .hero-visual { display: none; }
-            .products-grid, .pricing-grid, .vps-types, .features-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .products-grid, .pricing-grid, .vps-types, .features-grid, .services-grid, .addons-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-container { grid-template-columns: repeat(2, 1fr); gap: 40px; }
             .nav-actions { gap: 12px; }
-            .products { padding: 80px 20px; }
-            .pricing { padding: 80px 20px; }
-            .vps-section { padding: 80px 20px; }
-            .features { padding: 80px 20px; }
-            .hosting-section { padding: 80px 20px; }
-            .new-services { padding: 80px 20px; }
-            .cta { padding: 80px 20px; }
-            .footer { padding: 60px 20px 40px; }
+            .domain-grid { grid-template-columns: 1fr; }
+            .products, .pricing, .vps-section, .features, .hosting-section, .new-services, .cta, .pricing-tables, .domain-section, .addons-section { padding: 80px 20px; }
         }
 
-        /* ===== RESPONSIVE: MOBILE ===== */
         @media (max-width: 768px) {
-            /* Nav */
             .nav-links { display: none; }
             .nav-actions { display: none; }
             .mobile-menu-btn { display: block; }
             .mobile-nav { display: block; }
             .nav-container { padding: 0 16px; }
             .logo { max-width: 130px; }
-
-            /* Hero */
             .hero { padding-top: 72px; min-height: auto; padding-bottom: 60px; }
             .hero-container { padding: 40px 16px; gap: 32px; }
             .hero-content h1 { font-size: 34px; letter-spacing: -1px; margin-bottom: 16px; }
@@ -293,19 +321,13 @@
             .stat-item { text-align: center; min-width: 80px; }
             .stat-item h3 { font-size: 26px; }
             .stat-item p { font-size: 12px; }
-
-            /* Section headers */
             .section-header { margin-bottom: 40px; padding: 0 4px; }
             .section-header h2 { font-size: 28px; margin-bottom: 12px; }
             .section-header p { font-size: 15px; }
-
-            /* Products */
             .products { padding: 60px 16px; }
             .products-grid { grid-template-columns: 1fr; gap: 20px; }
             .product-card { padding: 28px 24px; }
             .product-card h3 { font-size: 19px; }
-
-            /* Pricing */
             .pricing { padding: 60px 16px; }
             .pricing-tabs { flex-wrap: wrap; width: 100%; gap: 6px; padding: 6px; }
             .tab-btn { padding: 10px 16px; font-size: 13px; flex: 1; text-align: center; }
@@ -314,49 +336,38 @@
             .pricing-card.featured { transform: scale(1); }
             .pricing-card.featured:hover { transform: translateY(-8px); }
             .pricing-price .amount { font-size: 44px; }
-
-            /* VPS */
             .vps-section { padding: 60px 16px; }
             .vps-types { grid-template-columns: 1fr; gap: 20px; margin-top: 40px; }
             .vps-type-card { padding: 28px 24px; }
-
-            /* Features */
             .features { padding: 60px 16px; }
             .features-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
             .feature-item { padding: 24px 16px; }
             .feature-icon { width: 56px; height: 56px; font-size: 22px; border-radius: 14px; }
             .feature-item h3 { font-size: 15px; }
             .feature-item p { font-size: 13px; }
-
-            /* Hosting table */
             .hosting-section { padding: 60px 16px; }
             .hosting-table-wrapper { border-radius: 12px; }
             .hosting-table th, .hosting-table td { padding: 14px 12px; font-size: 13px; }
-
-            /* Jasa/Services */
             .new-services { padding: 60px 16px; }
             .services-grid { grid-template-columns: 1fr; gap: 20px; }
             .service-card { padding: 32px 24px; }
             .featured-jasa { transform: scale(1) !important; }
             .featured-jasa:hover { transform: translateY(-12px) !important; }
             .service-price-promo { font-size: 22px; }
-
-            /* CTA */
             .cta { padding: 60px 16px; }
             .cta h2 { font-size: 28px; }
             .cta p { font-size: 16px; }
             .cta-buttons { flex-direction: column; align-items: center; }
             .cta-buttons .btn { width: 100%; max-width: 320px; justify-content: center; padding: 16px 24px; font-size: 15px; }
-
-            /* Footer */
             .footer { padding: 50px 16px 30px; }
             .footer-container { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
             .footer-brand .footer-logo-link img { max-width: 80px; }
             .footer-bottom { flex-direction: column; gap: 10px; text-align: center; padding-top: 24px; }
             .footer-bottom p { font-size: 13px; }
-
-            /* Footer nav columns: 2 columns on mobile */
-            .footer-columns-mobile { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+            .pricing-tables { padding: 60px 16px; }
+            .addons-grid { grid-template-columns: 1fr; }
+            .domain-section { padding: 60px 16px; }
+            .domain-card { padding: 28px 24px; }
         }
 
         @media (max-width: 400px) {
@@ -365,13 +376,16 @@
             .tab-btn { padding: 10px 10px; font-size: 12px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo"><img src="logo-oqline.png" alt="Oqline Logo"></a>
+            <a href="index.html" class="logo">
+                <img src="logo-oqline.png" alt="Oqline Logo">
+            </a>
             <ul class="nav-links">
                 <li><a href="#products" data-lang="nav_products">Produk</a></li>
                 <li><a href="#jasa-website" data-lang="nav_jasa">Jasa Website</a></li>
@@ -379,6 +393,7 @@
                 <li><a href="#vps" data-lang="nav_vps">Cloud VPS</a></li>
                 <li><a href="#hosting" data-lang="nav_hosting">Hosting</a></li>
                 <li><a href="#features" data-lang="nav_features">Fitur</a></li>
+                <li><a href="customer-service.html" data-lang="nav_support">Layanan Pelanggan</a></li>
             </ul>
             <div class="nav-actions">
                 <div class="lang-switcher" id="langSwitcher">
@@ -396,16 +411,17 @@
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-drawer">
             <div class="mobile-nav-header">
-                <img src="logo-oqline.png" alt="Oqline Logo">
+                <div class="logo-text" style="font-size: 24px;">Oq<span style="color: var(--oracle-red);">line</span></div>
                 <button class="mobile-nav-close" id="mobileNavClose" aria-label="Tutup menu"><i class="fas fa-times"></i></button>
             </div>
             <ul class="mobile-nav-links">
-                <li><a href="#products" class="mobile-nav-link" data-lang="nav_products">Produk</a></li>
-                <li><a href="#jasa-website" class="mobile-nav-link" data-lang="nav_jasa">Jasa Website</a></li>
-                <li><a href="#pricing" class="mobile-nav-link" data-lang="nav_pricing">Harga</a></li>
-                <li><a href="#vps" class="mobile-nav-link" data-lang="nav_vps">Cloud VPS</a></li>
-                <li><a href="#hosting" class="mobile-nav-link" data-lang="nav_hosting">Hosting</a></li>
-                <li><a href="#features" class="mobile-nav-link" data-lang="nav_features">Fitur</a></li>
+                <li><a href="index.html#products" class="mobile-nav-link" data-lang="nav_products">Produk</a></li>
+                <li><a href="index.html#jasa-website" class="mobile-nav-link" data-lang="nav_jasa">Jasa Website</a></li>
+                <li><a href="index.html#pricing" class="mobile-nav-link" data-lang="nav_pricing">Harga</a></li>
+                <li><a href="index.html#vps" class="mobile-nav-link" data-lang="nav_vps">Cloud VPS</a></li>
+                <li><a href="index.html#hosting" class="mobile-nav-link" data-lang="nav_hosting">Hosting</a></li>
+                <li><a href="index.html#features" class="mobile-nav-link" data-lang="nav_features">Fitur</a></li>
+                <li><a href="customer-service.html" class="mobile-nav-link" data-lang="nav_support">Layanan Pelanggan</a></li>
             </ul>
             <div class="mobile-nav-actions">
                 <div class="lang-switcher" style="margin-bottom: 12px;">
@@ -471,7 +487,7 @@
                         <li><i class="fas fa-check"></i> <span data-lang="feature_backup">Daily Backup</span></li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_ssl">Free SSL Certificate</span></li>
                     </ul>
-                    <a href="#pricing" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                    <a href="#hosting" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="product-card scroll-reveal">
                     <div class="product-icon"><i class="fas fa-server"></i></div>
@@ -502,12 +518,12 @@
                     <h3 data-lang="product_domain_title">Domain</h3>
                     <p data-lang="product_domain_desc">Domain terlengkap dengan proses cepat dan praktis. Lindungi brand Anda sekarang juga.</p>
                     <ul class="product-features">
-                        <li><i class="fas fa-check"></i> <span data-lang="feature_domain_com">.com mulai Rp 160.000/tahun</span></li>
-                        <li><i class="fas fa-check"></i> <span data-lang="feature_domain_id">.id mulai Rp 210.000/tahun</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_domain_com">.com mulai Rp 240.000/tahun</span></li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_domain_id">.id mulai Rp 315.000/tahun</span></li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_dns">DNS Management</span></li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_privacy">Domain Privacy</span></li>
                     </ul>
-                    <a href="https://wa.me/6289652435067" target="_blank" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                    <a href="#domain" class="product-link" data-lang="learn_more">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="product-card scroll-reveal">
                     <div class="product-icon"><i class="fas fa-microchip"></i></div>
@@ -552,8 +568,8 @@
                     <span class="service-tag" data-lang="website_tag">Website</span>
                     <h3 data-lang="jasa_company_title">Company Profile</h3>
                     <div class="service-price-box">
-                        <div class="service-price-normal">Rp 7.500.000</div>
-                        <div class="service-price-promo" data-lang="jasa_company_price">Rp 4.999.000</div>
+                        <div class="service-price-normal">Rp 11.250.000</div>
+                        <div class="service-price-promo" data-lang="jasa_company_price">Rp 7.500.000</div>
                     </div>
                     <p data-lang="jasa_company_desc">Website profesional untuk meningkatkan trust, branding, dan closing client.</p>
                     <ul class="service-features">
@@ -580,8 +596,8 @@
                     <span class="service-tag" style="background: var(--oracle-blue);" data-lang="ecommerce_tag">E-Commerce</span>
                     <h3 data-lang="jasa_ecommerce_title">Toko Online</h3>
                     <div class="service-price-box">
-                        <div class="service-price-normal">Rp 18.000.000</div>
-                        <div class="service-price-promo" data-lang="jasa_ecommerce_price">Rp 11.999.000</div>
+                        <div class="service-price-normal">Rp 27.000.000</div>
+                        <div class="service-price-promo" data-lang="jasa_ecommerce_price">Rp 18.000.000</div>
                     </div>
                     <p data-lang="jasa_ecommerce_desc">Website jualan online otomatis + sistem lengkap seperti marketplace pribadi.</p>
                     <ul class="service-features">
@@ -607,9 +623,9 @@
                     <span class="service-tag" style="background: linear-gradient(135deg, #6B21A8, #9333EA);" data-lang="custom_tag">Custom App</span>
                     <h3 data-lang="jasa_custom_title">Aplikasi Custom</h3>
                     <div class="service-price-box">
-                        <div class="service-price-tier"><span class="tier-name">Basic</span><span class="tier-price">Rp 25.000.000</span></div>
-                        <div class="service-price-tier"><span class="tier-name">Business</span><span class="tier-price">Rp 35.000.000-</span></div>
-                        <div class="service-price-tier"><span class="tier-name">Enterprise</span><span class="tier-price">Rp 50.000.000+</span></div>
+                        <div class="service-price-tier"><span class="tier-name">Basic</span><span class="tier-price">Rp 37.500.000</span></div>
+                        <div class="service-price-tier"><span class="tier-name">Business</span><span class="tier-price">Rp 52.500.000-</span></div>
+                        <div class="service-price-tier"><span class="tier-name">Enterprise</span><span class="tier-price">Rp 75.000.000+</span></div>
                     </div>
                     <p data-lang="jasa_custom_desc">Sistem/aplikasi yang dibuat sesuai kebutuhan bisnis Anda.</p>
                     <ul class="service-features">
@@ -632,7 +648,7 @@
         </div>
     </section>
 
-    <!-- VPS -->
+    <!-- VPS EXTREME -->
     <section class="vps-section" id="vps">
         <div class="vps-container">
             <div class="section-header scroll-reveal">
@@ -644,13 +660,13 @@
                 <div class="vps-type-card scroll-reveal">
                     <span class="performance-badge badge-standard" data-lang="vps_standard">Standard</span>
                     <h3 data-lang="vps_basic_title">Basic Standard</h3>
-                    <div class="vps-price">Rp 121.800</div>
-                    <div class="vps-hourly">Rp 168 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
+                    <div class="vps-price">Rp 130.500</div>
+                    <div class="vps-hourly">Rp 180 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
                     <p data-lang="vps_basic_desc">Performa andal untuk website dan aplikasi skala kecil hingga menengah.</p>
                     <div class="vps-specs">
-                        <div class="vps-spec"><span data-lang="vps_cpu">CPU</span><span data-lang="vps_scalable">Scalable</span></div>
-                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span data-lang="vps_scalable">Scalable</span></div>
-                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span data-lang="vps_nvme">NVMe SSD</span></div>
+                        <div class="vps-spec"><span data-lang="vps_cpu">CPU</span><span>2 Core</span></div>
+                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span>2 GB</span></div>
+                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span>20 GB NVMe</span></div>
                         <div class="vps-spec"><span data-lang="vps_bandwidth">Bandwidth</span><span data-lang="vps_unlimited">Unlimited</span></div>
                     </div>
                     <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="vps_deploy">Deploy Sekarang</a>
@@ -658,13 +674,13 @@
                 <div class="vps-type-card scroll-reveal">
                     <span class="performance-badge badge-intel" data-lang="vps_intel_badge">4-5x Faster</span>
                     <h3 data-lang="vps_intel_title">Intel eXtreme</h3>
-                    <div class="vps-price">Rp 208.600</div>
-                    <div class="vps-hourly">Rp 286 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
+                    <div class="vps-price">Rp 223.500</div>
+                    <div class="vps-hourly">Rp 306 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
                     <p data-lang="vps_intel_desc">Intel eXtreme hadir dengan performa tinggi & kecepatan 4-5x lebih cepat.</p>
                     <div class="vps-specs">
                         <div class="vps-spec"><span data-lang="vps_cpu">CPU</span><span data-lang="vps_intel_cpu">Intel High Performance</span></div>
-                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span data-lang="vps_scalable">Scalable</span></div>
-                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span data-lang="vps_nvme">NVMe SSD</span></div>
+                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span>2 GB</span></div>
+                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span>20 GB NVMe</span></div>
                         <div class="vps-spec"><span data-lang="vps_bandwidth">Bandwidth</span><span data-lang="vps_premium">Unlimited Premium</span></div>
                     </div>
                     <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="vps_deploy">Deploy Sekarang</a>
@@ -672,13 +688,13 @@
                 <div class="vps-type-card scroll-reveal">
                     <span class="performance-badge badge-amd" data-lang="vps_amd_badge">6-8x Faster</span>
                     <h3 data-lang="vps_amd_title">AMD eXtreme</h3>
-                    <div class="vps-price">Rp 208.600</div>
-                    <div class="vps-hourly">Rp 286 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
+                    <div class="vps-price">Rp 223.500</div>
+                    <div class="vps-hourly">Rp 306 <span data-lang="hour">/jam</span> <span data-lang="per_month">- /bulan</span></div>
                     <p data-lang="vps_amd_desc">Komputasi 6-8x lebih cepat dengan CPU AMD EPYC 7542.</p>
                     <div class="vps-specs">
                         <div class="vps-spec"><span data-lang="vps_cpu">CPU</span><span data-lang="vps_amd_cpu">AMD EPYC 7542</span></div>
-                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span data-lang="vps_scalable">Scalable</span></div>
-                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span data-lang="vps_nvme">NVMe SSD</span></div>
+                        <div class="vps-spec"><span data-lang="vps_ram">RAM</span><span>2 GB</span></div>
+                        <div class="vps-spec"><span data-lang="vps_storage">Storage</span><span>20 GB NVMe</span></div>
                         <div class="vps-spec"><span data-lang="vps_bandwidth">Bandwidth</span><span data-lang="vps_premium">Unlimited Premium</span></div>
                     </div>
                     <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;" data-lang="vps_deploy">Deploy Sekarang</a>
@@ -687,7 +703,7 @@
         </div>
     </section>
 
-    <!-- PRICING -->
+    <!-- PRICING TABS -->
     <section class="pricing" id="pricing">
         <div class="pricing-container">
             <div class="section-header scroll-reveal">
@@ -703,7 +719,7 @@
             <div id="cloud-pricing" class="pricing-grid">
                 <div class="pricing-card scroll-reveal">
                     <div class="pricing-header"><h3 data-lang="starter_title">Starter Pro</h3><p data-lang="starter_desc">Untuk personal blog & testing</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">21.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">30.000</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> <strong>1 GB</strong> SSD Storage</li>
                         <li><i class="fas fa-check"></i> <strong>1 Core</strong> CPU</li>
@@ -719,7 +735,7 @@
                 <div class="pricing-card featured scroll-reveal">
                     <span class="featured-badge" data-lang="featured_popular">Paling Populer</span>
                     <div class="pricing-header"><h3 data-lang="business_title">Business Pro</h3><p data-lang="business_desc">Untuk medium enterprise</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">147.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">148.500</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> <strong>13 GB</strong> SSD Storage</li>
                         <li><i class="fas fa-check"></i> <strong>3 Core</strong> CPU</li>
@@ -734,7 +750,7 @@
                 </div>
                 <div class="pricing-card scroll-reveal">
                     <div class="pricing-header"><h3 data-lang="advanced_title">Advanced Pro</h3><p data-lang="advanced_desc">Untuk enterprise applications</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">343.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">412.500</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> <strong>35 GB</strong> SSD Storage</li>
                         <li><i class="fas fa-check"></i> <strong>5 Core</strong> CPU</li>
@@ -751,11 +767,11 @@
             <div id="vps-pricing" class="pricing-grid" style="display: none;">
                 <div class="pricing-card scroll-reveal">
                     <div class="pricing-header"><h3 data-lang="vps_pro1_title">VPS Pro + 1</h3><p data-lang="vps_pro1_desc">Entry level VPS</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">140.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">168.000</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> <strong>1 GB</strong> RAM</li>
-                        <li><i class="fas fa-check"></i> <strong>2 CPU</strong> Core</li>
-                        <li><i class="fas fa-check"></i> <strong>30 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>1 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>25 GB</strong> NVMe Storage</li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_root">Full Root Access</span></li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_os">Pilihan OS & Apps</span></li>
@@ -767,11 +783,11 @@
                 <div class="pricing-card featured scroll-reveal">
                     <span class="featured-badge" data-lang="featured_value">Best Value</span>
                     <div class="pricing-header"><h3 data-lang="vps_shiny_title">Cloud VPS - Shiny</h3><p data-lang="vps_shiny_desc">Performa tinggi</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">600.600</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">540.000</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> <strong>4 GB</strong> RAM</li>
-                        <li><i class="fas fa-check"></i> <strong>4 Core</strong> CPU</li>
-                        <li><i class="fas fa-check"></i> <strong>100 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>2 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>80 GB</strong> NVMe Storage</li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
                         <li><i class="fas fa-check"></i> cPanel / Plesk / DirectAdmin</li>
                         <li><i class="fas fa-check"></i> 1 Dedicated IP</li>
@@ -782,11 +798,11 @@
                 </div>
                 <div class="pricing-card scroll-reveal">
                     <div class="pricing-header"><h3 data-lang="vps_pro5_title">VPS Pro + 5</h3><p data-lang="vps_pro5_desc">Enterprise grade</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">1.960.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">1.050.000</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> <strong>16 GB</strong> RAM</li>
-                        <li><i class="fas fa-check"></i> <strong>16 CPU</strong> Core</li>
-                        <li><i class="fas fa-check"></i> <strong>200 GB</strong> SSD Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>8 GB</strong> RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>4 Core</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>140 GB</strong> NVMe Storage</li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_unlimited">Unlimited Bandwidth</span></li>
                         <li><i class="fas fa-check"></i> HPE Nimble Storage</li>
                         <li><i class="fas fa-check"></i> High Security Level</li>
@@ -799,12 +815,12 @@
             <div id="dedicated-pricing" class="pricing-grid" style="display: none;">
                 <div class="pricing-card scroll-reveal">
                     <div class="pricing-header"><h3 data-lang="dedicated_160_title">Dedicated 160</h3><p data-lang="dedicated_160_desc">Starter dedicated</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">1.118.600</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">3.900.000</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> <strong>4 CPU</strong> Core</li>
-                        <li><i class="fas fa-check"></i> <strong>8 GB</strong> RAM</li>
-                        <li><i class="fas fa-check"></i> <strong>160 GB</strong> NVMe SSD</li>
-                        <li><i class="fas fa-check"></i> <strong>4 TB</strong> Data Transfer</li>
+                        <li><i class="fas fa-check"></i> <strong>E5-2620v4</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>64 GB</strong> DDR4 RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>2x 1TB</strong> SAS Storage</li>
+                        <li><i class="fas fa-check"></i> <span data-lang="feature_transfer">Unlimited Transfer</span></li>
                         <li><i class="fas fa-check"></i> Unlimited Hosted Domains</li>
                         <li><i class="fas fa-check"></i> 1 Dedicated IP</li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_root">Full Root Access</span></li>
@@ -815,11 +831,11 @@
                 <div class="pricing-card featured scroll-reveal">
                     <span class="featured-badge" data-lang="featured_enterprise">Enterprise</span>
                     <div class="pricing-header"><h3 data-lang="dedicated_1_title">Dedicated Server 1</h3><p data-lang="dedicated_1_desc">High performance</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">3.640.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">4.500.000</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> <strong>Quad Core</strong> CPU</li>
-                        <li><i class="fas fa-check"></i> <strong>16 GB</strong> RAM</li>
-                        <li><i class="fas fa-check"></i> <strong>2000 GB</strong> Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>2x E5-2620 v4</strong> CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>16 GB</strong> DDR4 RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>2x 960GB</strong> SSD NVMe</li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_transfer">Unlimited Transfer</span></li>
                         <li><i class="fas fa-check"></i> Unlimited Hosted Domains</li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_access">Full Access</span></li>
@@ -830,11 +846,11 @@
                 </div>
                 <div class="pricing-card scroll-reveal">
                     <div class="pricing-header"><h3 data-lang="dedicated_8_title">Dedicated Server 8</h3><p data-lang="dedicated_8_desc">Maximum power</p></div>
-                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">14.000.000</span><span class="period" data-lang="price_month">/bulan</span></div>
+                    <div class="pricing-price"><span class="currency">Rp</span><span class="amount">15.000.000</span><span class="period" data-lang="price_month">/bulan</span></div>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> <strong>High-End</strong> Processor</li>
-                        <li><i class="fas fa-check"></i> <strong>64+ GB</strong> RAM</li>
-                        <li><i class="fas fa-check"></i> <strong>Large</strong> Storage</li>
+                        <li><i class="fas fa-check"></i> <strong>2x 2699 v4</strong> Intel CPU</li>
+                        <li><i class="fas fa-check"></i> <strong>512 GB</strong> DDR4 RAM</li>
+                        <li><i class="fas fa-check"></i> <strong>2x 2TB</strong> SSD NVMe</li>
                         <li><i class="fas fa-check"></i> <span data-lang="feature_transfer">Unlimited Transfer</span></li>
                         <li><i class="fas fa-check"></i> Custom Configuration</li>
                         <li><i class="fas fa-check"></i> ISO 9001 & 27001</li>
@@ -842,6 +858,290 @@
                         <li><i class="fas fa-check"></i> Dedicated Support Team</li>
                     </ul>
                     <a href="https://wa.me/6289652435067" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;" data-lang="select_package">Pilih Paket</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPREHENSIVE PRICING TABLES -->
+    <section class="pricing-tables" id="comprehensive-pricing">
+        <div class="pricing-tables-container">
+            <!-- Cloud VPS eXtreme Full Table -->
+            <div class="section-header scroll-reveal" style="margin-bottom: 40px;">
+                <span class="section-label">Cloud VPS eXtreme</span>
+                <h2>Daftar Lengkap Cloud VPS</h2>
+                <p>Semua paket Cloud VPS eXtreme dengan harga yang sudah termasuk markup 50%.</p>
+            </div>
+            <div class="pricing-table-wrapper scroll-reveal">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Paket</th>
+                            <th>CPU</th>
+                            <th>RAM</th>
+                            <th>Storage</th>
+                            <th>Harga/Bulan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="spec-name">Basic Standard 20GB</td><td>2 Core</td><td>2 GB</td><td>20 GB NVMe</td><td class="price-highlight">Rp 130.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Basic Standard 40GB</td><td>2 Core</td><td>2 GB</td><td>40 GB NVMe</td><td class="price-highlight">Rp 150.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Basic Standard 60GB</td><td>2 Core</td><td>4 GB</td><td>60 GB NVMe</td><td class="price-highlight">Rp 337.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Intel eXtreme 20GB</td><td>2 Core</td><td>2 GB</td><td>20 GB NVMe</td><td class="price-highlight">Rp 223.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Intel eXtreme 40GB</td><td>2 Core</td><td>2 GB</td><td>40 GB NVMe</td><td class="price-highlight">Rp 289.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Intel eXtreme 60GB</td><td>2 Core</td><td>4 GB</td><td>60 GB NVMe</td><td class="price-highlight">Rp 517.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">AMD eXtreme 20GB</td><td>2 Core</td><td>2 GB</td><td>20 GB NVMe</td><td class="price-highlight">Rp 223.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">AMD eXtreme 40GB</td><td>2 Core</td><td>2 GB</td><td>40 GB NVMe</td><td class="price-highlight">Rp 289.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">AMD eXtreme 60GB</td><td>2 Core</td><td>4 GB</td><td>60 GB NVMe</td><td class="price-highlight">Rp 534.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Server VPS NVMe Full Table -->
+            <div class="section-header scroll-reveal" style="margin-bottom: 40px; margin-top: 80px;">
+                <span class="section-label">Server VPS NVMe</span>
+                <h2>High Performance Server VPS</h2>
+                <p>Server VPS dengan storage NVMe untuk performa tinggi.</p>
+            </div>
+            <div class="pricing-table-wrapper scroll-reveal">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Paket</th>
+                            <th>CPU</th>
+                            <th>RAM</th>
+                            <th>Storage</th>
+                            <th>Harga/Bulan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="spec-name">NVME 1</td><td>1 Core</td><td>1 GB</td><td>25 GB NVMe</td><td class="price-highlight">Rp 168.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 2</td><td>1 Core</td><td>2 GB</td><td>30 GB NVMe</td><td class="price-highlight">Rp 270.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 3</td><td>2 Core</td><td>2 GB</td><td>40 GB NVMe</td><td class="price-highlight">Rp 405.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 4</td><td>2 Core</td><td>4 GB</td><td>80 GB NVMe</td><td class="price-highlight">Rp 540.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 5</td><td>4 Core</td><td>8 GB</td><td>140 GB NVMe</td><td class="price-highlight">Rp 1.050.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 6</td><td>4 Core</td><td>12 GB</td><td>200 GB NVMe</td><td class="price-highlight">Rp 1.575.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 7</td><td>8 Core</td><td>16 GB</td><td>250 GB NVMe</td><td class="price-highlight">Rp 2.100.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 8</td><td>12 Core</td><td>24 GB</td><td>350 GB NVMe</td><td class="price-highlight">Rp 3.150.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 9</td><td>16 Core</td><td>32 GB</td><td>400 GB NVMe</td><td class="price-highlight">Rp 5.400.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">NVME 10</td><td>32 Core</td><td>64 GB</td><td>500 GB NVMe</td><td class="price-highlight">Rp 8.250.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Dedicated CPU eXtreme -->
+            <div class="section-header scroll-reveal" style="margin-bottom: 40px; margin-top: 80px;">
+                <span class="section-label">Dedicated CPU</span>
+                <h2>Dedicated CPU eXtreme</h2>
+                <p>Server dengan dedicated CPU untuk performa maksimal.</p>
+            </div>
+            <div class="pricing-table-wrapper scroll-reveal">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Paket</th>
+                            <th>CPU</th>
+                            <th>RAM</th>
+                            <th>Storage</th>
+                            <th>Harga/Bulan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="spec-name">eXtreme 1</td><td>1 Core</td><td>1 GB</td><td>25 GB NVMe</td><td class="price-highlight">Rp 168.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 2</td><td>1 Core</td><td>2 GB</td><td>30 GB NVMe</td><td class="price-highlight">Rp 270.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 3</td><td>2 Core</td><td>2 GB</td><td>40 GB NVMe</td><td class="price-highlight">Rp 405.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 4</td><td>2 Core</td><td>4 GB</td><td>80 GB NVMe</td><td class="price-highlight">Rp 540.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 5</td><td>4 Core</td><td>8 GB</td><td>140 GB NVMe</td><td class="price-highlight">Rp 1.050.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 6</td><td>4 Core</td><td>12 GB</td><td>200 GB NVMe</td><td class="price-highlight">Rp 1.575.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 7</td><td>8 Core</td><td>16 GB</td><td>250 GB NVMe</td><td class="price-highlight">Rp 2.100.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 8</td><td>12 Core</td><td>24 GB</td><td>350 GB NVMe</td><td class="price-highlight">Rp 3.150.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 9</td><td>16 Core</td><td>32 GB</td><td>400 GB NVMe</td><td class="price-highlight">Rp 5.400.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">eXtreme 10</td><td>32 Core</td><td>64 GB</td><td>500 GB NVMe</td><td class="price-highlight">Rp 8.250.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- High Availability Rocket VPS -->
+            <div class="section-header scroll-reveal" style="margin-bottom: 40px; margin-top: 80px;">
+                <span class="section-label">High Availability</span>
+                <h2>Rocket VPS</h2>
+                <p>VPS dengan high availability untuk uptime maksimal.</p>
+            </div>
+            <div class="pricing-table-wrapper scroll-reveal">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Paket</th>
+                            <th>CPU</th>
+                            <th>RAM</th>
+                            <th>Storage</th>
+                            <th>Harga/Bulan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="spec-name">Rocket VPS 1</td><td>2 Core</td><td>4 GB</td><td>60 GB NVMe</td><td class="price-highlight">Rp 157.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Rocket VPS 2</td><td>4 Core</td><td>4 GB</td><td>80 GB NVMe</td><td class="price-highlight">Rp 217.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Rocket VPS 3</td><td>4 Core</td><td>8 GB</td><td>100 GB NVMe</td><td class="price-highlight">Rp 322.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Rocket VPS 4</td><td>4 Core</td><td>16 GB</td><td>120 GB NVMe</td><td class="price-highlight">Rp 367.500</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Rocket VPS 5</td><td>8 Core</td><td>8 GB</td><td>120 GB NVMe</td><td class="price-highlight">Rp 405.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Rocket VPS 6</td><td>8 Core</td><td>16 GB</td><td>120 GB NVMe</td><td class="price-highlight">Rp 540.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Rocket VPS 7</td><td>16 Core</td><td>16 GB</td><td>120 GB NVMe</td><td class="price-highlight">Rp 615.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Managed VPS WHM cPanel -->
+            <div class="section-header scroll-reveal" style="margin-bottom: 40px; margin-top: 80px;">
+                <span class="section-label">Managed VPS</span>
+                <h2>Managed VPS WHM cPanel</h2>
+                <p>VPS fully managed dengan WHM dan cPanel.</p>
+            </div>
+            <div class="pricing-table-wrapper scroll-reveal">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Paket</th>
+                            <th>RAM</th>
+                            <th>CPU</th>
+                            <th>Storage</th>
+                            <th>Harga/Bulan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="spec-name">Cpanel Iron</td><td>2 GB</td><td>2 Core</td><td>40 GB SSD</td><td class="price-highlight">Rp 1.020.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Cpanel Bronze</td><td>4 GB</td><td>4 Core</td><td>80 GB SSD</td><td class="price-highlight">Rp 1.335.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Cpanel Silver</td><td>8 GB</td><td>7 Core</td><td>160 GB SSD</td><td class="price-highlight">Rp 2.100.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                        <tr><td class="spec-name">Cpanel Gold</td><td>12 GB</td><td>8 Core</td><td>200 GB SSD</td><td class="price-highlight">Rp 2.625.000</td><td><a href="https://wa.me/6289652435067" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;">Pesan</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOMAIN SECTION -->
+    <section class="domain-section" id="domain">
+        <div class="domain-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Domain</span>
+                <h2>Harga Domain</h2>
+                <p>Domain terlengkap dengan harga kompetitif untuk Indonesia dan internasional.</p>
+            </div>
+            <div class="domain-grid">
+                <div class="domain-card scroll-reveal">
+                    <h3><i class="fas fa-flag"></i> Domain Indonesia</h3>
+                    <div class="domain-item"><span class="domain-name">.my.id</span><span class="domain-price">Rp 37.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.biz.id</span><span class="domain-price">Rp 82.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.ponpes.id</span><span class="domain-price">Rp 82.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.sch.id</span><span class="domain-price">Rp 82.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.ac.id</span><span class="domain-price">Rp 82.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.or.id</span><span class="domain-price">Rp 82.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.web.id</span><span class="domain-price">Rp 82.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.id</span><span class="domain-price">Rp 315.000 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.co.id</span><span class="domain-price">Rp 405.000 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.net.id</span><span class="domain-price">Rp 600.000 <small>/tahun</small></span></div>
+                </div>
+                <div class="domain-card scroll-reveal">
+                    <h3><i class="fas fa-globe"></i> Domain Internasional</h3>
+                    <div class="domain-item"><span class="domain-name">.top</span><span class="domain-price">Rp 181.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.xyz</span><span class="domain-price">Rp 438.000 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.asia</span><span class="domain-price">Rp 352.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.icu</span><span class="domain-price">Rp 430.950 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.com</span><span class="domain-price">Rp 240.000 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.click</span><span class="domain-price">Rp 285.000 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.net</span><span class="domain-price">Rp 442.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.org</span><span class="domain-price">Rp 345.000 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.info</span><span class="domain-price">Rp 676.500 <small>/tahun</small></span></div>
+                    <div class="domain-item"><span class="domain-name">.vip</span><span class="domain-price">Rp 466.500 <small>/tahun</small></span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADDONS SECTION -->
+    <section class="addons-section" id="addons">
+        <div class="addons-container">
+            <div class="section-header scroll-reveal">
+                <span class="section-label">Solutions & Addons</span>
+                <h2>Solusi & Addons</h2>
+                <p>Berbagai solusi tambahan untuk melengkapi kebutuhan bisnis Anda.</p>
+            </div>
+            <div class="addons-grid">
+                <div class="addon-card scroll-reveal">
+                    <div class="addon-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Email Solution (Zimbra)</h3>
+                    <p>Solusi email enterprise dengan Zimbra.</p>
+                    <div class="addon-price">Rp 22.500 <small>/user/bln</small></div>
+                    <ul class="addon-features">
+                        <li><i class="fas fa-check"></i> 1 User, 10GB Storage</li>
+                        <li><i class="fas fa-check"></i> 10 Alias</li>
+                        <li><i class="fas fa-check"></i> 10 Distribution List</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 13px; padding: 10px;">Pilih Paket</a>
+                </div>
+                <div class="addon-card scroll-reveal">
+                    <div class="addon-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Sertifikat SSL</h3>
+                    <p>Keamanan SSL untuk website Anda.</p>
+                    <div class="addon-price">Rp 165.000 <small>/6 bln</small></div>
+                    <ul class="addon-features">
+                        <li><i class="fas fa-check"></i> 2048 bit encryption</li>
+                        <li><i class="fas fa-check"></i> Domain & Subdomain</li>
+                        <li><i class="fas fa-check"></i> Comodo PositiveSSL</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 13px; padding: 10px;">Pilih Paket</a>
+                </div>
+                <div class="addon-card scroll-reveal">
+                    <div class="addon-icon"><i class="fas fa-key"></i></div>
+                    <h3>Lisensi</h3>
+                    <p>Berbagai lisensi software untuk server Anda.</p>
+                    <div class="addon-price">Rp 383.250 <small>/bln</small></div>
+                    <ul class="addon-features">
+                        <li><i class="fas fa-check"></i> CloudLinux OS</li>
+                        <li><i class="fas fa-check"></i> Kernelcare</li>
+                        <li><i class="fas fa-check"></i> Imunify360</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 13px; padding: 10px;">Pilih Paket</a>
+                </div>
+                <div class="addon-card scroll-reveal">
+                    <div class="addon-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>Cloud Storage (Nextcloud)</h3>
+                    <p>Storage cloud pribadi dengan Nextcloud.</p>
+                    <div class="addon-price">Rp 45.000 <small>/akun/bln</small></div>
+                    <ul class="addon-features">
+                        <li><i class="fas fa-check"></i> Start 30 GB</li>
+                        <li><i class="fas fa-check"></i> Free Setup</li>
+                        <li><i class="fas fa-check"></i> Premium Support</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 13px; padding: 10px;">Pilih Paket</a>
+                </div>
+                <div class="addon-card scroll-reveal">
+                    <div class="addon-icon"><i class="fab fa-google"></i></div>
+                    <h3>Google Workspace</h3>
+                    <p>Email bisnis dan kolaborasi dengan Google.</p>
+                    <div class="addon-price">Rp 144.000 <small>/user/bln</small></div>
+                    <ul class="addon-features">
+                        <li><i class="fas fa-check"></i> Email Bisnis</li>
+                        <li><i class="fas fa-check"></i> 100 Peserta Video</li>
+                        <li><i class="fas fa-check"></i> 30 GB Cloud Storage</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 13px; padding: 10px;">Pilih Paket</a>
+                </div>
+                <div class="addon-card scroll-reveal">
+                    <div class="addon-icon"><i class="fas fa-users"></i></div>
+                    <h3>Reseller Hosting</h3>
+                    <p>Mulai bisnis hosting Anda sendiri.</p>
+                    <div class="addon-price">Rp 120.000 <small>/bln</small></div>
+                    <ul class="addon-features">
+                        <li><i class="fas fa-check"></i> 10 GB SSD NVMe</li>
+                        <li><i class="fas fa-check"></i> Up to 5 Users</li>
+                        <li><i class="fas fa-check"></i> Unlimited Domain & DB</li>
+                    </ul>
+                    <a href="https://wa.me/6289652435067" class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 13px; padding: 10px;">Pilih Paket</a>
                 </div>
             </div>
         </div>
@@ -869,10 +1169,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td class="plan-name" data-lang="feature_label">Harga <span data-lang="price_month">/bulan</span></td><td class="plan-price">Rp 21.000</td><td class="plan-price">Rp 42.000</td><td class="plan-price">Rp 70.000</td><td class="plan-price">Rp 147.000</td><td class="plan-price">Rp 287.000</td><td class="plan-price">Rp 343.000</td></tr>
-                        <tr><td class="plan-name">Storage SSD</td><td>1 GB</td><td>3 GB</td><td>7 GB</td><td>13 GB</td><td>25 GB</td><td>35 GB</td></tr>
+                        <tr><td class="plan-name" data-lang="feature_label">Harga <span data-lang="price_month">/bulan</span></td><td class="plan-price">Rp 30.000</td><td class="plan-price">Rp 67.500</td><td class="plan-price">Rp 112.500</td><td class="plan-price">Rp 148.500</td><td class="plan-price">Rp 307.500</td><td class="plan-price">Rp 412.500</td></tr>
+                        <tr><td class="plan-name">Storage SSD</td><td>512 MB</td><td>3 GB</td><td>7 GB</td><td>13 GB</td><td>25 GB</td><td>35 GB</td></tr>
                         <tr><td class="plan-name">CPU Core</td><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
                         <tr><td class="plan-name">RAM</td><td>512 MB</td><td>1 GB</td><td>2 GB</td><td>2 GB</td><td>3 GB</td><td>4 GB</td></tr>
+                        <tr><td class="plan-name">Entry Processes</td><td>10</td><td>20</td><td>40</td><td>60</td><td>80</td><td>100</td></tr>
+                        <tr><td class="plan-name">NPROC</td><td>30</td><td>40</td><td>70</td><td>90</td><td>120</td><td>150</td></tr>
                         <tr><td class="plan-name" data-lang="vps_bandwidth">Bandwidth</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td><td class="check">Unlimited</td></tr>
                         <tr><td class="plan-name">Addon Domain</td><td>-</td><td>-</td><td>-</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
                         <tr><td class="plan-name">Gratis Domain</td><td>-</td><td>-</td><td>-</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
@@ -934,7 +1236,9 @@
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand">
-                <a href="#" class="footer-logo-link"><img src="logo-oqline.png" alt="Oqline Logo"></a>
+                <a href="index.html" class="footer-logo-link">
+                    <img src="logo-oqline.png" alt="Oqline Logo">
+                </a>
                 <p data-lang="footer_desc">Platform cloud infrastructure terdepan di Indonesia. Menyediakan layanan Cloud Hosting, VPS, Dedicated Server, dan solusi enterprise dengan teknologi terkini.</p>
                 <div class="footer-social">
                     <a href="https://www.instagram.com/oqlineidn?igsh=dWx5bnhzMDRhMmw3" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -953,16 +1257,14 @@
                     </dl>
                 </div>
             </div>
-
-            <!-- Footer columns: wrapped in a div for mobile 2-col layout -->
             <div class="footer-column">
                 <h4 data-lang="footer_products">Produk</h4>
                 <ul>
-                    <li><a href="#hosting">Cloud Hosting</a></li>
-                    <li><a href="#vps" data-lang="nav_vps">Cloud VPS</a></li>
-                    <li><a href="#pricing">Dedicated Server</a></li>
+                    <li><a href="index.html#hosting">Cloud Hosting</a></li>
+                    <li><a href="index.html#vps" data-lang="nav_vps">Cloud VPS</a></li>
+                    <li><a href="index.html#pricing">Dedicated Server</a></li>
                     <li><a href="https://wa.me/6289652435067" target="_blank">GPU Server</a></li>
-                    <li><a href="https://wa.me/6289652435067" target="_blank">Domain</a></li>
+                    <li><a href="index.html#domain">Domain</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -982,7 +1284,7 @@
                     <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_blog">Blog</a></li>
                     <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_career">Karir</a></li>
                     <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_partner">Partner</a></li>
-                    <li><a href="https://wa.me/6289652435067" target="_blank" data-lang="footer_contact_link">Kontak</a></li>
+                    <li><a href="customer-service.html" data-lang="footer_contact_link">Kontak & Layanan Pelanggan</a></li>
                 </ul>
             </div>
         </div>
@@ -1047,7 +1349,6 @@
             if (e.target === mobileNav) closeMobileNav();
         });
 
-        // Close mobile nav on link click
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', closeMobileNav);
         });
@@ -1063,6 +1364,7 @@
             "nav_vps": "Cloud VPS",
             "nav_hosting": "Hosting",
             "nav_features": "Fitur",
+            "nav_support": "Layanan Pelanggan",
             "nav_login": "Masuk",
             "nav_start": "Mulai Gratis",
             "hero_title": "Infrastruktur Cloud <span>Terbaik</span> Indonesia",
@@ -1101,8 +1403,8 @@
             "feature_transfer": "Unlimited Transfer",
             "feature_tier4": "Tier 4 Data Center",
             "feature_monitoring": "24/7 Monitoring",
-            "feature_domain_com": ".com mulai Rp 160.000/tahun",
-            "feature_domain_id": ".id mulai Rp 210.000/tahun",
+            "feature_domain_com": ".com mulai Rp 240.000/tahun",
+            "feature_domain_id": ".id mulai Rp 315.000/tahun",
             "feature_dns": "DNS Management",
             "feature_privacy": "Domain Privacy",
             "feature_tesla": "4x Tesla V100",
@@ -1127,8 +1429,8 @@
             "jasa_enterprise": "Enterprise",
             "jasa_order": "Pesan Sekarang",
             "jasa_consult": "Konsultasi Gratis",
-            "jasa_company_price": "Rp 4.999.000",
-            "jasa_ecommerce_price": "Rp 11.999.000",
+            "jasa_company_price": "Rp 7.500.000",
+            "jasa_ecommerce_price": "Rp 18.000.000",
             "vps_label": "Cloud VPS eXtreme",
             "vps_title": "Pilih Performa Server Anda",
             "vps_desc": "Layanan server Cloud VPS dengan pembayaran Pay as You Grow yang transparan & berkualitas.",
@@ -1221,7 +1523,7 @@
             "footer_blog": "Blog",
             "footer_career": "Karir",
             "footer_partner": "Partner",
-            "footer_contact_link": "Kontak",
+            "footer_contact_link": "Kontak & Layanan Pelanggan",
             "footer_startup": "Startup",
             "footer_enterprise": "Enterprise",
             "footer_ecommerce": "E-commerce",
@@ -1250,6 +1552,7 @@
             "nav_vps": "Cloud VPS",
             "nav_hosting": "Hosting",
             "nav_features": "Features",
+            "nav_support": "Customer Service",
             "nav_login": "Login",
             "nav_start": "Start Free",
             "hero_title": "Indonesia's <span>Best</span> Cloud Infrastructure",
@@ -1288,8 +1591,8 @@
             "feature_transfer": "Unlimited Transfer",
             "feature_tier4": "Tier 4 Data Center",
             "feature_monitoring": "24/7 Monitoring",
-            "feature_domain_com": ".com from Rp 160.000/year",
-            "feature_domain_id": ".id from Rp 210.000/year",
+            "feature_domain_com": ".com from Rp 240.000/year",
+            "feature_domain_id": ".id from Rp 315.000/year",
             "feature_dns": "DNS Management",
             "feature_privacy": "Domain Privacy",
             "feature_tesla": "4x Tesla V100",
@@ -1314,8 +1617,8 @@
             "jasa_enterprise": "Enterprise",
             "jasa_order": "Order Now",
             "jasa_consult": "Free Consultation",
-            "jasa_company_price": "Rp 4.999.000",
-            "jasa_ecommerce_price": "Rp 11.999.000",
+            "jasa_company_price": "Rp 7.500.000",
+            "jasa_ecommerce_price": "Rp 18.000.000",
             "vps_label": "Cloud VPS eXtreme",
             "vps_title": "Choose Your Server Performance",
             "vps_desc": "Cloud VPS server service with transparent & quality Pay as You Grow billing.",
@@ -1408,7 +1711,7 @@
             "footer_blog": "Blog",
             "footer_career": "Career",
             "footer_partner": "Partner",
-            "footer_contact_link": "Contact",
+            "footer_contact_link": "Contact & Customer Service",
             "footer_startup": "Startup",
             "footer_enterprise": "Enterprise",
             "footer_ecommerce": "E-commerce",
@@ -1444,8 +1747,6 @@
     function applyLanguage() {
         const data = langData[currentLang];
         if (!data) return;
-
-        // Update all elements with data-lang attribute
         document.querySelectorAll('[data-lang]').forEach(el => {
             const key = el.getAttribute('data-lang');
             if (data[key]) {
@@ -1456,11 +1757,7 @@
                 }
             }
         });
-
-        // Update HTML lang attribute
         document.documentElement.lang = currentLang === 'id' ? 'id' : 'en';
-
-        // Update title
         document.title = currentLang === 'id' ? 'Oqline | Cloud Infrastructure Terbaik Indonesia' : "Oqline | Indonesia's Best Cloud Infrastructure";
     }
 
@@ -1474,7 +1771,6 @@
         });
     }
 
-    // Initialize on load
     document.addEventListener('DOMContentLoaded', () => {
         applyLanguage();
         updateLangButtons();
