@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oqline QR Studio - Generator & Reader | Powered by oqline</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Library QR Code Generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Library QR Code Reader -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <!-- Library Pembuat File DOCX Resmi -->
+    <script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
+    <!-- Library FileSaver -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .page-content { display: none; }
+        .page-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation Bar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 max-w-4xl flex justify-between items-center h-16">
+            <span class="font-extrabold text-xl text-indigo-600 tracking-tight flex items-center gap-1.5">
+                🎨 Oqline <span class="text-slate-900 font-medium text-lg">QR Studio</span>
+            </span>
+            <!-- Menu Switcher Utama -->
+            <div class="flex gap-2 bg-slate-100 p-1 rounded-xl">
+                <button onclick="switchPage('generator')" id="nav-generator" class="px-4 py-1.5 text-sm font-semibold rounded-lg transition bg-white text-indigo-600 shadow-xs cursor-pointer">
+                    🛠️ Studio Buat
+                </button>
+                <button onclick="switchPage('reader')" id="nav-reader" class="px-4 py-1.5 text-sm font-medium rounded-lg transition text-slate-600 hover:text-slate-900 cursor-pointer">
+                    🔍 Studio Scan
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-10 max-w-4xl flex-grow">
+        
+        <!-- ================= HALAMAN GENERATOR ================= -->
+        <div id="page-generator" class="page-content active">
+            <header class="text-center mb-10">
+                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">QR Code Generator</h1>
+                <p class="text-slate-500">Desain QR Code kustom untuk Menu Restoran, Wi-Fi, Teks, atau Link Bisnis Anda</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Kiri: Input Form -->
+                <div class="md:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="flex border-b border-slate-200 mb-6 overflow-x-auto">
+                        <button onclick="switchTab('url')" id="tab-url" class="py-2.5 px-4 font-medium text-sm text-indigo-600 border-b-2 border-indigo-600 focus:outline-none whitespace-nowrap cursor-pointer">
+                            🔗 Tautan / Menu
+                        </button>
+                        <button onclick="switchTab('wifi')" id="tab-wifi" class="py-2.5 px-4 font-medium text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-700 focus:outline-none whitespace-nowrap cursor-pointer">
+                            📶 Wi-Fi
+                        </button>
+                        <button onclick="switchTab('text')" id="tab-text" class="py-2.5 px-4 font-medium text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-700 focus:outline-none whitespace-nowrap cursor-pointer">
+                            📝 Teks / Bisnis
+                        </button>
+                    </div>
+
+                    <div id="content-url" class="tab-content active mb-6">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">URL Website atau Menu Digital</label>
+                        <input type="url" id="input-url" placeholder="https://restoranmu.com/menu" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm">
+                    </div>
+
+                    <div id="content-wifi" class="tab-content mb-6">
+                        <div class="grid grid-cols-1 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Wi-Fi (SSID)</label>
+                                <input type="text" id="wifi-ssid" placeholder="Contoh: Cafe_Gratis" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Kata Sandi (Password)</label>
+                                <input type="password" id="wifi-pass" placeholder="********" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Tipe Keamanan</label>
+                                <select id="wifi-type" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm bg-white">
+                                    <option value="WPA">WPA/WPA2</option>
+                                    <option value="WEP">WEP</option>
+                                    <option value="nopass">Tanpa Password (Terbuka)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="content-text" class="tab-content mb-6">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Teks Bebas / Informasi Bisnis</label>
+                        <textarea id="input-text" rows="3" placeholder="Masukkan detail kontak, promo, atau info bisnis..." class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"></textarea>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-6">
+                        <h3 class="text-sm font-bold text-slate-800 mb-3">Kustomisasi Warna Studio</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 mb-1">Warna QR (Gelap)</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="color" id="color-dark" value="#000000" class="w-8 h-8 rounded border border-slate-300 cursor-pointer">
+                                    <span class="text-xs text-slate-600">Utama</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 mb-1">Warna Latar (Terang)</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="color" id="color-light" value="#ffffff" class="w-8 h-8 rounded border border-slate-300 cursor-pointer">
+                                    <span class="text-xs text-slate-600">Background</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="generateQR()" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl transition duration-200 shadow-md shadow-indigo-100 focus:ring-4 focus:ring-indigo-200 cursor-pointer">
+                        Generate QR Code ✨
+                    </button>
+                </div>
+
+                <!-- Kanan: Preview Hasil & Download Options -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-between min-h-[380px]">
+                    <h3 class="text-sm font-bold text-slate-800 self-start mb-4">Preview QR Code</h3>
+                    <div id="qrcode-container" class="p-4 bg-white border border-slate-100 rounded-xl shadow-inner flex items-center justify-center min-h-[160px] min-w-[160px]">
+                        <div id="qrcode"></div>
+                    </div>
+                    <p id="placeholder-text" class="text-xs text-slate-400 text-center mt-2 px-4">Isi formulir dan klik generate untuk melihat hasil render Studio.</p>
+                    
+                    <!-- Download Container -->
+                    <div id="download-box" class="w-full flex flex-col gap-2 mt-4 hidden">
+                        <button onclick="downloadQR()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition duration-200 cursor-pointer">
+                            📥 Download Gambar (PNG)
+                        </button>
+                        <button onclick="downloadDocx()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition duration-200 cursor-pointer">
+                            📄 Download Dokumen (DOCX)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN READER (PEMINDAI) ================= -->
+        <div id="page-reader" class="page-content">
+            <header class="text-center mb-10">
+                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">QR Code Reader</h1>
+                <p class="text-slate-500">Scan QR Code menu, Wi-Fi, atau link menggunakan Kamera atau Unggah File Foto</p>
+            </header>
+
+            <div class="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="overflow-hidden rounded-xl bg-slate-900 border border-slate-800 min-h-[300px] flex flex-col items-center justify-center relative">
+                    <div id="reader" class="w-full"></div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-slate-100">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Punya file gambar QR? Scan disini:</label>
+                    <input type="file" id="qr-input-file" accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"/>
+                </div>
+
+                <div id="scan-result-box" class="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-200 hidden">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Hasil Scan:</h3>
+                    <div id="scan-result-text" class="text-sm font-medium text-slate-800 break-all bg-white p-3 rounded-lg border border-slate-200 shadow-inner"></div>
+                    <div id="scan-action-container" class="mt-3 flex gap-2"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-6 bg-white border-t border-slate-100">
+        <p class="text-sm text-slate-500">
+            &copy; 2026 Oqline QR Studio. All rights reserved.
+        </p>
+        <p class="text-xs font-bold text-indigo-500 tracking-wide mt-1 uppercase">
+            Powered by oqline
+        </p>
+    </footer>
+
+    <!-- Logic JavaScript -->
+    <script>
+        let html5QrcodeScanner = null;
+
+        function switchPage(page) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`page-${page}`).classList.add('active');
+
+            const btnGen = document.getElementById('nav-generator');
+            const btnRead = document.getElementById('nav-reader');
+
+            if (page === 'generator') {
+                btnGen.className = "px-4 py-1.5 text-sm font-semibold rounded-lg transition bg-white text-indigo-600 shadow-xs cursor-pointer";
+                btnRead.className = "px-4 py-1.5 text-sm font-medium rounded-lg transition text-slate-600 hover:text-slate-900 cursor-pointer";
+                stopScanner();
+            } else {
+                btnRead.className = "px-4 py-1.5 text-sm font-semibold rounded-lg transition bg-white text-indigo-600 shadow-xs cursor-pointer";
+                btnGen.className = "px-4 py-1.5 text-sm font-medium rounded-lg transition text-slate-600 hover:text-slate-900 cursor-pointer";
+                startScanner();
+            }
+        }
+
+        let currentTab = 'url';
+        let rawQRText = '';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`content-${tab}`).classList.add('active');
+
+            ['url', 'wifi', 'text'].forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tab) {
+                    btn.className = "py-2.5 px-4 font-medium text-sm text-indigo-600 border-b-2 border-indigo-600 focus:outline-none whitespace-nowrap cursor-pointer";
+                } else {
+                    btn.className = "py-2.5 px-4 font-medium text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-700 focus:outline-none whitespace-nowrap cursor-pointer";
+                }
+            });
+        }
+
+        function generateQR() {
+            let finalData = "";
+            if (currentTab === 'url') {
+                const urlInput = document.getElementById('input-url').value.trim();
+                if(!urlInput) return alert('Silakan masukkan URL terlebih dahulu!');
+                finalData = urlInput;
+            } else if (currentTab === 'wifi') {
+                const ssid = document.getElementById('wifi-ssid').value.trim();
+                const pass = document.getElementById('wifi-pass').value.trim();
+                const type = document.getElementById('wifi-type').value;
+                if(!ssid) return alert('Nama Wi-Fi (SSID) wajib diisi!');
+                finalData = `WIFI:S:${ssid};T:${type};P:${pass};;`;
+            } else if (currentTab === 'text') {
+                const textInput = document.getElementById('input-text').value.trim();
+                if(!textInput) return alert('Silakan tulis teks terlebih dahulu!');
+                finalData = textInput;
+            }
+
+            rawQRText = finalData;
+            const qrContainer = document.getElementById("qrcode");
+            qrContainer.innerHTML = "";
+            document.getElementById('placeholder-text').classList.add('hidden');
+
+            new QRCode(qrContainer, {
+                text: finalData,
+                width: 200,
+                height: 200,
+                colorDark : document.getElementById('color-dark').value,
+                colorLight : document.getElementById('color-light').value,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            setTimeout(() => {
+                document.getElementById('download-box').classList.remove('hidden');
+            }, 150);
+        }
+
+        function getQRBase64() {
+            const img = document.querySelector('#qrcode img');
+            const canvas = document.querySelector('#qrcode canvas');
+            return img && img.src ? img.src : (canvas ? canvas.toDataURL("image/png") : "");
+        }
+
+        function downloadQR() {
+            let src = getQRBase64();
+            if (src) {
+                const link = document.createElement('a');
+                link.href = src;
+                link.download = `oqline-studio-${Date.now()}.png`;
+                link.click();
+            }
+        }
+
+        function downloadDocx() {
+            let src = getQRBase64();
+            if (!src) return alert("Hasilkan QR Code terlebih dahulu!");
+
+            const base64Data = src.split(',')[1];
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+
+            const doc = new docx.Document({
+                sections: [{
+                    properties: {},
+                    children: [
+                        new docx.Paragraph({
+                            children: [
+                                new docx.TextRun({
+                                    text: "OQLINE QR STUDIO",
+                                    bold: true,
+                                    size: 32,
+                                }),
+                            ],
+                            spacing: { after: 200 },
+                        }),
+                        new docx.Paragraph({
+                            children: [
+                                new docx.TextRun({
+                                    text: `Konten/Data QR: ${rawQRText}`,
+                                    italic: true,
+                                    size: 20,
+                                }),
+                            ],
+                            spacing: { after: 400 },
+                        }),
+                        new docx.Paragraph({
+                            children: [
+                                new docx.ImageRun({
+                                    data: byteArray,
+                                    transformation: {
+                                        width: 180,
+                                        height: 180,
+                                    },
+                                }),
+                            ],
+                            spacing: { after: 400 },
+                        }),
+                        new docx.Paragraph({
+                            children: [
+                                new docx.TextRun({
+                                    text: "Powered by oqline",
+                                    bold: true,
+                                    size: 16,
+                                }),
+                            ],
+                        }),
+                    ],
+                }],
+            });
+
+            docx.Packer.toBlob(doc).then((blob) => {
+                saveAs(blob, `oqline-studio-${Date.now()}.docx`);
+            }).catch(err => {
+                console.error(err);
+                alert("Gagal memproses file Word.");
+            });
+        }
+
+        function startScanner() {
+            html5QrcodeScanner = new Html5QrcodeScanner("reader", { 
+                fps: 10, 
+                qrbox: {width: 250, height: 250},
+                rememberLastUsedCamera: true
+            });
+            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        }
+
+        function stopScanner() {
+            if (html5QrcodeScanner) {
+                html5QrcodeScanner.clear().catch(err => console.error("Gagal stop scanner:", err));
+            }
+        }
+
+        function onScanSuccess(decodedText, decodedResult) {
+            const resultBox = document.getElementById('scan-result-box');
+            const resultText = document.getElementById('scan-result-text');
+            const actionContainer = document.getElementById('scan-action-container');
+
+            resultBox.classList.remove('hidden');
+            resultText.innerText = decodedText;
+            actionContainer.innerHTML = "";
+
+            if (decodedText.startsWith('http://') || decodedText.startsWith('https://')) {
+                const btnOpen = document.createElement('a');
+                btnOpen.href = decodedText;
+                btnOpen.target = "_blank";
+                btnOpen.className = "px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg shadow-sm transition inline-block";
+                btnOpen.innerText = "🌐 Buka Link Tautan";
+                actionContainer.appendChild(btnOpen);
+            }
+
+            const btnCopy = document.createElement('button');
+            btnCopy.className = "px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg shadow-sm transition cursor-pointer";
+            btnCopy.innerText = "📋 Salin Teks";
+            btnCopy.onclick = () => {
+                navigator.clipboard.writeText(decodedText);
+                alert('Teks berhasil disalin!');
+            };
+            actionContainer.appendChild(btnCopy);
+        }
+
+        function onScanFailure(error) {}
+
+        document.getElementById('qr-input-file').addEventListener('change', e => {
+            if (e.target.files.length == 0) return;
+            const imageFile = e.target.files[0];
+            const html5QrCode = new Html5Qrcode("reader");
+            html5QrCode.scanFile(imageFile, true)
+                .then(decodedText => { onScanSuccess(decodedText, null); })
+                .catch(err => { alert("Tidak mendeteksi QR Code yang valid pada gambar ini."); });
+        });
+    </script>
+</body>
+</html>
