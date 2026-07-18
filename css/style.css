@@ -517,6 +517,7 @@ a { text-decoration: none; color: inherit; }
 
 @media (min-width: 1024px) {
     .pilar-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .pilar-grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ============================================
