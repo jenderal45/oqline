@@ -76,7 +76,7 @@ a { text-decoration: none; color: inherit; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    height: 80px;
 }
 
 .logo {
@@ -85,7 +85,7 @@ a { text-decoration: none; color: inherit; }
     gap: 0.75rem;
 }
 
-.logo img { height: 36px; width: auto; }
+.logo img { height: 48px; width: auto; }
 
 .logo-text {
     display: flex;
@@ -731,10 +731,10 @@ a { text-decoration: none; color: inherit; }
 .footer-logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: center;
 }
 
-.footer-logo img { height: 40px; width: auto; }
+.footer-logo img { height: 72px; width: auto; }
 
 .footer-logo-text {
     font-family: 'Space Grotesk', sans-serif;
@@ -1042,7 +1042,7 @@ a { text-decoration: none; color: inherit; }
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
-    .navbar-inner { height: 64px; }
+    .navbar-inner { height: 72px; }
     .nav-links { display: none; }
     .mobile-menu-btn { display: block; }
     .mobile-menu { display: flex; }
