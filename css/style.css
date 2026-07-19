@@ -734,7 +734,7 @@ a { text-decoration: none; color: inherit; }
     justify-content: center;
 }
 
-.footer-logo img { height: 72px; width: auto; }
+.footer-logo img { height: 172px; width: auto; }
 
 .footer-logo-text {
     font-family: 'Space Grotesk', sans-serif;
