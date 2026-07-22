@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Oqline Tech — Pengadaan Komputer, Sparepart & Hardware</title>
+    <meta name="description" content="Oqline Tech menyediakan pengadaan komputer, sparepart, dan hardware terlengkap dengan harga kompetitif. Katalog produk open access untuk kebutuhan bisnis dan personal.">
+    <meta name="keywords" content="Oqline Tech, pengadaan komputer, sparepart komputer, hardware, laptop, processor, RAM, SSD, monitor, jual komputer Jakarta">
+    <meta name="author" content="Oqline">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://oqline.com/tech">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oqline.com/tech">
+    <meta property="og:title" content="Oqline Tech — Pengadaan Komputer, Sparepart & Hardware">
+    <meta property="og:description" content="Katalog pengadaan komputer, sparepart, dan hardware terlengkap dari Oqline Tech.">
+    <meta property="og:site_name" content="Oqline">
+    <meta property="og:locale" content="id_ID">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/jenderal45/oqline/main/logo-oqline.png">
+    <meta name="theme-color" content="#dc2626">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    <meta name="google-site-verification" content="vVzTXoYngVQOq4cQOsM2kVoB0sjSjTj_yGMdr0BwAO8">
+
+    <style>
+    /* ============================================
+       OQLINE TECH — CATALOG STYLES
+       ============================================ */
+    .tech-filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        max-width: 1100px;
+        margin: 0 auto 2rem;
+        padding: 0 1.5rem;
+    }
+    .tech-filter-btn {
+        padding: 0.5rem 1.25rem;
+        background: white;
+        border: 1.5px solid var(--slate-200);
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--slate-600);
+        cursor: pointer;
+        transition: all 0.25s ease;
+        font-family: 'Inter', sans-serif;
+    }
+    .tech-filter-btn:hover {
+        border-color: var(--oqline-300);
+        color: var(--oqline-600);
+        background: var(--oqline-50);
+    }
+    .tech-filter-btn.active {
+        background: linear-gradient(135deg, var(--oqline-500), var(--oqline-700));
+        color: white;
+        border-color: var(--oqline-600);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+    }
+    .tech-catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    .tech-product-card {
+        background: white;
+        border: 1px solid var(--slate-200);
+        border-radius: 1.25rem;
+        overflow: hidden;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+    }
+    .tech-product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.1);
+        border-color: var(--oqline-200);
+    }
+    .tech-product-img-wrap {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--slate-50), var(--slate-100));
+    }
+    .tech-product-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .tech-product-card:hover .tech-product-img-wrap img {
+        transform: scale(1.08);
+    }
+    .tech-product-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        padding: 0.35rem 0.875rem;
+        background: linear-gradient(135deg, var(--oqline-500), var(--oqline-700));
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
+        z-index: 2;
+    }
+    .tech-product-body {
+        padding: 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .tech-product-body h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--slate-900);
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+    .tech-product-spec {
+        font-size: 0.8125rem;
+        color: var(--slate-500);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        flex: 1;
+    }
+    .tech-product-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--slate-100);
+    }
+    .tech-product-status {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+    }
+    .tech-product-status.tersedia {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+    .tech-product-status.preorder {
+        background: #fef3c7;
+        color: #d97706;
+    }
+    .tech-product-status.kosong {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+    .tech-product-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(135deg, var(--oqline-500), var(--oqline-700));
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-radius: 9999px;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+    }
+    .tech-product-cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+        .tech-filter-bar { gap: 0.375rem; padding: 0 1rem; }
+        .tech-filter-btn { padding: 0.4rem 0.875rem; font-size: 0.8rem; }
+        .tech-catalog-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; padding: 0 1rem; }
+        .tech-product-footer { flex-direction: column; align-items: stretch; }
+        .tech-product-cta { justify-content: center; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .tech-catalog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1025px) {
+        .tech-catalog-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Oqline Tech",
+        "url": "https://oqline.com/tech",
+        "description": "Pengadaan komputer, sparepart, dan hardware terlengkap.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Depan Taman RPTRA, Jl. Walang Baru Jl. Walang Raya No.10A, RT.15/RW.15, Tugu Utara, Kec. Koja",
+            "addressLocality": "Kec. Koja, Jkt Utara",
+            "addressRegion": "Daerah Khusus Ibukota Jakarta",
+            "postalCode": "14320",
+            "addressCountry": "ID"
+        },
+        "telephone": "+62-896-5243-5067"
+    }
+    </script>
+<base target="_blank">
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="https://raw.githubusercontent.com/jenderal45/oqline/main/logo-oqline.png" alt="Oqline Logo">
+                <div class="logo-text">
+                    <span class="logo-name">Oqline</span>
+                    <span class="logo-tag">Tech</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="saas.html" class="nav-link">SaaS</a>
+                <a href="ai.html" class="nav-link">AI</a>
+                <a href="tech.html" class="nav-link active">Tech</a>
+                <a href="https://news.oqline.com" target="_blank" class="nav-link">News</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="portfolio.html" class="nav-link">Portfolio</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="saas.html" class="mobile-nav-link">SaaS</a>
+        <a href="ai.html" class="mobile-nav-link">AI</a>
+        <a href="tech.html" class="mobile-nav-link active">Tech</a>
+        <a href="https://news.oqline.com" target="_blank" class="mobile-nav-link">News</a>
+        <a href="index.html#services" class="mobile-nav-link">Services</a>
+        <a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
+    </div>
+
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="breadcrumb">
+                <a href="index.html">Beranda</a>
+                <span class="breadcrumb-sep">/</span>
+                <span class="breadcrumb-current">Tech</span>
+            </div>
+            <div class="page-header-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #2563eb;">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h1>Oqline Tech</h1>
+            <p>Pengadaan komputer, sparepart, dan hardware terlengkap untuk kebutuhan bisnis dan personal Anda.</p>
+        </div>
+    </section>
+
+    <!-- Kategori Filter -->
+    <section class="section" style="padding-bottom: 0;">
+        <div class="section-header" style="margin-bottom: 2rem;">
+            <span class="section-label">Katalog</span>
+            <h2 class="section-title">Produk Kami</h2>
+            <p class="section-desc">Jelajahi katalog produk komputer dan hardware kami. Hubungi kami untuk pemesanan dan penawaran harga.</p>
+        </div>
+        <div class="tech-filter-bar">
+            <button class="tech-filter-btn active" data-filter="all">Semua</button>
+            <button class="tech-filter-btn" data-filter="laptop">Laptop</button>
+            <button class="tech-filter-btn" data-filter="processor">Processor</button>
+            <button class="tech-filter-btn" data-filter="ram">RAM</button>
+            <button class="tech-filter-btn" data-filter="storage">Storage</button>
+            <button class="tech-filter-btn" data-filter="gpu">VGA / GPU</button>
+            <button class="tech-filter-btn" data-filter="monitor">Monitor</button>
+            <button class="tech-filter-btn" data-filter="peripheral">Peripheral</button>
+            <button class="tech-filter-btn" data-filter="network">Network</button>
+            <button class="tech-filter-btn" data-filter="printer">Printer</button>
+        </div>
+    </section>
+
+    <!-- Katalog Produk -->
+    <section class="section section-alt" style="padding-top: 40px;">
+        <div class="tech-catalog-grid" id="tech-catalog">
+
+            <!-- LAPTOP -->
+            <div class="tech-product-card" data-category="laptop">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.mos.cms.futurecdn.net/f253e6fb712377a163ced7a3d563486dd125d379.jpg" alt="Laptop Gaming" loading="lazy">
+                    <span class="tech-product-badge">Laptop</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Laptop Gaming HP Omen</h3>
+                    <p class="tech-product-spec">Intel Core i7-13700HX, RTX 4060, 16GB DDR5, 512GB SSD, 16.1" FHD 165Hz</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Laptop%20Gaming%20HP%20Omen" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-product-card" data-category="laptop">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/dlcdnwebimgs.asus.com/5530b3ae251879bb3eb2c844cd6ee22646b4859b" alt="Laptop ASUS ROG" loading="lazy">
+                    <span class="tech-product-badge">Laptop</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>ASUS ROG Strix SCAR</h3>
+                    <p class="tech-product-spec">AMD Ryzen 9 7945HX, RTX 4080, 32GB DDR5, 1TB SSD, 18" 4K 240Hz Mini LED</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20ASUS%20ROG%20Strix%20SCAR" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROCESSOR -->
+            <div class="tech-product-card" data-category="processor">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/pisces.bbystatic.com/5dbef8b3806f7f92b9cf6b8efe462bf58b1f5ba9.jpg;maxHeight=455;maxWidth=815" alt="Processor Intel & AMD" loading="lazy">
+                    <span class="tech-product-badge">Processor</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Processor Intel & AMD</h3>
+                    <p class="tech-product-spec">Tersedia Intel Core i3/i5/i7/i9 Gen 12-14 dan AMD Ryzen 5/7/9 7000 Series. Box & Tray.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Processor%20Intel/AMD" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RAM -->
+            <div class="tech-product-card" data-category="ram">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/in.element14.com/ecc135b3dbdb9a86ba2df7301143eb19502d6f37.jpg" alt="RAM DDR4/DDR5" loading="lazy">
+                    <span class="tech-product-badge">RAM</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>RAM DDR4 / DDR5</h3>
+                    <p class="tech-product-spec">Kapasitas 4GB, 8GB, 16GB, 32GB. Brand: Kingston, Corsair, G.Skill, Teamgroup. Desktop & Laptop.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20RAM%20DDR4/DDR5" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STORAGE -->
+            <div class="tech-product-card" data-category="storage">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/nzxt.com/1be96275818f50a7120fc86da5021c4851b4e919.jpg" alt="SSD & HDD Storage" loading="lazy">
+                    <span class="tech-product-badge">Storage</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>SSD & HDD</h3>
+                    <p class="tech-product-spec">SSD SATA, NVMe M.2, HDD 3.5" & 2.5". Kapasitas 256GB - 4TB. Brand: Samsung, WD, Seagate, Kingston.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20SSD%20dan%20HDD" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOTHERBOARD -->
+            <div class="tech-product-card" data-category="processor">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.computerhope.com/34c09f6ba974e49ed9538bde595fecffa2f7b512.png" alt="Motherboard" loading="lazy">
+                    <span class="tech-product-badge">Motherboard</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Motherboard Intel & AMD</h3>
+                    <p class="tech-product-spec">Socket LGA1700, AM5, AM4. Brand: ASUS, MSI, Gigabyte, ASRock. ATX, mATX, ITX.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Motherboard" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GPU / VGA -->
+            <div class="tech-product-card" data-category="gpu">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.thewirecutter.com/7e0ef12323ffa29cb3e26badefce28aaac449567.jpg" alt="Graphics Card GPU" loading="lazy">
+                    <span class="tech-product-badge">VGA / GPU</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Graphics Card NVIDIA & AMD</h3>
+                    <p class="tech-product-spec">NVIDIA RTX 4060 - RTX 4090, AMD RX 7600 - RX 7900 XTX. Brand: ASUS, MSI, Gigabyte, Sapphire.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Graphics%20Card" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MONITOR -->
+            <div class="tech-product-card" data-category="monitor">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.thewirecutter.com/554c4eb52dbe4cfabbd28d00a112ed00ed110ece.jpg" alt="Monitor 4K" loading="lazy">
+                    <span class="tech-product-badge">Monitor</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Monitor 4K & Gaming</h3>
+                    <p class="tech-product-spec">Ukuran 24" - 32". Resolusi FHD, QHD, 4K. Refresh rate 60Hz - 240Hz. Brand: LG, Samsung, ASUS, Dell.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Monitor" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-product-card" data-category="monitor">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/i.pcmag.com/727d7c9277067c498015066cc37e13a229c40345.webp" alt="Monitor PC" loading="lazy">
+                    <span class="tech-product-badge">Monitor</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Monitor Office & Professional</h3>
+                    <p class="tech-product-spec">Monitor IPS, VA, OLED. Panel profesional untuk desain, editing, dan office. Ukuran 21" - 34" ultrawide.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Monitor%20Office" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERIPHERAL -->
+            <div class="tech-product-card" data-category="peripheral">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.thewirecutter.com/0af51613ed33284f91e407210f29f2f86954e017.jpg" alt="Mechanical Keyboard" loading="lazy">
+                    <span class="tech-product-badge">Keyboard</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Mechanical Keyboard</h3>
+                    <p class="tech-product-spec">Switch Cherry MX, Gateron, Kailh. Layout 60%, 75%, TKL, Full-size. RGB & non-RGB. Brand: Keychron, RK, Vortex.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Mechanical%20Keyboard" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-product-card" data-category="peripheral">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.gamemaxpc.com/aba76a0a59bdceee469512f0a13e10b9e7297212.png" alt="PC Case" loading="lazy">
+                    <span class="tech-product-badge">Casing</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>PC Case & Casing</h3>
+                    <p class="tech-product-spec">Full Tower, Mid Tower, Mini ITX. Tempered glass, mesh, RGB. Brand: Corsair, NZXT, Phanteks, Lian Li.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20PC%20Case" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-product-card" data-category="peripheral">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/latam.thermaltake.com/bfddc0a1d8417afbc0e7c5056ac9af5e639bc464.jpg" alt="Cooling Fan RGB" loading="lazy">
+                    <span class="tech-product-badge">Cooling</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Cooling Fan & AIO</h3>
+                    <p class="tech-product-spec">Air cooler, AIO liquid cooler 120mm-360mm, case fan RGB/ARGB. Brand: Noctua, Deepcool, Thermaltake, Corsair.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Cooling%20Fan/AIO" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PSU -->
+            <div class="tech-product-card" data-category="peripheral">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.technologyuk.net/1eaad9c1ca6bc59b689738fd36b84d7a8125bbcc.jpg" alt="Power Supply Unit" loading="lazy">
+                    <span class="tech-product-badge">PSU</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Power Supply Unit (PSU)</h3>
+                    <p class="tech-product-spec">Wattage 450W - 1200W. 80 Plus Bronze, Gold, Platinum. Modular & non-modular. Brand: Corsair, Seasonic, EVGA.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20PSU" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NETWORK -->
+            <div class="tech-product-card" data-category="network">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.thewirecutter.com/8d42c5b13be8c024b5e8e5c0fcaafcf96d8531f7.jpg" alt="WiFi Router" loading="lazy">
+                    <span class="tech-product-badge">Network</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Router & Networking</h3>
+                    <p class="tech-product-spec">WiFi 6/6E/7 router, mesh system, switch managed/unmanaged, access point. Brand: TP-Link, ASUS, Ubiquiti, MikroTik.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Router/Networking" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRINTER -->
+            <div class="tech-product-card" data-category="printer">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/i.rtings.com/ef2b7dde3dd2bc9508b1babfeede62e687a46606.jpg" alt="Printer Office" loading="lazy">
+                    <span class="tech-product-badge">Printer</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Printer Office & Laser</h3>
+                    <p class="tech-product-spec">Inkjet, laser, multifunction (print/scan/copy/fax). Brand: HP, Canon, Brother, Epson. Toner & cartridge tersedia.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Printer" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-product-card" data-category="printer">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/techguruinsight.com/311a3401b8d68eed3c87169204c9bf39a544ef00.webp" alt="Printer Laser" loading="lazy">
+                    <span class="tech-product-badge">Printer</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Printer Laser & All-in-One</h3>
+                    <p class="tech-product-spec">Laser monochrome & color. All-in-One dengan ADF. Kecepatan tinggi untuk kantor. Tersedia sewa printer.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20tertarik%20dengan%20Printer%20Laser" target="_blank" class="tech-product-cta">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RAKIT PC -->
+            <div class="tech-product-card" data-category="all">
+                <div class="tech-product-img-wrap">
+                    <img src="https://kimi-web-img.moonshot.cn/img/image.isu.pub/09bd0a5085fc5cd5c82589a118a59b98eb789b00.jpg" alt="Rakit PC" loading="lazy">
+                    <span class="tech-product-badge">Rakit PC</span>
+                </div>
+                <div class="tech-product-body">
+                    <h3>Jasa Rakit PC Custom</h3>
+                    <p class="tech-product-spec">Rakit PC gaming, editing, rendering, dan office sesuai budget. Garansi & after-sales support. Free konsultasi spesifikasi.</p>
+                    <div class="tech-product-footer">
+                        <span class="tech-product-status tersedia">Tersedia</span>
+                        <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20ingin%20rakit%20PC%20custom" target="_blank" class="tech-product-cta">Konsultasi</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="section">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <span class="section-label">Layanan</span>
+            <h2 class="section-title">Mengapa Oqline Tech?</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #2563eb;">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3>Produk Original & Bergaransi</h3>
+                <p>Semua produk yang kami sediakan adalah original dengan garansi resmi distributor. Tidak ada barang palsu atau rekondisi tanpa informasi.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #16a34a;">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3>Harga Kompetitif</h3>
+                <p>Kami menawarkan harga terbaik untuk pengadaan volume maupun eceran. Diskon khusus untuk institusi, kantor, dan project bulk.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); color: #d97706;">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <h3>Pengiriman Cepat</h3>
+                <p>Pengiriman ke seluruh Indonesia. Same-day delivery untuk area Jakarta. Packing aman dengan bubble wrap dan kardus khusus elektronik.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #db2777;">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </div>
+                <h3>After-Sales Support</h3>
+                <p>Tim teknis kami siap membantu instalasi, troubleshooting, dan klaim garansi. Support via WhatsApp, telepon, dan remote.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Butuh Penawaran Harga?</h2>
+            <p class="cta-desc">Hubungi kami sekarang untuk konsultasi kebutuhan hardware dan penawaran harga terbaik.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/6289652435067?text=Halo%20Oqline%20Tech,%20saya%20ingin%20bertanya%20tentang%20produk%20hardware" target="_blank" class="btn btn-white">Chat WhatsApp</a>
+                <a href="tel:089652435067" class="btn btn-outline-white">Telepon Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="https://raw.githubusercontent.com/jenderal45/oqline/main/logo-oqline.png" alt="Oqline">
+                    <div class="footer-logo-text">Oqline Tech</div>
+                </div>
+                <p class="footer-tagline">"Teknologi untuk Semua, Solusi untuk Indonesia"</p>
+            </div>
+            <div class="footer-info">
+                <div class="footer-info-item">
+                    <h4>Alamat</h4>
+                    <p>
+                    <strong style="color: #e2e8f0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">📍 Kantor Pusat</strong>
+                    Depan Taman RPTRA, Jl. Walang Baru Jl. Walang Raya No.10A,<br>RT.15/RW.15, Tugu Utara, Kec. Koja,<br>Jkt Utara, Daerah Khusus Ibukota Jakarta 14320</p>
+                </div>
+                <div class="footer-info-item">
+                    <h4>Kontak</h4>
+                    <a href="tel:089652435067">0896-5243-5067</a>
+                    <p style="margin-top: 0.25rem; font-size: 0.8rem; color: #64748b;">Senin - Jumat, 09:00 - 17:00 WIB</p>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.tiktok.com/@oqlineidn" target="_blank" aria-label="TikTok">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.89 2.89 2.89 0 0 1 2.88-2.89c.26 0 .51.04.75.1v-3.5a6.37 6.37 0 0 0-.75-.05A6.34 6.34 0 0 0 2 15.28a6.34 6.34 0 0 0 6.33 6.33 6.34 6.34 0 0 0 6.33-6.33V8.83a8.27 8.27 0 0 0 4.93 1.63V7.08a4.83 4.83 0 0 1-2-1.39z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/oqlineidn" target="_blank" aria-label="Instagram">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                <a href="https://www.threads.com/@oqlineidn" target="_blank" aria-label="Threads">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01V11.8c.025-3.583.876-6.438 2.534-8.69C5.855.81 8.615-.372 12.219-.352h.014c2.654.013 5.221.764 7.447 2.14a.79.79 0 0 1 .336.67v.407a.79.79 0 0 1-.79.79l-.407-.008a.79.79 0 0 1-.67-.336c-1.774-1.103-3.86-1.74-6.05-1.758h-.013c-2.85-.017-5.075.93-6.65 2.848-1.32 1.62-2.04 3.91-2.09 6.64v.19c.05 2.73.77 5.02 2.09 6.64 1.575 1.918 3.8 2.865 6.65 2.848 2.373-.014 4.55-.745 6.327-2.11a.79.79 0 0 1 1.09.18l.27.36a.79.79 0 0 1-.18 1.09c-2.16 1.64-4.8 2.54-7.59 2.56zm5.4-5.18a4.57 4.57 0 0 1-3.39 1.33c-1.3 0-2.36-.42-3.06-1.21-.73-.82-1.1-1.96-1.1-3.38V9.43c0-1.42.37-2.56 1.1-3.38.7-.79 1.76-1.21 3.06-1.21 1.3 0 2.36.42 3.06 1.21.73.82 1.1 1.96 1.1 3.38v.74a.79.79 0 0 1-.79.79h-5.47v.53c0 1.03.24 1.83.7 2.37.44.52 1.08.8 1.89.8.73 0 1.37-.22 1.86-.64a.79.79 0 0 1 1.1.08l.3.34a.79.79 0 0 1-.08 1.1zm-5.47-5.35h3.89v-.53c0-1.03-.24-1.83-.7-2-37-.44-.52-1.08-.8-1.89-.8-.81 0-1.45.28-1.89.8-.46.54-.7 1.34-.7 2.37v.53z"/></svg>
+                </a>
+            </div>
+            <div class="footer-bottom">
+                © 2026 Oqline Tech. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    // Filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterBtns = document.querySelectorAll('.tech-filter-btn');
+        const productCards = document.querySelectorAll('.tech-product-card');
+
+        filterBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+
+                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+
+                productCards.forEach(function(card) {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter || category === 'all') {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.4s ease forwards';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Beranda",
+                "item": "https://oqline.com"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tech",
+                "item": "https://oqline.com/tech"
+            }
+        ]
+    }
+    </script>
+</body>
+</html>
